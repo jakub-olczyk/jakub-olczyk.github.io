@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>/</link><description>przemyślenia około programistyczne...</description><atom:link href="/feeds/rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 12 May 2015 10:00:00 +0200</lastBuildDate><item><title>service blog restart</title><link>/service-blog-restart.html</link><description>&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około programistyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 12 May 2015 10:00:00 +0200</lastBuildDate><item><title>service blog restart</title><link>https://jakub-olczyk.github.io/service-blog-restart.html</link><description>&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
 w dużym stopniu wydawały mi się uciążliwe oraz niesamowicie przeciążone, a już
 w żadnej mierze nie pasowały do moje stylu pracy nad tekstem (trzeba przyznać,
 że edycja tekstu w Vimie to jest coś co zmienia człowieka na zawsze). Z tego
@@ -49,4 +49,4 @@ dociągać dużej ilości nowych paczek (kolejny plus).&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.staticgen.com/pelican"&gt;Static Gen o Pelicanie &lt;em&gt;można tam poczytać o innych genereatorach&lt;/em&gt;&lt;/a&gt; &lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/getpelican/pelican"&gt;GitHub projektu Pelican&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://docs.getpelican.com"&gt;Dokumentacja Pelicana&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 12 May 2015 10:00:00 +0200</pubDate><guid>tag:,2015-05-12:service-blog-restart.html</guid><category>static site generation</category></item></channel></rss>
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 12 May 2015 10:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-05-12:service-blog-restart.html</guid><category>static site generation</category></item></channel></rss>
