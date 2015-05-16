@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="/" rel="alternate"></link><link href="/feeds/blog.atom.xml" rel="self"></link><id>/</id><updated>2015-05-12T10:00:00+02:00</updated><entry><title>service blog restart</title><link href="/service-blog-restart.html" rel="alternate"></link><updated>2015-05-12T10:00:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:,2015-05-12:service-blog-restart.html</id><summary type="html">&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
+w dużym stopniu wydawały mi się uciążliwe oraz niesamowicie przeciążone, a już
+w żadnej mierze nie pasowały do moje stylu pracy nad tekstem (trzeba przyznać,
+że edycja tekstu w Vimie to jest coś co zmienia człowieka na zawsze). Z tego
+też powodu zacząłem szukać jakiegoś rozwiązania mojego problemu z Wordpressem i
+innym podobnymi do niego rozwiązaniami.&lt;/p&gt;
+&lt;h3&gt;W czym tkwi problem?&lt;/h3&gt;
+&lt;p&gt;Poza dość banalnym argumentem jakim jest wygoda pracy moje obawy przed
+korzystaniem z rozwiązań typu Wordpress, Joomla itd wiązały się przede
+wszystkim z bezpieczeństwem. Jeśli do tego dorzuci się jeszcze własne lenistwo,
+to można chyba się zacząć domyślać czemu zainteresowało mnie statyczne
+serwowanie stron.&lt;/p&gt;
+&lt;p&gt;No więc jaka jest różnica pomiędzy na przykład Wordpressem a generatorem
+statycznych stron?&lt;/p&gt;
+&lt;p&gt;W przypadku Wordpressa nasz serwer będzie potrzebował jakiejś bazy danych,
+interpretera PHP, no i oczywiście serwera HTTP. Jak widać jest to dość dużo
+usług jak na jedną maszynę, co może się wiązać z kilkoma wektorami ataku, gdyby
+komuś bardzo zależało na dostępie do takiego serwera.&lt;/p&gt;
+&lt;p&gt;No ale co się dzieję, gdy ktoś wchodzi na naszą stronę? Skrypt w PHP
+dynamicznie połączy treści napisane przez nas z szablonami strony, które
+wszystkie siedzą sobie gdzieś w bazie danych lub w jakimś katalogu. No i
+dopiero taki output, który się ze sobą pokleił leci do przeglądarki, która
+wysłała zapytanie o treść.&lt;/p&gt;
+&lt;p&gt;Z kolei to z co ja proponuje to przeprowadzenie tego procesu raz przy dodawaniu
+treści do strony. Prawda jest taka, że kiedy coś już się napisze na bloga, to 
+raczej nie będziemy tego zmieniać już bardzo często. Dlaczego też nie napisać
+naszego artykułu w jakimś lepszym do czytania i edytowania formacie? Ja bardzo
+sobię cenię możliwości formatowania jakie daje Markdown i cieszę się gdy mogę
+pisać w moim ulubionym edytorze tekstu - Vim. Nie jestem przywiązany do tego, 
+co oferuje mi CMS.&lt;/p&gt;
+&lt;p&gt;Przy pisaniu bloga za pomocą statycznej generacji jedyne co potrzeba to
+oczywiście silnik generatora u siebie na komputerze, gdzie będziemy pisać
+artykuł, edytor tekstu i sposób na wrzucenie naszej treści na serwer www. Cały
+proces według mnie jest równie prosty co korzystanie z Wordpressa czy Joomli,
+a dodatkowo pozwala mi na większą kontrolę tego co się dzieje.&lt;/p&gt;
+&lt;h3&gt;Mój wybór - Pelican&lt;/h3&gt;
+&lt;p&gt;Nie jest to może najbardziej składny i dokładny opis static site generatorów,
+ale myślę, że widać tutaj powody, które mną kierowały. Jeśli kogoś zainteresował
+ten temat to polecam sobie wyszukać w DuckDuckGo &lt;code&gt;static site generators&lt;/code&gt; i 
+na pewno będą tam wszystkie przydatne informacje.&lt;/p&gt;
+&lt;p&gt;Ja sam korzystam z &lt;a href="https://getpelican.com"&gt;Pelicana&lt;/a&gt; jest to dla mnie najlepsze rozwiązanie,
+bo przede wszystkim jest napisany w Pythonie, którego chcę się uczyć (i którego
+składnia jest mi bliższa niż np. składnia Ruby). Na dokładkę mam już kilka 
+aplikacji w systemie, które z niego korzystają więc instalując nie musiałem 
+dociągać dużej ilości nowych paczek (kolejny plus).&lt;/p&gt;
+&lt;p&gt;Zainteresowanym polecam zajrzeć na :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.staticgen.com/pelican"&gt;Static Gen o Pelicanie &lt;em&gt;można tam poczytać o innych genereatorach&lt;/em&gt;&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican"&gt;GitHub projektu Pelican&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.getpelican.com"&gt;Dokumentacja Pelicana&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="static site generation"></category></entry></feed>
