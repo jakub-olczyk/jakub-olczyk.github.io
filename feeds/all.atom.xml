@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2015-05-12T10:00:00+02:00</updated><entry><title># service blog restart</title><link href="https://jakub-olczyk.github.io/service-blog-restart.html" rel="alternate"></link><updated>2015-05-12T10:00:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-05-12:service-blog-restart.html</id><summary type="html">&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
 w dużym stopniu wydawały mi się uciążliwe oraz niesamowicie przeciążone, a już
-w żadnej mierze nie pasowały do moje stylu pracy nad tekstem (trzeba przyznać,
+w żadnej mierze nie pasowały do mojego stylu pracy nad tekstem (trzeba przyznać,
 że edycja tekstu w Vimie to jest coś co zmienia człowieka na zawsze). Z tego
 też powodu zacząłem szukać jakiegoś rozwiązania mojego problemu z Wordpressem i
 innym podobnymi do niego rozwiązaniami.&lt;/p&gt;
@@ -17,7 +17,7 @@ statycznych stron?&lt;/p&gt;
 interpretera PHP, no i oczywiście serwera HTTP. Jak widać jest to dość dużo
 usług jak na jedną maszynę, co może się wiązać z kilkoma wektorami ataku, gdyby
 komuś bardzo zależało na dostępie do takiego serwera.&lt;/p&gt;
-&lt;p&gt;No ale co się dzieję, gdy ktoś wchodzi na naszą stronę? Skrypt w PHP
+&lt;p&gt;No ale co się dzieje, gdy ktoś wchodzi na naszą stronę? Skrypt w PHP
 dynamicznie połączy treści napisane przez nas z szablonami strony, które
 wszystkie siedzą sobie gdzieś w bazie danych lub w jakimś katalogu. No i
 dopiero taki output, który się ze sobą pokleił leci do przeglądarki, która
