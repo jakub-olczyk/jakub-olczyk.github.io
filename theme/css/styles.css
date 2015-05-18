@@ -226,7 +226,7 @@ sub {
 }
 
 .article pre {
-    font-family: 'Source Code Pro';
+    font-family: 'Source Code Pro',monospace;
     font-size: .8em;
     margin: auto;
     padding: 1em;
@@ -234,7 +234,7 @@ sub {
 }
 
 .article code {
-    font-family: 'Source Code Pro';
+    font-family: 'Source Code Pro',monospace;
     font-size: 1em;
 }
 
