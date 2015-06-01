@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około programistyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 12 May 2015 10:00:00 +0200</lastBuildDate><item><title># service blog restart</title><link>https://jakub-olczyk.github.io/service-blog-restart.html</link><description>&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około programistyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 01 Jun 2015 00:00:00 +0200</lastBuildDate><item><title>cal i calendar w jednym</title><link>https://jakub-olczyk.github.io/cal-i-calendar-w-jednym.html</link><description>&lt;p&gt;Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
+terminalu programy &lt;code&gt;cal&lt;/code&gt; oraz &lt;code&gt;calendar&lt;/code&gt;, które w mojej ocenie są niesamowicie
+dobrymi rozwiązaniami na podwyższenie produktywności, szczególnie gdy połączy
+się je z tym, żeby się odpalały z każdym włączeniem terminala. &lt;/p&gt;
+&lt;p&gt;Ktoś może stwierdzić, że przecież nie ma problemu po prostu dodajmy do &lt;code&gt;.bashrc&lt;/code&gt;
+na sam koniec 2 linijki i po sprawie, na przykład&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;cal&lt;/span&gt;
+&lt;span class="go"&gt;calendar&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Dla mnie jednak jest w tym mały problem, a mianowicie output z takich poleceń
+jest dość pokaźny. Wolałbym mieć to bardziej skondensowane, szczególnie, że
+obecnie częściej mamy do czynienia z ekranami o większej szerokości niż
+wysokości. Dla przykładu output takiego polecenia:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; cal&lt;span class="p"&gt;;&lt;/span&gt; calendar
+&lt;span class="go"&gt;   Czerwiec 2015      &lt;/span&gt;
+&lt;span class="go"&gt;ni po wt śr cz pi so  &lt;/span&gt;
+&lt;span class="go"&gt;    1  2  3  4  5  6  &lt;/span&gt;
+&lt;span class="go"&gt; 7  8  9 10 11 12 13  &lt;/span&gt;
+&lt;span class="go"&gt;14 15 16 17 18 19 20  &lt;/span&gt;
+&lt;span class="go"&gt;21 22 23 24 25 26 27  &lt;/span&gt;
+&lt;span class="go"&gt;28 29 30&lt;/span&gt;
+
+&lt;span class="go"&gt;Jun 02  Non-Profit status of SPI approved, 1999&lt;/span&gt;
+&lt;span class="go"&gt;Jun 02  First issue of Computerworld, 1967&lt;/span&gt;
+&lt;span class="go"&gt;Jun 03  Debian&amp;#39;s Diversity Statement ratified, 2012&lt;/span&gt;
+&lt;span class="go"&gt;Jun 05  Debian GNU/Linux 1.3 alias ``bo&amp;#39;&amp;#39; released, 1997&lt;/span&gt;
+&lt;span class="go"&gt;Jun 06  Debian GNU/Linux 3.1 alias ``sarge&amp;#39;&amp;#39; released, 2005&lt;/span&gt;
+&lt;span class="go"&gt;Jun 06  Incorporation of Software in the Public Interest completed, 1997&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jak widać jest to dość długie, a po prawej stronie outputu z &lt;code&gt;cal&lt;/code&gt;a jest
+całkiem sporo miejsca. Jak więc połączyć wyniki obu programów w jakiś miły
+sposób?  Podejść może być wiele, dla mnie dość oczywistym byłoby skorzystanie w
+tym wypadku z Perla, bo to &lt;a href="http://raid6.com.au/~onlyjob/posts/arena/"&gt;język skorojony na potrzeby przetwarzania tekstu&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Moje rozwiązanie tego problemu pewnie bardzo odkrywcze nie jest. Pewnie można by
+też napisać to krócej. Jeszcze sobie nad tym pomedytuje, ale tak wygląda moje 
+rozwiązanie sklepane na kolanie w Perlu.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;#!/usr/bin/perl&lt;/span&gt;
+&lt;span class="c1"&gt;# author : Jakub Olczyk &amp;lt;jakub.olczyk@openmailbox.org&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;# date   : 2015-06-01&lt;/span&gt;
+&lt;span class="c1"&gt;# license: GPLv3+&lt;/span&gt;
+&lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="n"&gt;strict&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;say&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@cal_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;split&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sb"&gt;`cal`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@calendar_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;split&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sb"&gt;`calendar`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;$start_line&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@output&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;@cal_output&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nv"&gt;@calendar_output&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;each&lt;/span&gt; &lt;span class="nv"&gt;@calendar_output&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="nv"&gt;$output&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$cal_output&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\t&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;each&lt;/span&gt; &lt;span class="nv"&gt;@cal_output&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="nv"&gt;$output&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\t&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$calendar_output&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="vg"&gt;$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;say&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;@output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jak na razie wydaje mi się, że taki skrypcik skutecznie będzie spełniał swoje
+zadanie.&lt;/p&gt;
+&lt;p&gt;Przykładowy output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;   Czerwiec 2015        Jun 02  Non-Profit status of SPI approved, 1999&lt;/span&gt;
+&lt;span class="go"&gt;ni po wt śr cz pi so    Jun 02  First issue of Computerworld, 1967&lt;/span&gt;
+&lt;span class="go"&gt;    1  2  3  4  5  6  &lt;/span&gt;
+&lt;span class="go"&gt; 7  8  9 10 11 12 13  &lt;/span&gt;
+&lt;span class="go"&gt;14 15 16 17 18 19 20  &lt;/span&gt;
+&lt;span class="go"&gt;21 22 23 24 25 26 27  &lt;/span&gt;
+&lt;span class="go"&gt;28 29 30&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Mon, 01 Jun 2015 00:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-06-01:cal-i-calendar-w-jednym.html</guid><category>terminal</category><category>GNU/Linux</category></item><item><title># service blog restart</title><link>https://jakub-olczyk.github.io/service-blog-restart.html</link><description>&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
 w dużym stopniu wydawały mi się uciążliwe oraz niesamowicie przeciążone, a już
 w żadnej mierze nie pasowały do mojego stylu pracy nad tekstem (trzeba przyznać,
 że edycja tekstu w Vimie to jest coś co zmienia człowieka na zawsze). Z tego

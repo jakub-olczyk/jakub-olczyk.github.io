@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+      <title>Jakub Olczyk</title>
+      <link rel="stylesheet" type="text/css" href="./theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="./theme/css/styles.css"/>
+      <meta charset="utf-8" />
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=https://avatars0.githubusercontent.com/u/6322872?v=3&s=460>
+            <img width="200" height="200" src=https://avatars0.githubusercontent.com/u/6322872?v=3&s=460>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href=".">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia około programistyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="./pages/o-mnie.html">o mnie</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/cal-i-calendar-w-jednym.html" rel="bookmark" title="Permalink to cal i calendar w jednym">
+      cal i calendar w jednym
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-06-01T00:00:00+02:00">
+      pon 01 czerwiec 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
+terminalu programy <code>cal</code> oraz <code>calendar</code>, które w mojej ocenie są niesamowicie
+dobrymi rozwiązaniami na podwyższenie produktywności, szczególnie gdy połączy
+się je z tym, żeby się odpalały z każdym włączeniem terminala. </p>
+<p>Ktoś może stwierdzić, że przecież nie ma problemu po prostu dodajmy do <code>.bashrc</code>
+na sam koniec 2 linijki i po sprawie, na przykład</p>
+<div class="highlight"><pre><span class="go">cal</span>
+<span class="go">calendar</span>
+</pre></div>
+
+
+<p>Dla mnie jednak jest w tym mały problem, a mianowicie output z takich poleceń
+jest dość pokaźny. Wolałbym mieć to bardziej skondensowane, szczególnie, że
+obecnie częściej mamy do czynienia z ekranami o większej szerokości niż
+wysokości. Dla przykładu output takiego polecenia:</p>
+<div class="highlight"><pre><span class="gp">$</span> cal<span class="p">;</span> calendar
+<span class="go">   Czerwiec 2015      </span>
+<span class="go">ni po wt śr cz pi so  </span>
+<span class="go">    1  2  3  4  5  6  </span>
+<span class="go"> 7  8  9 10 11 12 13  </span>
+<span class="go">14 15 16 17 18 19 20  </span>
+<span class="go">21 22 23 24 25 26 27  </span>
+<span class="go">28 29 30</span>
+
+<span class="go">Jun 02  Non-Profit status of SPI approved, 1999</span>
+<span class="go">Jun 02  First issue of Computerworld, 1967</span>
+<span class="go">Jun 03  Debian&#39;s Diversity Statement ratified, 2012</span>
+<span class="go">Jun 05  Debian GNU/Linux 1.3 alias ``bo&#39;&#39; released, 1997</span>
+<span class="go">Jun 06  Debian GNU/Linux 3.1 alias ``sarge&#39;&#39; released, 2005</span>
+<span class="go">Jun 06  Incorporation of Software in the Public Interest completed, 1997</span>
+</pre></div>
+
+
+<p>Jak widać jest to dość długie, a po prawej stronie outputu z <code>cal</code>a jest
+całkiem sporo miejsca. Jak więc połączyć wyniki obu programów w jakiś miły
+sposób?  Podejść może być wiele, dla mnie dość oczywistym byłoby skorzystanie w
+tym wypadku z Perla, bo to <a href="http://raid6.com.au/~onlyjob/posts/arena/">język skorojony na potrzeby przetwarzania tekstu</a>.</p>
+<p>Moje rozwiązanie tego problemu pewnie bardzo odkrywcze nie jest. Pewnie można by
+też napisać to krócej. Jeszcze sobie nad tym pomedytuje, ale tak wygląda moje 
+rozwiązanie sklepane na kolanie w Perlu.</p>
+<div class="highlight"><pre><span class="c1">#!/usr/bin/perl</span>
+<span class="c1"># author : Jakub Olczyk &lt;jakub.olczyk@openmailbox.org&gt;</span>
+<span class="c1"># date   : 2015-06-01</span>
+<span class="c1"># license: GPLv3+</span>
+<span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+<span class="k">use</span> <span class="n">feature</span> <span class="s">&#39;say&#39;</span><span class="p">;</span>
+
+<span class="k">my</span> <span class="nv">@cal_output</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&quot;\n&quot;</span><span class="p">,</span> <span class="sb">`cal`</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">@calendar_output</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&quot;\n&quot;</span> <span class="p">,</span> <span class="sb">`calendar`</span><span class="p">;</span>
+
+<span class="k">my</span> <span class="nv">$start_line</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">@output</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">@cal_output</span> <span class="o">&lt;</span> <span class="nv">@calendar_output</span><span class="p">){</span>
+    <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$i</span><span class="p">,</span> <span class="nv">$line</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">@calendar_output</span><span class="p">){</span>
+        <span class="nv">$output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$cal_output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="o">.</span><span class="s">&quot;\t&quot;</span><span class="o">.</span><span class="nv">$line</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$i</span><span class="p">,</span> <span class="nv">$line</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">@cal_output</span><span class="p">){</span>
+        <span class="nv">$output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$line</span><span class="o">.</span><span class="s">&quot;\t&quot;</span><span class="o">.</span><span class="p">(</span><span class="nv">$calendar_output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="sr">//</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">local</span> <span class="vg">$&quot;</span> <span class="o">=</span> <span class="s">&quot;\n&quot;</span><span class="p">;</span>
+<span class="n">say</span> <span class="s">&quot;@output&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Jak na razie wydaje mi się, że taki skrypcik skutecznie będzie spełniał swoje
+zadanie.</p>
+<p>Przykładowy output:</p>
+<div class="highlight"><pre><span class="go">   Czerwiec 2015        Jun 02  Non-Profit status of SPI approved, 1999</span>
+<span class="go">ni po wt śr cz pi so    Jun 02  First issue of Computerworld, 1967</span>
+<span class="go">    1  2  3  4  5  6  </span>
+<span class="go"> 7  8  9 10 11 12 13  </span>
+<span class="go">14 15 16 17 18 19 20  </span>
+<span class="go">21 22 23 24 25 26 27  </span>
+<span class="go">28 29 30</span>
+</pre></div>
+  </div><!-- .content -->
+
+</section>
+
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href=""> <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</a>
+        unless otherwise noted.
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+        slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.
+      </p>
+    </footer>
+  </body>
+</html>
