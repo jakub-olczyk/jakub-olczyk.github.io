@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2015-06-01T00:00:00+02:00</updated><entry><title>cal i calendar w jednym</title><link href="https://jakub-olczyk.github.io/cal-i-calendar-w-jednym.html" rel="alternate"></link><updated>2015-06-01T00:00:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-06-01:cal-i-calendar-w-jednym.html</id><summary type="html">&lt;p&gt;Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
-terminalu programy &lt;code&gt;cal&lt;/code&gt; oraz &lt;code&gt;calendar&lt;/code&gt;, które w mojej ocenie są niesamowicie
-dobrymi rozwiązaniami na podwyższenie produktywności, szczególnie gdy połączy
-się je z tym, żeby się odpalały z każdym włączeniem terminala. &lt;/p&gt;
-&lt;p&gt;Ktoś może stwierdzić, że przecież nie ma problemu po prostu dodajmy do &lt;code&gt;.bashrc&lt;/code&gt;
-na sam koniec 2 linijki i po sprawie, na przykład&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;cal&lt;/span&gt;
-&lt;span class="go"&gt;calendar&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+większości dystrybucji GNU/Linuxa programy &lt;code&gt;cal&lt;/code&gt; oraz &lt;code&gt;calendar&lt;/code&gt;, które w mojej
+ocenie są niesamowicie dobrymi rozwiązaniami na podwyższenie produktywności,
+szczególnie, gdy dorzuci sie je do swojego &lt;code&gt;.bashrc&lt;/code&gt; tak, żeby przy każdym
+włączeniu terminala pełniły rolę przypominajki o ważnych terminach.&lt;/p&gt;
 &lt;p&gt;Dla mnie jednak jest w tym mały problem, a mianowicie output z takich poleceń
-jest dość pokaźny. Wolałbym mieć to bardziej skondensowane, szczególnie, że
-obecnie częściej mamy do czynienia z ekranami o większej szerokości niż
-wysokości. Dla przykładu output takiego polecenia:&lt;/p&gt;
+jest dość pokaźny. Wolałbym to mieć w  bardziej skondensowanej formie,
+szczególnie, że obecnie częściej mamy do czynienia z ekranami o większej
+szerokości niż wysokości. Dla przykładu output takiego polecenia:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; cal&lt;span class="p"&gt;;&lt;/span&gt; calendar
 &lt;span class="go"&gt;   Czerwiec 2015      &lt;/span&gt;
 &lt;span class="go"&gt;ni po wt śr cz pi so  &lt;/span&gt;
@@ -48,8 +42,6 @@ rozwiązanie sklepane na kolanie w Perlu.&lt;/p&gt;
 
 &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@cal_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;split&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sb"&gt;`cal`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@calendar_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;split&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sb"&gt;`calendar`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;$start_line&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@output&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;@cal_output&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nv"&gt;@calendar_output&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;

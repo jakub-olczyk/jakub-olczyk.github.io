@@ -58,20 +58,14 @@
 
   <div class="article">
     <p>Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
-terminalu programy <code>cal</code> oraz <code>calendar</code>, które w mojej ocenie są niesamowicie
-dobrymi rozwiązaniami na podwyższenie produktywności, szczególnie gdy połączy
-się je z tym, żeby się odpalały z każdym włączeniem terminala. </p>
-<p>Ktoś może stwierdzić, że przecież nie ma problemu po prostu dodajmy do <code>.bashrc</code>
-na sam koniec 2 linijki i po sprawie, na przykład</p>
-<div class="highlight"><pre><span class="go">cal</span>
-<span class="go">calendar</span>
-</pre></div>
-
-
+większości dystrybucji GNU/Linuxa programy <code>cal</code> oraz <code>calendar</code>, które w mojej
+ocenie są niesamowicie dobrymi rozwiązaniami na podwyższenie produktywności,
+szczególnie, gdy dorzuci sie je do swojego <code>.bashrc</code> tak, żeby przy każdym
+włączeniu terminala pełniły rolę przypominajki o ważnych terminach.</p>
 <p>Dla mnie jednak jest w tym mały problem, a mianowicie output z takich poleceń
-jest dość pokaźny. Wolałbym mieć to bardziej skondensowane, szczególnie, że
-obecnie częściej mamy do czynienia z ekranami o większej szerokości niż
-wysokości. Dla przykładu output takiego polecenia:</p>
+jest dość pokaźny. Wolałbym to mieć w  bardziej skondensowanej formie,
+szczególnie, że obecnie częściej mamy do czynienia z ekranami o większej
+szerokości niż wysokości. Dla przykładu output takiego polecenia:</p>
 <div class="highlight"><pre><span class="gp">$</span> cal<span class="p">;</span> calendar
 <span class="go">   Czerwiec 2015      </span>
 <span class="go">ni po wt śr cz pi so  </span>
@@ -106,8 +100,6 @@ rozwiązanie sklepane na kolanie w Perlu.</p>
 
 <span class="k">my</span> <span class="nv">@cal_output</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&quot;\n&quot;</span><span class="p">,</span> <span class="sb">`cal`</span><span class="p">;</span>
 <span class="k">my</span> <span class="nv">@calendar_output</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&quot;\n&quot;</span> <span class="p">,</span> <span class="sb">`calendar`</span><span class="p">;</span>
-
-<span class="k">my</span> <span class="nv">$start_line</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="k">my</span> <span class="nv">@output</span><span class="p">;</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">@cal_output</span> <span class="o">&lt;</span> <span class="nv">@calendar_output</span><span class="p">){</span>
