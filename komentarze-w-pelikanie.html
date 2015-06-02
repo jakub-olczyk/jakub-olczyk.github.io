@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+      <title>Jakub Olczyk</title>
+      <link rel="stylesheet" type="text/css" href="./theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="./theme/css/styles.css"/>
+      <meta charset="utf-8" />
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=https://avatars0.githubusercontent.com/u/6322872?v=3&s=460>
+            <img width="200" height="200" src=https://avatars0.githubusercontent.com/u/6322872?v=3&s=460>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href=".">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia około programistyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="./pages/o-mnie.html">o mnie</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/komentarze-w-pelikanie.html" rel="bookmark" title="Permalink to Komentarze w Pelikanie">
+      Komentarze w Pelikanie
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-06-02T11:00:00+02:00">
+      wto 02 czerwiec 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
+pisałem wcześniej mają one, z mojego punktu widzenia, dużo zalet, jadnak
+istnieje w ich przypadku przynajmniej jedna wada (czy może wadka, bo gotowe
+rozwiązania istnieją) - obsługa komentarzy to sprawa dość problematyczna.</p>
+<p>Oczywiście, mamy mnogość możliwości i możemy sobie wybierać i przebierać w
+różnych rozwiązaniach - Disqus, komentarze Google+, a pewnie można by też
+podpiąć tutaj komentarze z Facebooka (dlaczego nie uważam, że to zły pomysł to
+temat na innego posta). Jednak dla mnie te rozwiązania nie wydają się być
+możliwością. Myśląc o zakładaniu bloga przyjąłem sobie założenie, że nie chcę
+korzystać z Javascriptu (a już szczególnie z innych źródeł niż mój blog) oraz
+chciałbym mieć w 100% kontrolę nad tym co znajduje się na mojej stronie. Stąd
+też pomysł na <strong>komentarze generowane statycznie</strong>.</p>
+<p>Pelican oferuje niesamowitą ilość pluginów oraz <a href="http://docs.getpelican.com/en/3.5.0/plugins.html">dość przejrzyste API</a>, które
+pozwala napisać swoje własne. Ja zdecydowałem się na wykorzystanie gotowego
+rozwiązania <a href="https://github.com/getpelican/pelican-plugins/tree/master/pelican_comment_system"><code>Pelican Comment System</code></a>, które można znaleźć w <a href="https://github.com/getpelican/pelican-plugins">głównym
+repozytorium pluginów</a>.</p>
+<p>Już teraz można korzystać z tego systemu. Działa on w bardzo prosty sposób.
+Pod każdym artykułem znajduje sie teraz duży przycisk, który otworzy okienko
+klienta pocztowego z wstępnie wypełnionymi polami, które wyglądają tak:</p>
+<div class="highlight"><pre><span class="n">date</span><span class="o">:</span> <span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DD</span> <span class="n">HH</span><span class="o">:</span><span class="n">MM</span><span class="o">:</span><span class="n">SS</span>
+<span class="n">author</span><span class="o">:</span>
+
+<span class="n">Tw</span><span class="err">ó</span><span class="n">j</span> <span class="n">komentarz</span>
+</pre></div>
+
+
+<p>W momencie pisania komentarza bardzo prosze o uzupełnienia pola z datą i
+podanie nicka, za pomocą którego będzie można zidentyfikować autora komentarza.
+Po wstępnej moderacji z mojej strony (gdy tylko będę mógł to zrobić) komentarz
+pojawi się pod odpowiednim artykułem.</p>
+<p>Mam nadzieję, że ten system będzie się sprawdzał i że będę mógł publikować
+Wasze przemyślenia na temat moich wypocin.</p>
+  </div><!-- .content -->
+
+</section>
+
+    <p>Brak komentarzy.<p>
+<br>
+<br>
+<a id="comment-button" href="mailto:jakub.olczyk@openmailbox.org?subject=[blog]comment-komentarze-w-pelikanie&body=date:YYYY-MM-DD HH:MM:SS%0D%0Aauthor:%0D%0ATwój komentarz">Napisz komentarz przez e-mail</a>
+
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href=""> <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</a>
+		unless otherwise noted.<br>
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+		slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.<br>
+		Code blocks styled with <a href="https://github.com/uraimo/pygments-vimstyles">wombat.css</a>
+      </p>
+    </footer>
+  </body>
+</html>

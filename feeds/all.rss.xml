@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około programistyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 01 Jun 2015 00:00:00 +0200</lastBuildDate><item><title>cal i calendar w jednym</title><link>https://jakub-olczyk.github.io/cal-i-calendar-w-jednym.html</link><description>&lt;p&gt;Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około programistyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 02 Jun 2015 11:00:00 +0200</lastBuildDate><item><title>Komentarze w Pelikanie</title><link>https://jakub-olczyk.github.io/komentarze-w-pelikanie.html</link><description>&lt;p&gt;Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
+pisałem wcześniej mają one, z mojego punktu widzenia, dużo zalet, jadnak
+istnieje w ich przypadku przynajmniej jedna wada (czy może wadka, bo gotowe
+rozwiązania istnieją) - obsługa komentarzy to sprawa dość problematyczna.&lt;/p&gt;
+&lt;p&gt;Oczywiście, mamy mnogość możliwości i możemy sobie wybierać i przebierać w
+różnych rozwiązaniach - Disqus, komentarze Google+, a pewnie można by też
+podpiąć tutaj komentarze z Facebooka (dlaczego nie uważam, że to zły pomysł to
+temat na innego posta). Jednak dla mnie te rozwiązania nie wydają się być
+możliwością. Myśląc o zakładaniu bloga przyjąłem sobie założenie, że nie chcę
+korzystać z Javascriptu (a już szczególnie z innych źródeł niż mój blog) oraz
+chciałbym mieć w 100% kontrolę nad tym co znajduje się na mojej stronie. Stąd
+też pomysł na &lt;strong&gt;komentarze generowane statycznie&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Pelican oferuje niesamowitą ilość pluginów oraz &lt;a href="http://docs.getpelican.com/en/3.5.0/plugins.html"&gt;dość przejrzyste API&lt;/a&gt;, które
+pozwala napisać swoje własne. Ja zdecydowałem się na wykorzystanie gotowego
+rozwiązania &lt;a href="https://github.com/getpelican/pelican-plugins/tree/master/pelican_comment_system"&gt;&lt;code&gt;Pelican Comment System&lt;/code&gt;&lt;/a&gt;, które można znaleźć w &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;głównym
+repozytorium pluginów&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Już teraz można korzystać z tego systemu. Działa on w bardzo prosty sposób.
+Pod każdym artykułem znajduje sie teraz duży przycisk, który otworzy okienko
+klienta pocztowego z wstępnie wypełnionymi polami, które wyglądają tak:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;YYYY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DD&lt;/span&gt; &lt;span class="n"&gt;HH&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SS&lt;/span&gt;
+&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+&lt;span class="n"&gt;Tw&lt;/span&gt;&lt;span class="err"&gt;ó&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="n"&gt;komentarz&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;W momencie pisania komentarza bardzo prosze o uzupełnienia pola z datą i
+podanie nicka, za pomocą którego będzie można zidentyfikować autora komentarza.
+Po wstępnej moderacji z mojej strony (gdy tylko będę mógł to zrobić) komentarz
+pojawi się pod odpowiednim artykułem.&lt;/p&gt;
+&lt;p&gt;Mam nadzieję, że ten system będzie się sprawdzał i że będę mógł publikować
+Wasze przemyślenia na temat moich wypocin.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 02 Jun 2015 11:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-06-02:komentarze-w-pelikanie.html</guid><category>static site generation</category></item><item><title>cal i calendar w jednym</title><link>https://jakub-olczyk.github.io/cal-i-calendar-w-jednym.html</link><description>&lt;p&gt;Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
 większości dystrybucji GNU/Linuxa programy &lt;code&gt;cal&lt;/code&gt; oraz &lt;code&gt;calendar&lt;/code&gt;, które w mojej
 ocenie są niesamowicie dobrymi rozwiązaniami na podwyższenie produktywności,
 szczególnie, gdy dorzuci sie je do swojego &lt;code&gt;.bashrc&lt;/code&gt; tak, żeby przy każdym
