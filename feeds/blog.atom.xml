@@ -64,6 +64,11 @@ tym wypadku z Perla, bo to &lt;a href="http://raid6.com.au/~onlyjob/posts/arena/
 &lt;p&gt;Moje rozwiązanie tego problemu pewnie bardzo odkrywcze nie jest. Pewnie można by
 też napisać to krócej. Jeszcze sobie nad tym pomedytuje, ale tak wygląda moje 
 rozwiązanie sklepane na kolanie w Perlu.&lt;/p&gt;
+&lt;h4&gt;EDIT 2015-06-04&lt;/h4&gt;
+&lt;p&gt;Zgodnie z komentarzem od Brainfuck usunąłem funkcję &lt;code&gt;split&lt;/code&gt; z kodu w miejscach,
+gdzie przypisujemy wyjście z zewnętrznych programów. Kontekst listowy w tym 
+wypadku załatwia nam sprawę i wrzuca każdą linię osobno w tablicę. 
+Konteksty to zdecydowanie piękna rzecz w Perlu.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;#!/usr/bin/perl&lt;/span&gt;
 &lt;span class="c1"&gt;# author : Jakub Olczyk &amp;lt;jakub.olczyk@openmailbox.org&amp;gt;&lt;/span&gt;
 &lt;span class="c1"&gt;# date   : 2015-06-01&lt;/span&gt;
@@ -71,8 +76,8 @@ rozwiązanie sklepane na kolanie w Perlu.&lt;/p&gt;
 &lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="n"&gt;strict&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="n"&gt;feature&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;say&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@cal_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;split&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sb"&gt;`cal`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@calendar_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;split&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\n&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sb"&gt;`calendar`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@cal_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="sb"&gt;`cal`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@calendar_output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="sb"&gt;`calendar`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;@output&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;each&lt;/span&gt; &lt;span class="nv"&gt;@cal_output&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;

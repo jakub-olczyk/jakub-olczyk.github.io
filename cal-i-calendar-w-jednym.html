@@ -91,6 +91,11 @@ tym wypadku z Perla, bo to <a href="http://raid6.com.au/~onlyjob/posts/arena/">j
 <p>Moje rozwiązanie tego problemu pewnie bardzo odkrywcze nie jest. Pewnie można by
 też napisać to krócej. Jeszcze sobie nad tym pomedytuje, ale tak wygląda moje 
 rozwiązanie sklepane na kolanie w Perlu.</p>
+<h4>EDIT 2015-06-04</h4>
+<p>Zgodnie z komentarzem od Brainfuck usunąłem funkcję <code>split</code> z kodu w miejscach,
+gdzie przypisujemy wyjście z zewnętrznych programów. Kontekst listowy w tym 
+wypadku załatwia nam sprawę i wrzuca każdą linię osobno w tablicę. 
+Konteksty to zdecydowanie piękna rzecz w Perlu.</p>
 <div class="highlight"><pre><span class="c1">#!/usr/bin/perl</span>
 <span class="c1"># author : Jakub Olczyk &lt;jakub.olczyk@openmailbox.org&gt;</span>
 <span class="c1"># date   : 2015-06-01</span>
@@ -98,8 +103,8 @@ rozwiązanie sklepane na kolanie w Perlu.</p>
 <span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
 <span class="k">use</span> <span class="n">feature</span> <span class="s">&#39;say&#39;</span><span class="p">;</span>
 
-<span class="k">my</span> <span class="nv">@cal_output</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&quot;\n&quot;</span><span class="p">,</span> <span class="sb">`cal`</span><span class="p">;</span>
-<span class="k">my</span> <span class="nv">@calendar_output</span> <span class="o">=</span> <span class="nb">split</span> <span class="s">&quot;\n&quot;</span> <span class="p">,</span> <span class="sb">`calendar`</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">@cal_output</span> <span class="o">=</span>  <span class="sb">`cal`</span><span class="p">;</span>
+<span class="k">my</span> <span class="nv">@calendar_output</span> <span class="o">=</span>  <span class="sb">`calendar`</span><span class="p">;</span>
 <span class="k">my</span> <span class="nv">@output</span><span class="p">;</span>
 
 <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$i</span><span class="p">,</span> <span class="nv">$line</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">@cal_output</span><span class="p">){</span>
