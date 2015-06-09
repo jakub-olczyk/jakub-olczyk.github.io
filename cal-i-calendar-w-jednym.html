@@ -108,7 +108,8 @@ Konteksty to zdecydowanie piękna rzecz w Perlu.</p>
 <span class="k">my</span> <span class="nv">@output</span><span class="p">;</span>
 
 <span class="k">while</span><span class="p">(</span><span class="k">my</span> <span class="p">(</span><span class="nv">$i</span><span class="p">,</span> <span class="nv">$line</span><span class="p">)</span> <span class="o">=</span> <span class="nb">each</span> <span class="nv">@cal_output</span><span class="p">){</span>
-    <span class="nv">$output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$line</span><span class="o">.</span><span class="s">&quot;\t&quot;</span><span class="o">.</span><span class="p">(</span><span class="nv">$calendar_output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="sr">//</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">chomp</span> <span class="nv">$line</span><span class="p">;</span>
+    <span class="nv">$output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$line</span><span class="o">.</span><span class="s">&quot;\t&quot;</span><span class="o">.</span><span class="p">(</span><span class="nv">$calendar_output</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="sr">//</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nb">local</span> <span class="vg">$&quot;</span> <span class="o">=</span> <span class="s">&quot;\n&quot;</span><span class="p">;</span>
