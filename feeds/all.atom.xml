@@ -32,9 +32,10 @@ pojawi się pod odpowiednim artykułem.&lt;/p&gt;
 &lt;p&gt;Mam nadzieję, że ten system będzie się sprawdzał i że będę mógł publikować
 Wasze przemyślenia na temat moich wypocin.&lt;/p&gt;</summary><category term="static site generation"></category></entry><entry><title>cal i calendar w jednym</title><link href="https://jakub-olczyk.github.io/cal-i-calendar-w-jednym.html" rel="alternate"></link><updated>2015-06-01T00:00:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-06-01:cal-i-calendar-w-jednym.html</id><summary type="html">&lt;p&gt;Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
 większości dystrybucji GNU/Linuxa programy &lt;code&gt;cal&lt;/code&gt; oraz &lt;code&gt;calendar&lt;/code&gt;, które w mojej
-ocenie są niesamowicie dobrymi rozwiązaniami na podwyższenie produktywności,
-szczególnie, gdy dorzuci się je do swojego &lt;code&gt;.bashrc&lt;/code&gt; tak, żeby przy każdym
-włączeniu terminala pełniły rolę przypominajki o ważnych terminach.&lt;/p&gt;
+ocenie są niesamowicie dobrymi rozwiązaniami terminarzowymi, z których można
+korzystać w terminalu, szczególnie, gdy dorzuci się je do swojego &lt;code&gt;.bashrc&lt;/code&gt;
+tak, żeby przy każdym włączeniu terminala pełniły rolę przypominajki o ważnych
+terminach.&lt;/p&gt;
 &lt;p&gt;Dla mnie jednak jest w tym mały problem, a mianowicie output z takich poleceń
 jest dość pokaźny. Wolałbym to mieć w  bardziej skondensowanej formie,
 szczególnie, że obecnie częściej mamy do czynienia z ekranami o większej
@@ -59,8 +60,9 @@ szerokości niż wysokości. Dla przykładu output takiego polecenia:&lt;/p&gt;
 
 &lt;p&gt;Jak widać jest to dość długie, a po prawej stronie outputu z &lt;code&gt;cal&lt;/code&gt;a jest
 całkiem sporo miejsca. Jak więc połączyć wyniki obu programów w jakiś miły
-sposób?  Podejść może być wiele, dla mnie dość oczywistym byłoby skorzystanie w
-tym wypadku z Perla, bo to &lt;a href="http://raid6.com.au/~onlyjob/posts/arena/"&gt;język skrojony na potrzeby przetwarzania tekstu&lt;/a&gt;.&lt;/p&gt;
+sposób?  Podejść może być wiele, dla mnie wygodnie było sklepać w tym wypadku
+prosty skrypt w Perlu (dodatkowo ciekawostka, ale jest to &lt;a href="http://raid6.com.au/~onlyjob/posts/arena/"&gt;język skrojony na
+potrzeby przetwarzania tekstu&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Moje rozwiązanie tego problemu pewnie bardzo odkrywcze nie jest. Pewnie można by
 też napisać to krócej. Jeszcze sobie nad tym pomedytuje, ale tak wygląda moje 
 rozwiązanie sklepane na kolanie w Perlu.&lt;/p&gt;
