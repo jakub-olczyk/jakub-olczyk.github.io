@@ -29,6 +29,7 @@
               <li><a class="nodec" href="/">blog</a></li>
             <!--pages-->
                 <li><a class="nodec" href="../pages/o-mnie.html">o mnie</a></li>
+                <li><a class="nodec" href="../pages/kontakt.html">kontakt</a></li>
             <!-- services icons -->
               <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
               <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
@@ -68,6 +69,40 @@ jakiegoś zaćmienia i nagle zaczyna się gubić. Tym artykułem chciałbym zach
 takich ludzi do spojrzenia na CLI (<em>commandline interface</em>) z innej
 perspektywy.</p>
 <h2>Jakie korzyści płyną ze umiejętności obsługi terminala?</h2>
+<p>Dla mnie chyba najważniejszym jest oszczędność czasu. Jest wiele rzeczy, które
+można w bardzo prosty sposób zautomatyzować korzystając ze środowiska
+tekstowego. </p>
+<p>Weźmy sobie na przykład sposób w jaki można by wrzucać zmiany w terści na
+stronie na bloga. Można by skorzystać z jakiegoś programu, który za pomocą FTP
+umieściłby nasze pliki na zdalnym serwerze, ale prawda jest taka, że to
+rozwiązanie jest optymalne tylko w przypadku, gdy chcemy coś takiego zrobić
+raz, może dwa. Włączanie programu i logowanie się na swój serwer za każdym
+razem to dość żmudne zajęcie (wpisanie loginu, hasła, przeciągnięcie
+odpowiedniego pliku z lokalnego systemu plików do tego na serwerze). </p>
+<p>A można to zrobić dużo wygodniej automatyzując sobie całą tę zabawę korzystając
+z krótkiego skryptu, który będzie wykorzystywał kilka poleceń. I tak mając
+skonfigurowanego demona ssh na serwerze będzie można skorzystać z <code>scp</code>, który
+będzie działać analogicznie do <code>cp</code> -- programu kopiującego pliki, który jest
+jednym z podstawowych narzędzi przy pracy z powłoką tekstową.</p>
+<p>Inną zaletą jest to, że nie musimy się uczyć czyjegoś środowiska pracy, kiedy
+chcemy komuś pomóc, bo przeważnie większość systemów jest wyposażona w bardzo
+podobne powłoki, które pozwalają na wykonanie wszystkich czynności, które znamy
+z bliższego nam systemu. I tak na przykład ze zmianą wersji nie będziemy się
+musieli od nowa doszukiwać gdzie znajdują się potrzebne nam opcje, żeby sobie
+odpowiednio je wyklikać (jak w przypadku systemów operacyjnych od firmy z
+Redmond).</p>
+<p>Dodatkowo, dla mnie wydaje się to być chyba najważniejsze jesteśmy w stanie
+poszerzyć nasze horyzonty jak chodzi o interakcję z systemem operacyjnym.  Jest
+sporo takich momentów, kiedy znając już dość nieźle możliwości różnych systemów
+operacyjnych jestem sfrustrowany tym, że nie wszyskie mają aż tak świetne
+narzędzia jak np. BASH, które w dużej mierze pozwalają na poczucie się jak
+prawdziwy władca swojej maszyny, który wydaje jej rozkazy (<strong>command</strong> line)
+w przeciwieństwie do użytkownika, który zawsze korzystał z GUI. </p>
+<p>A jest to szczególnie ważne na przykład dla kogoś, kto chciałby wiązać swoją
+karierę z administracją systemami. Jak pisze w swojej książce <em>Essential
+Administration</em> Aeleen Frisch, czasem korzystanie tylko z narzędzi graficznych 
+prowadzi do zastoju w pogłębianiu wiedzy na temat pracy systemów operacyjnych
+oraz możliwość związanych z ich administracją.</p>
 <h2>Ciekawe zastosowania powłoki systemowej</h2>
   </div><!-- .content -->
 
