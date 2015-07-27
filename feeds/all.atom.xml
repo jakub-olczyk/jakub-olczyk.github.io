@@ -1,5 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2015-06-02T11:00:00+02:00</updated><entry><title>Komentarze w Pelikanie</title><link href="https://jakub-olczyk.github.io/komentarze-w-pelikanie.html" rel="alternate"></link><updated>2015-06-02T11:00:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-06-02:komentarze-w-pelikanie.html</id><summary type="html">&lt;p&gt;Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2015-07-16T14:50:00+02:00</updated><entry><title>Bash - przydatne konstrukcje</title><link href="https://jakub-olczyk.github.io/bash-przydatne-konstrukcje.html" rel="alternate"></link><updated>2015-07-16T14:50:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-07-16:bash-przydatne-konstrukcje.html</id><summary type="html">&lt;p&gt;Ostatnio stwierdziłem, że dobrze by było odświeżyć porządnie swoją wiedzę z
+zakresu pisania skryptów w powłoce tekstowej. Stwierdziłem, że ilość
+przydatnych informacji, które znalazłem jest dostatecznie duża, żeby napisać na
+ten temat posta lub może zacząć jakąś serię postów na ten temat. Nie ma
+lepszego sposobu na nauczenie się nowych rzeczy niż przez uczenie na ich temat
+innych (a w przypadku bloga pewnie siebie za jakiś czas). Do dzieła!&lt;/p&gt;
+&lt;h1&gt;Bashowy &lt;em&gt;strict mode&lt;/em&gt;?&lt;/h1&gt;
+&lt;p&gt;Dość często porównuje się różne języki skryptowe i muszę przyznać, że perlowa
+zasada dodawania&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="n"&gt;strict&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="n"&gt;warnings&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;do dłuższych skryptów jest bardzo sensownym pomysłem, bo zaoszczędza masę czasu
+na debugowanie niedziałających skryptów. I okazuje się, że w Bashu przy
+odrobinie kreatywności jesteśmy osiągnąć podobny efekt. Wystarczy, żeby na
+początku skryptu dodać takie linijki :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -euo pipefail
+&lt;span class="nv"&gt;IFS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;$&amp;#39;\n\t&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Nie jest to odpowiednik jeden do jeden perlowego zachowania, ale i tak jest to
+coś o czym powinien wiedzieć każdy kto chce nauczyć się pisać porządne skrypty
+systemowe. A teraz co dokładnie robią poszczególne opcje, które tutaj włączamy?
+(&lt;a href="https://www.gnu.org/software/bash/manual/bashref.html#The-Set-Builtin"&gt;Zachęcam do przejrzenia odpowiedniej strony z podręcznika dotyczącego Basha&lt;/a&gt;)
+Po pierwsze można by to rozbić na poszczególne polecenia:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -e 
+&lt;span class="nb"&gt;set&lt;/span&gt; -u
+&lt;span class="nb"&gt;set&lt;/span&gt; -o pipefail
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Flaga &lt;code&gt;-e&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Włączenie tej flagi powoduje, że każda komenda w skrypcie, która zwróci wartość
+inną niż zero spowoduje jego zatrzymanie. Zmienia to działanie interpretera na
+to, które jest bliższe działaniu innych języków skryptowych jak na przykład
+Python. Jest to opcja, której raczej nie włączymy wpisując polecenia "z palca"
+w terminal, ale jest niesamowicie przydatna, gdy chcemy napisać jakiś dłuższy
+skrypt.&lt;/p&gt;
+&lt;h3&gt;Flaga &lt;code&gt;-u&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Dzięki niej odwołanie się do wcześnej niezadeklarowanej zmiennej jest
+traktowane jako błąd i powoduje natychmiastowe zakończenie wykonywania skryptu.
+Problemy związane z literówkami przy włączeniu tej opcji są bardzo szybkie do
+wychwycenia i naprawienia. Jest to dość podobne do skorzystania z &lt;code&gt;use strict
+'vars'&lt;/code&gt; w Perlu. Naprawdę pozwala na uniknięcie wielu niedogodności. &lt;/p&gt;
+&lt;h3&gt;set -o pipefail&lt;/h3&gt;
+&lt;p&gt;Flaga &lt;code&gt;-o&lt;/code&gt; pozwala na włączenie opcji za pomocą jej nazwy w tym wypadku jest to
+&lt;code&gt;pipefail&lt;/code&gt;, która odkrywa wszelkie błędy, które mogą się pojawić w potokach, a
+nie będą widoczne na pierwszy rzut oka. Posłużę się tutaj przykładem ze źródła
+tej informacji.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; grep jakis-tekst /nieistniejacy/plik &lt;span class="p"&gt;|&lt;/span&gt; sort
+&lt;span class="go"&gt;grep: /nieistniejacy/plik: No such file or directory&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="go"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jak widać w zmiennej &lt;code&gt;$?&lt;/code&gt; znajduje się wartość zwróconą przez &lt;code&gt;sort&lt;/code&gt;, który
+pomimo, że dostał pusty string do posortowania traktuje go jako poprawne dane
+wejściowe. Nie jest to zachowanie, które pasuje do skryptów powłoki, ale bez 
+wątpienia wystarcza przy normalnym pracowniu z terminalem.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt; -o pipefail
+&lt;span class="gp"&gt;$&lt;/span&gt; grep jakis-tekst /nieistniejacy/plik &lt;span class="p"&gt;|&lt;/span&gt; sort
+&lt;span class="go"&gt;grep: /nieistniejacy/plik: No such file or directory&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="go"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Zmienna IFS&lt;/h3&gt;
+&lt;p&gt;Zgodnie z tym co można znaleźć na stronach &lt;code&gt;man&lt;/code&gt;a dotyczących Basha:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;IFS&lt;/strong&gt;    The  Internal  Field  Separator  that is used for word splitting
+after expansion and to split lines into words with the read builtin command.
+The default value is ``\ \t\n''.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Dlaczego go zmieniać? Pomaga to w zmianie sposobu w jaki Bash będzie iterować
+po listach zmiennych. Jest to dość pomocne szczególnie, gdy spojrzy się na
+skrypt, który mógłby dla przykładu robić coś z plikami, których nazwy
+podawałoby się przy wywołaniu. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash &lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; arg in &lt;span class="nv"&gt;$@&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Removing &lt;/span&gt;&lt;span class="nv"&gt;$arg&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Bez zmiany IFS wywołanie tego skryptu z argumentami mogłoby skutkować pomyłką
+w ich interpretacji:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./skrypt.sh &lt;span class="nb"&gt;test&lt;/span&gt;-file &lt;span class="s1"&gt;&amp;#39;Mission Impossible.webm&amp;#39;&lt;/span&gt;
+&lt;span class="go"&gt;Removing test-file&lt;/span&gt;
+&lt;span class="go"&gt;Removing Mission&lt;/span&gt;
+&lt;span class="go"&gt;Removing Impossible.webm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Więcej informacji na temat działania Basha po takich zmianach można znaleźć w 
+oryginalnym artykule, do którego link znajduje się na końcu tego posta.&lt;/p&gt;
+&lt;h1&gt;Różne udogodnienia związane ze środowiskiem tekstowym&lt;/h1&gt;
+&lt;p&gt;Poniżej znajduje się kilka przydatnych informacji dotyczących Basha jako
+środowiska użytkownika. Na pewno bardzo się przydadzą przy codziennej pracy z
+terminalem, ale nie o wszystkich mówi się w czasie zajęć z systemów
+operacyjnych (przynajmniej takie są moje doświadczenia).&lt;/p&gt;
+&lt;h3&gt;Operacje na historii poleceń&lt;/h3&gt;
+&lt;p&gt;Dla mnie dużym udogodnieniem jak chodzi o pracę z terminalem są &lt;/p&gt;
+&lt;p&gt;!! ^find^substitute&lt;/p&gt;
+&lt;h2&gt;Źródła&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Aaron Maxwell, &lt;a href="http://redsymbol.net/articles/unofficial-bash-strict-mode/"&gt;&lt;em&gt;Use the Unofficial Bash Strict Mode (Unless You Looove Debugging)&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="bash"></category><category term="scripting"></category></entry><entry><title>Komentarze w Pelikanie</title><link href="https://jakub-olczyk.github.io/komentarze-w-pelikanie.html" rel="alternate"></link><updated>2015-06-02T11:00:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-06-02:komentarze-w-pelikanie.html</id><summary type="html">&lt;p&gt;Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
 pisałem wcześniej mają one, z mojego punktu widzenia, dużo zalet, jednak
 istnieje w ich przypadku przynajmniej jedna wada (czy może wadka, bo gotowe
 rozwiązania istnieją) - obsługa komentarzy to sprawa dość problematyczna.&lt;/p&gt;
