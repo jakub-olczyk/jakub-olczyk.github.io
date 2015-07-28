@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około programistyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/blog.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 02 Jun 2015 11:00:00 +0200</lastBuildDate><item><title>Komentarze w Pelikanie</title><link>https://jakub-olczyk.github.io/komentarze-w-pelikanie.html</link><description>&lt;p&gt;Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około programistyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/blog.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 28 Jul 2015 11:00:00 +0200</lastBuildDate><item><title>What happened?</title><link>https://jakub-olczyk.github.io/what-happened.html</link><description>&lt;p&gt;Jestem dzieckiem ery, w której dostęp do Internetu jest tak oczywisty, że w
+momencie, w którym dostęp do niego staje się ograniczony komputer zaczyna być
+urządzeniem niemal bezużytecznym (nie jestem w tym osamotniony, vide &lt;a href="https://pl.wikipedia.org/wiki/Prawo_Metcalfe%27a"&gt;Prawo
+Metcalfe'a&lt;/a&gt;). Jednakże im dłużej studiuję informatykę tym bardziej zaczynam
+żałować, że nie urodziłem się wcześniej, w bardziej pionierskich czasach
+(przynajmniej z perspektywy naszego kraju), kiedy Internet jeszcze był czymś
+niezrozumiałym, trudnym i przede wszystkim drogim. Mam wrażenie, że tamte czasy
+były zdecydowanie lepsze. &lt;/p&gt;
+&lt;p&gt;Najważniejsze jak dla mnie jest to, że przeciętny użytkownik był zdecydowanie
+lepiej przystosowany do kultury, która zdążyła się wtedy wykształcić i całej
+związanej z nią netykiety.  Kiedy pojawiał się ktoś nowy dość szybko &lt;a href="http://www.catb.org/~esr/faqs/smart-questions.html"&gt;był
+uczony przez innych użytkowników&lt;/a&gt; w jaki sposób należy się zachowywać w
+Internecie, bo trzeba przyznać, że względna anonimowość jaką dawał wtedy
+Internet wyzwalała wszelkie niedobre strony ludzkiej natury.&lt;/p&gt;
+&lt;p&gt;Tamte czasy minęły już, jak się zdaje, bezpowrotnie. Teraz Internetem
+rządzi jedynie pieniądz oraz wielkie korporacje, które IMHO są odpowiedzialne
+za niesamowite zgłupienie użytkowników sieci. W niektórych krajach dalekiej
+Azji &lt;a href="http://elitedaily.com/news/technology/millions-people-dont-realize-facebook-part-internet/930519/"&gt;ludzie nie wiedzą, że korzystając z pewnego portalu społecznościowego
+korzystają z Internetu&lt;/a&gt;, ponadto powstaje coraz więcej komercyjnych (bo
+niestety nie można nazwać tego inaczej) &lt;a href="http://qz.com/385821/poor-internet-for-poor-people-why-facebooks-internet-org-amounts-to-economic-racism/"&gt;projektów, które mają na celu
+udostępnienie jedynie pewnego wycinka internetowej rzeczywistości&lt;/a&gt; dla ludzi
+i to takiego, w którym ci ludzie są produktem i korzyści, które będą ich
+udziałem są nieporównywalnie mniejsze od tych, które będą generować dla firm
+biorących udział w tym projekcie (&lt;a href="http://www.businessinsider.com/how-does-facebook-make-money-2010-5?op=1"&gt;zbieranie informacji o użytkownikach w celu
+sprzedaży ich w ten lub innych sposób reklamodawcom&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Ludzie powinni zacząć zdawać sobię sprawę z tego, że obecnie nie zostało już
+nic z tego czym Internet był kiedyś. Teraz jest to narzędzie masowej
+inwigilacji, czy to &lt;a href="https://www.eff.org/nsa-spying"&gt;ze strony rządów&lt;/a&gt;, czy też &lt;a href="http://www.computerworld.com/article/2551008/networking/what-google-knows-about-you.html"&gt;ze strony prywatnych
+podmiotów&lt;/a&gt;.  Niewiele zostało z radosnej, utopijnej wizji, gdzie jest to
+miejsce spotkań zwykłych ludzi z całego świata, którzy mogą podzielić się
+własnymi doświadczeniami i nauczyć czegoś nowego na temat świata. &lt;/p&gt;
+&lt;p&gt;Powinniśmy uczyć teraz jak z rozwagą i dystansem podchodzić do tego co znajduje
+się w sieci. Na szczęście &lt;a href="http://cyfrowa-wyprawka.org/"&gt;pojawiają się już też inicjatywy, które mają na celu
+uzupełnienie tych braków&lt;/a&gt; wśród wszystkich użytkowników, ale szczególnie
+wśród tych najmłodszych. Otwartym jednak pozostaje pytanie o to czy jest szansa
+na &lt;a href="https://youtu.be/XEVlyP4_11M?t=961"&gt;wzbudzenie jakiegokolwiek zainteresowania tym tematem wśród przeciętnych
+ludzi&lt;/a&gt;, którzy na codzień nie zastanawiają się nad prywatnością czy tym na
+co się zgadzają klikając na przycisk "akceptuję warunki licencji", kiedy coś
+instalują na komórce (swoją drogą Fundacja Nowoczesna Polska i Ministerstwo
+Cyfryzacji &lt;a href="https://nowoczesnapolska.org.pl/2015/01/22/mobilne-bezpieczenstwo/"&gt;wypuściły aplikację służącą do uświadamiania do
+jakich treści mają prawo poszczególne aplikacje na telefonie&lt;/a&gt;) lub
+komputerze.&lt;/p&gt;
+&lt;p&gt;Ludzie, dla których te sprawy są istotne powinni częściej znajdować się w
+mediach, trudno jest usłyszeć o wielu organizacjach, które zajmują się takimi
+sprawami, a mamy ich w naszym kraju całkiem dużo i myślę, że warto je tutaj
+wymienić:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://panoptykon.pl"&gt;Fundacja Panoptykon&lt;/a&gt; : działają zgodnie z ideą
+  "kontrolujmy kontrolujących"&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://nowoczesnapolska.org.pl/"&gt;Fundacja Nowoczesna Polska&lt;/a&gt; :
+  uświadamianie użytkowników odnośnie technologii informatycznych z naciskiem
+  na edukację &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cybsecurity.org"&gt;Fundacja Bezpieczna Cyberprzestrzeń&lt;/a&gt; :
+  działania na rzecz poprawy bezpieczeństwa w Internecie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Myślę, że warto wspierać te organizacje chociażby przez przesyłanie znajomym
+odpowiednich materiałów, które one publikują. Uświadamianie jest wpisane
+chyba we wszystkie statuty tych fundacji, a to jest pierwszy krok do tego,
+żeby Internet znów mógł zacząć przypominać bezpieczne miejsce, w którym może
+odbywać się prywatna wymiana myśli.&lt;/p&gt;
+&lt;h5&gt;Materiały dla zainteresowanych&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://edukacjamedialna.edu.pl/media/chunks/attachment/poradnik-bezpieczenstwa-mobilnego.pdf"&gt;Poradnik bezpieczeństwa mobilnego (pdf)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://panoptykon.org/sites/panoptykon.org/files/infografiki/co_wie_moj_telefon.png"&gt;Co wie o mnie mój telefon? (infografika)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://panoptykon.org/sites/panoptykon.org/files/infografiki/prywatnosc_w_sieci.jpg"&gt;Prywatność w sieci: odzyskaj kontrolę (inforgrafika)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dug.net.pl/tekst/239/jak_dbac_o_swoja_prywatnosc___nie_tylko_w_sieci/"&gt;Jak zadbać o swoją prywatność? (w kontekście Debiana)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://panoptykon.org/file/2705/download?token=YgpCBN7D"&gt;Szyfrowane: co i dlaczego warto zabezpieczać? (inforgrafika)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 28 Jul 2015 11:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-07-28:what-happened.html</guid><category>internet</category><category>privacy</category></item><item><title>Komentarze w Pelikanie</title><link>https://jakub-olczyk.github.io/komentarze-w-pelikanie.html</link><description>&lt;p&gt;Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
 pisałem wcześniej mają one, z mojego punktu widzenia, dużo zalet, jednak
 istnieje w ich przypadku przynajmniej jedna wada (czy może wadka, bo gotowe
 rozwiązania istnieją) - obsługa komentarzy to sprawa dość problematyczna.&lt;/p&gt;
