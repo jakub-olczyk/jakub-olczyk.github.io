@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+      <title>Jakub Olczyk</title>
+      <link rel="stylesheet" type="text/css" href="../theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="../theme/css/styles.css"/>
+      <meta charset="utf-8" />
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=https://avatars0.githubusercontent.com/u/6322872?v=3&s=460>
+            <img width="200" height="200" src=https://avatars0.githubusercontent.com/u/6322872?v=3&s=460>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href="..">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia około programistyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="../pages/o-mnie.html">o mnie</a></li>
+                <li><a class="nodec" href="../pages/kontakt.html">kontakt</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/drafts/bash-przydatne-konstrukcje.html" rel="bookmark" title="Permalink to Bash - przydatne konstrukcje">
+      Bash - przydatne konstrukcje
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-07-16T14:50:00+02:00">
+      Thu 16 July 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>Ostatnio stwierdziłem, że dobrze by było odświeżyć porządnie swoją wiedzę z
+zakresu pisania skryptów w powłoce tekstowej. Stwierdziłem, że ilość
+przydatnych informacji, które znalazłem jest dostatecznie duża, żeby napisać na
+ten temat posta lub może zacząć jakąś serię postów na ten temat. Nie ma
+lepszego sposobu na nauczenie się nowych rzeczy niż przez uczenie na ich temat
+innych (a w przypadku bloga pewnie siebie za jakiś czas). Do dzieła!</p>
+<h1>Bashowy <em>strict mode</em>?</h1>
+<p>Dość często porównuje się różne języki skryptowe i muszę przyznać, że perlowa
+zasada dodawania</p>
+<div class="highlight"><pre><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+<span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+</pre></div>
+
+
+<p>do dłuższych skryptów jest bardzo sensownym pomysłem, bo zaoszczędza masę czasu
+na debugowanie niedziałających skryptów. I okazuje się, że w Bashu przy
+odrobinie kreatywności jesteśmy osiągnąć podobny efekt. Wystarczy, żeby na
+początku skryptu dodać takie linijki :</p>
+<div class="highlight"><pre><span class="nb">set</span> -euo pipefail
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n\t&#39;</span>
+</pre></div>
+
+
+<p>Nie jest to odpowiednik jeden do jeden perlowego zachowania, ale i tak jest to
+coś o czym powinien wiedzieć każdy kto chce nauczyć się pisać porządne skrypty
+systemowe. A teraz co dokładnie robią poszczególne opcje, które tutaj włączamy?
+(<a href="https://www.gnu.org/software/bash/manual/bashref.html#The-Set-Builtin">Zachęcam do przejrzenia odpowiedniej strony z podręcznika dotyczącego Basha</a>)
+Po pierwsze można by to rozbić na poszczególne polecenia:</p>
+<div class="highlight"><pre><span class="nb">set</span> -e 
+<span class="nb">set</span> -u
+<span class="nb">set</span> -o pipefail
+</pre></div>
+
+
+<h3>Flaga <code>-e</code></h3>
+<p>Włączenie tej flagi powoduje, że każda komenda w skrypcie, która zwróci wartość
+inną niż zero spowoduje jego zatrzymanie. Zmienia to działanie interpretera na
+to, które jest bliższe działaniu innych języków skryptowych jak na przykład
+Python. Jest to opcja, której raczej nie włączymy wpisując polecenia "z palca"
+w terminal, ale jest niesamowicie przydatna, gdy chcemy napisać jakiś dłuższy
+skrypt.</p>
+<h3>Flaga <code>-u</code></h3>
+<p>Dzięki niej odwołanie się do wcześnej niezadeklarowanej zmiennej jest
+traktowane jako błąd i powoduje natychmiastowe zakończenie wykonywania skryptu.
+Problemy związane z literówkami przy włączeniu tej opcji są bardzo szybkie do
+wychwycenia i naprawienia. Jest to dość podobne do skorzystania z <code>use strict
+'vars'</code> w Perlu. Naprawdę pozwala na uniknięcie wielu niedogodności. </p>
+<h3>set -o pipefail</h3>
+<p>Flaga <code>-o</code> pozwala na włączenie opcji za pomocą jej nazwy w tym wypadku jest to
+<code>pipefail</code>, która odkrywa wszelkie błędy, które mogą się pojawić w potokach, a
+nie będą widoczne na pierwszy rzut oka. Posłużę się tutaj przykładem ze źródła
+tej informacji.</p>
+<div class="highlight"><pre><span class="gp">$</span> grep jakis-tekst /nieistniejacy/plik <span class="p">|</span> sort
+<span class="go">grep: /nieistniejacy/plik: No such file or directory</span>
+<span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">0</span>
+</pre></div>
+
+
+<p>Jak widać w zmiennej <code>$?</code> znajduje się wartość zwróconą przez <code>sort</code>, który
+pomimo, że dostał pusty string do posortowania traktuje go jako poprawne dane
+wejściowe. Nie jest to zachowanie, które pasuje do skryptów powłoki, ale bez 
+wątpienia wystarcza przy normalnym pracowniu z terminalem.</p>
+<div class="highlight"><pre><span class="gp">$</span> <span class="nb">set</span> -o pipefail
+<span class="gp">$</span> grep jakis-tekst /nieistniejacy/plik <span class="p">|</span> sort
+<span class="go">grep: /nieistniejacy/plik: No such file or directory</span>
+<span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">2</span>
+</pre></div>
+
+
+<h3>Zmienna IFS</h3>
+<p>Zgodnie z tym co można znaleźć na stronach <code>man</code>a dotyczących Basha:</p>
+<blockquote>
+<p><strong>IFS</strong>    The  Internal  Field  Separator  that is used for word splitting
+after expansion and to split lines into words with the read builtin command.
+The default value is ``\ \t\n''.</p>
+</blockquote>
+<p>Dlaczego go zmieniać? Pomaga to w zmianie sposobu w jaki Bash będzie iterować
+po listach zmiennych. Jest to dość pomocne szczególnie, gdy spojrzy się na
+skrypt, który mógłby dla przykładu robić coś z plikami, których nazwy
+podawałoby się przy wywołaniu. </p>
+<div class="highlight"><pre><span class="c">#!/bin/bash </span>
+<span class="k">for</span> arg in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Removing </span><span class="nv">$arg</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</pre></div>
+
+
+<p>Bez zmiany IFS wywołanie tego skryptu z argumentami mogłoby skutkować pomyłką
+w ich interpretacji:</p>
+<div class="highlight"><pre><span class="gp">$</span> ./skrypt.sh <span class="nb">test</span>-file <span class="s1">&#39;Mission Impossible.webm&#39;</span>
+<span class="go">Removing test-file</span>
+<span class="go">Removing Mission</span>
+<span class="go">Removing Impossible.webm</span>
+</pre></div>
+
+
+<p>Więcej informacji na temat działania Basha po takich zmianach można znaleźć w 
+oryginalnym artykule, do którego link znajduje się na końcu tego posta.</p>
+<h1>Różne udogodnienia związane ze środowiskiem tekstowym</h1>
+<p>Poniżej znajduje się kilka przydatnych informacji dotyczących Basha jako
+środowiska użytkownika. Na pewno bardzo się przydadzą przy codziennej pracy z
+terminalem, ale nie o wszystkich mówi się w czasie zajęć z systemów
+operacyjnych (przynajmniej takie są moje doświadczenia).</p>
+<h3>Operacje na historii poleceń</h3>
+<p>Dla mnie dużym udogodnieniem jak chodzi o pracę z terminalem są </p>
+<p>!! ^find^substitute</p>
+<h2>Źródła</h2>
+<ul>
+<li>Aaron Maxwell, <a href="http://redsymbol.net/articles/unofficial-bash-strict-mode/"><em>Use the Unofficial Bash Strict Mode (Unless You Looove Debugging)</em></a></li>
+</ul>
+  </div><!-- .content -->
+
+</section>
+
+<!--static comments from plugin -->
+<section id="comment-section">
+    <p>Brak komentarzy.<p>
+<br>
+<br>
+<a id="comment-button" href="mailto:jakub.olczyk@openmailbox.org?subject=[blog]comment-bash-przydatne-konstrukcje&body=date:YYYY-MM-DD HH:MM:SS%0D%0Aauthor:%0D%0ATwój komentarz">Napisz komentarz przez e-mail</a>
+</section>
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href=""> <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</a>
+		unless otherwise noted.<br>
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+		slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.<br>
+		Code blocks styled with <a href="https://github.com/uraimo/pygments-vimstyles">wombat.css</a>
+      </p>
+    </footer>
+  </body>
+</html>
