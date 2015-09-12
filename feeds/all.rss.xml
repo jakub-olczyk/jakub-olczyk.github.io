@@ -1,5 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około informatyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 28 Jul 2015 11:00:00 +0200</lastBuildDate><item><title>What happened?</title><link>https://jakub-olczyk.github.io/what-happened.html</link><description>&lt;p&gt;Jestem dzieckiem ery, w której dostęp do Internetu jest tak oczywisty, że w
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia około informatyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 12 Sep 2015 19:30:00 +0200</lastBuildDate><item><title>Informatyka europejczyka - czego uczy nas podręcznik do szkoły średniej?</title><link>https://jakub-olczyk.github.io/informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</link><description>&lt;p&gt;Miałem okazję ostatnio przyjrzeć się jednej książce, z której w liceum lub
+technikum mieliby się uczyć przyszli "prości użytkownicy komputera" (i nie mam
+tutaj bynajmniej na myśli niczego złego, każdy z nas czasem jest prostym
+użytkownikiem -- ja dla przykładu zawsze będę &lt;em&gt;prostym użytkownikiem
+samochodu&lt;/em&gt;, ponieważ nie mam zielonego pojęcia w jaki sposób zbudowany jest
+silnik).  Muszę przyznać, że &lt;strong&gt;jestem przerażony tym, co można z takiej pozycji
+wyczytać&lt;/strong&gt;. Wiem co prawda, że egzemplarz, który mi wpadł w ręce jest z roku
+2012,kiedy to jeszcze nie wiedzieliśmy o skali &lt;a href="https://en.wikipedia.org/wiki/List_of_government_mass_surveillance_projects"&gt;masowej inwigilacji w
+Internecie prowadzonej przez organy rządowe wielu państw&lt;/a&gt;, jednak już wtedy
+było wiadomo jak duża jest skala szpiegowania przez prywatne firmy&lt;a href="http://www.nytimes.com/2007/11/01/technology/01Privacy.html?pagewanted=2&amp;amp;_r=2"&gt;(jako
+ilustracja może posłużyć ten artykuł z 2007 roku)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Żeby była pełna jasność, podam jeszcze raz informacje bibliograficzne
+"recenzowanej" książki :&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Autor: Jarosław Skłodowski&lt;br /&gt;
+Informatyka europejczyka. Zakres podstawowy.&lt;br /&gt;
+Podręcznik do szkół ponadgimnazjalnych.
+Rok wydania: 2012&lt;br /&gt;
+Wydawca: Helion  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Dobór treści&lt;/h3&gt;
+&lt;p&gt;Myślę, że większość podręczników w dzisiejszych czasach najbardziej traci
+właśnie już na stracie przy samym doborze materiału, który chce przedstawić
+uczniom.  A już nic mnie bardziej nie denerwuje niż to, że serwuje się w
+książce, która ma być wstępem do dalszych poszukiwań tylko jeden punkt widzenia
+– a mianowicie zamykanie młodych ludzi w siatce korporacyjnego oprogramowania.
+Pozwolę sobie zacytować kilka zdań ze wstępu:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Podręcznik ten powstał z myślą o (...) uczniach polskich szkół,
+mających przyjemność korzystania na lekcjach informatyki z komputerów
+z oprogramowaniem Windows 7.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To znaczy, że jeśli ktoś nie korzysta z oprogramowania M$ to niczego nie dowie się z tej
+książki.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nie przyzwyczajaj się do konkretnych programów i ich "guziczkologii".
+Porównuj różne aplikacje tego samego typu i dostępne w nich funkcje.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Nie miałbym się do czego przyczepić, gdyby nie fakt, że książka nie świeci w
+tym wypadku przykładem i nie porównuje różnych dostępnych opcji.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Płyta dołączona do podręcznika stanowi jego integralną część i zawiera
+obszerne rozszerzenie treści zawartych w książce (...) na płycie znajdziesz
+także to, czego nie udało się zmieścić w podręczniku.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Niesamowicie denerwuje mnie to ostatnie stwierdzenie. &lt;strong&gt;W podręczniku zawsze
+można zmieścić wszystko to, co jest ważne&lt;/strong&gt;. Wystarczy chcieć i na przykład nie
+dodawać bezsensownych ciekawostek czy też zabierać miejsce na tekst, który się
+tam znajdować nie powinien ( znów chodzi mi tu o dobór treści) , czy też
+ilustracje, które nie ilustrują zupełnie nic.  Dla przykładu (pomińmy treść
+merytoryczną, bo pewnie i z nią można by dyskutować)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(...) odrębną gałęzią informatyki jest technologia informacyjna, inaczej
+teleinformatyka (...) stanowi swego rodzaju połączenie informatyki i
+telekomunikacji (rysunek 1.3)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Poniżej moje przybliżone odtworzenie rysunku 1.3 za pomocą znaków ASCII.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;+-------------+          +-------------+
+| informatyka |          | komunikacja |
++-------------+          +-------------+
+            \             /
+      +--------------------------+
+      | technologia informacyjna |
+      +--------------------------+
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Takie "obrazowe" ilustracje nie są niczym niespotykanym w dzisiejszych
+podręcznikach, a w książkach z przed 20-30 lat są nie do pomyślenia.  W
+dzisiejszych czasach książki, z których korzysta się w szkołach cierpią na
+wielki problem związany z &lt;strong&gt;przerostem formy nad treścią&lt;/strong&gt;.  Dodatkowo
+informacje, które faktycznie powinny się tam znaleźć i o których powinniśmy
+rozmawiać na lekcjach informatyki, bo nie służą jedynie temu, żeby ten
+przedmiot sprowadzić do kursu obsługi programów biurowych, trafiają do ramki z
+"Ciekawostkami".&lt;/p&gt;
+&lt;p&gt;Przykład, który znajdujemy w okolicach paragrafu zatytułowanego
+&lt;em&gt;"Jakie są konsekwencje łatwego dostępu do informacji"&lt;/em&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Administracja USA pracuje nad nowymi regulacjami prawnymi umożliwiającymi
+służbom rządowym kontrolę użytkowników sieci. Politycy żądają, aby wszystkie
+serwisy internetowe, które pozwalają na komunikowanie się -- w tym portale
+takie jak Facebook oraz komunikatory typu Skype -- tak zmodyfikowały swoje
+oprogramowanie, by służby miały dostęp do danych o ich użytkownikach. Nowe
+prawo ma też umożliwić szybkie przechwytywanie i rozszyfrowywanie na
+przykładu zakodowanych e-maili.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;W treści paragrafu nie można znaleźć nawet jednego odniesienia do tej
+"ciekawostki", o której jak wiemy z tego co opublikował Snowden można
+powiedzieć tyle, że jest przestarzała, bo już w 2012 roku to, o czym jest tam
+napisane, miało miejsce od dobrych kilku lat. I nie trzeba było do tego "nowego
+prawa", to które weszło w życie w imię walki z terroryzmem zupełnie wystarczyło
+do takiej inwigilacji. W ćwiczeniach do rozdziału znajduje się propozycja
+przeprowadzenia na zajęciach debaty na temat, cytuję, "cenzury Internetu"
+(rozumiem, że odnosi się to do ciekawostki). Z własnego doświadczenia jako
+ucznia wiem, że ta forma zajęć się zwyczajnie nie sprawdza.  Sztuczne dzielenie
+ludzi na grupy "za" i "przeciw" jedynie przekłada się na to, że uczniowie mają
+w nosie podany temat. Gdyby udało się przeprowadzić dyskusję w tej kwestii w
+klasie, to w moim odczuciu miałoby to dużo większą wartość.  Szczególnie, gdy
+nauczyciel umiałby ją przeprowadzić w taki sposób, żeby dotrzeć do uczniów i
+dotknąć wszystkich ważnych problemów.&lt;/p&gt;
+&lt;p&gt;Pierwsze "spotkanie", bo tak tutaj nazywają się rozdziały, miało dotyczyć
+informacji. Zdaję sobie sprawę z tego, że nie jest to pojęcie zarezerwowane dla
+informatyki, ale jednak myślę, że można by je raczej przedstawić z takiej
+perspektywy na lekcjach, a o innych znaczeniach tylko wspomnieć.
+Bardzo podobał mi się dobór materiału na studiach na Wstępie do Informatyki,
+gdzie również omawialiśmy podobne zagadnienia. Czytając tę książkę trudno mi nie
+pomyśleć, że ten rozdział to tylko zapychacz, gdzie przedstawiono jakieś
+piramidy zdobywania wiedzy i inne mało istotne i nieścisłe treści niezwiązane z
+informatyką na tyle by zajmowały aż tyle miejsca w podręczniku.
+Jest tutaj jakiś ogólny wstęp, ale wiele pojęć, które są trudniejsze, chyba
+pozostawia się niezdefiniowanymi (np. heurystyka), po to żeby każdy mógł sobie
+poszukać informacji na ich temat w Internecie, a jest to temat następnego
+"spotkania".&lt;/p&gt;
+&lt;h3&gt;&lt;em&gt;"Jak sprytnie 'guglać'"&lt;/em&gt; -- czyli korporacyjna nowomowa&lt;/h3&gt;
+&lt;p&gt;Cały rozdział traktuje o tym jak wyszukiwać informacje w sieci. Jest to taki
+kurs umiejętnego korzystania z wyszukiwarki Google. Mnie się wydaje, że to są
+materiały, które powinny trafić na płytę przy poprzednim rozdziale o
+informacji. Owszem, wypada o tym wspomnieć, że można dodać pewne ograniczenia
+do zapytań i np. otrzymać wyniki dotyczące odpowiedniego okresu w historii, ale
+&lt;strong&gt;czy nie jest ważniejsze, żeby wspomnieć o tym, że od dawna &lt;a href="https://en.wikipedia.org/wiki/Filter_bubble"&gt;różne osoby przy
+wpisaniu tego samego zapytania do Google otrzymają różne wyniki&lt;/a&gt;?&lt;/strong&gt; I
+porozmawiać na temat tego jak bardzo jest to niekorzystne w dzisiejszych
+czasach, bo ludzie o odmiennych poglądach zamykają się we "własnym świecie", w
+którym wszyscy myślą tak samo. I nie jest tak, że Google jako jedyny wprowadza
+&lt;em&gt;personalized searches&lt;/em&gt;, bo to samo jest z tym co pojawia się w strumieniach
+aktywności znajomych na portalach społecznościowych, gdzie jest większa szansa
+na to, by zobaczyć wpis znajomego o podobnych poglądach. &lt;strong&gt;Zaczyna brakować
+miejsca na dyskusję w Internecie, chyba warto porozmawiać o tym na lekcjach
+informatyki&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;Algorytmika po łebkach i informacje na temat dyskutowania&lt;/h3&gt;
+&lt;p&gt;Następny rozdział  "Rozwiązywanie problemów" rozpoczyna opis tego czym
+jest algorytmika, ale w mojej ocenie nie robi tego zbyt przekonująco. Dodatkowo
+muszę przyznać, że z tego co rozumiem więcej w tym rozdziale szeroko pojętej
+humanistyki niż nauk ścisłych, do których informatyka się przecież zalicza.
+Spójrzmy na przykład na ten fragment:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Pierwsze algorytmy obmyślała ponad 100 lat temu córka lorda Byrona -- Ada.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Nie chcę tutaj wychodzić na osobę bardzo czepliwą, ale to jest &lt;strong&gt;poważny błąd
+merytoryczny!&lt;/strong&gt; Pierwsze algorytmy opisywał przecież &lt;a href="https://www.britannica.com/biography/al-Khwarizmi"&gt;al-Chuwarizmi&lt;/a&gt;!  Nie
+dość, że wymyślił algebrę to jeszcze opisał pierwsze sposoby rozwiązywania
+równań liniowych i kwadratowych, które algorytmami przecież są. Notabene, to właśnie &lt;strong&gt;od jego nazwiska w
+wersji zlatynizowanej pochodzi samo słowo algorytm&lt;/strong&gt;. Wcześniej od Ady był też
+Euklides ze swoim &lt;a href="https://www.britannica.com/topic/Euclidean-algorithm"&gt;algorytmem wyznaczania największego wspólnego dzielnika&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Napotkane sytuacje problemowe możemy próbować zaklasyfikować pod względem
+liczby rozwiązań:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;konwergencyjne&lt;/strong&gt; -- mają jedno rozwiązanie&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;dywergencyjne&lt;/strong&gt;  -- mają więcej niż jedno rozwiązanie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Trudno było mi się odnieść do tego fragmentu, ponieważ nigdy się z tą
+klasyfikacją nie spotkałem w kontekście informatycznym. Owszem są na przykład
+funkcje, które są zbieżne (konwergencja - zbieżność), ale nie widziałem nigdy
+tego słowa użytego w taki sposób. Z pomocą przyszedł Internet, który
+podpowiedział, że są to &lt;a href="http://www.kognitywistyka.net/encyklopedia/myslenie.html#klasyfikacja"&gt;podziały z psychologii i kognitywistyki&lt;/a&gt;. Zero
+powiązania z algorytmiką.&lt;/p&gt;
+&lt;p&gt;Następnie mamy dość sporo informacji na temat rozwiązywania problemów, ale znów mam
+wrażenie jakbym czytał książkę do psychologii. Nie są to metody informatyczne,
+tego jestem pewien. &lt;strong&gt;Nie twierdzę, że umiejętność prowadzenia dyskusji oraz
+omawiania problemów za pomocą burzy mózgów nie jest potrzebna. Nie jest to
+jednak w żaden sposób związane z &lt;a href="http://issi.uz.zgora.pl/pl/didactic/ao/tpi/tpi03.pdf"&gt;algorytmicznym rozwiązywaniem
+problemów&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;Korespondencja internetowa&lt;/h3&gt;
+&lt;p&gt;Jest to standardowy tekst opisujący możliwości poczty internetowej. Brakuje
+jednak kilku istotnych informacji. Wydaje mi się, że przydałoby się opowiedzieć
+nieco więcej na tematy związane z netykietą (&lt;a href="http://www.gazeta.tv/plej/29,107457,11595738,114927,video.html?embed=0&amp;amp;autoplay=1"&gt;oraz poprawnością
+językową&lt;/a&gt;) i wyraźnie poświęcić im osobny akapit. Dodatkowo wybitnie
+razi mnie polecanie korzystania z takiej czy innej konkretnej usługi. W tym
+wypadku z maila oferowanego przez Google.&lt;/p&gt;
+&lt;p&gt;Myślę, że szczególny nacisk powinno się też położyć na &lt;strong&gt;czytanie warunków
+użytkowania danej usługi internetowej&lt;/strong&gt;. Weźmy sobie za przykład politykę
+prywatności w Gmailu zachwalanym przez podręcznik :&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nasze automatyczne systemy analizują treść &lt;strong&gt;(w tym wiadomości e-mail)&lt;/strong&gt; w
+celu oferowania spersonalizowanych funkcji usług, takich jak wyniki
+wyszukiwania, reklamy indywidualne i wykrywanie spamu oraz złośliwego
+oprogramowania.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To jest kolejny temat do dyskuskusji związaną ze świadomym dobieraniem usług,
+ponieważ w innym miejscu w polityce prywatności firmy z Mountain View można
+znaleźć takie stwierdzenia:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(...) prosimy o podanie danych osobowych, takich jak imię i nazwisko, adres
+e-mail, numer telefonu czy numer karty kredytowej. Będziemy je przechowywać z
+danymi konta. &lt;strong&gt;Jeśli użytkownik chce w pełni wykorzystać oferowane przez nas
+funkcje udostępniania treści, jest również proszony o utworzenie publicznego
+profilu Google zawierającego m.in. jego imię i nazwisko oraz zdjęcie&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Trzeba się zastanowić czy chcemy jakiejś zagranicznej firmie możliwość rozpoznawania
+nas na każdym kroku. Dość istotne jest to, że nie jest to
+firma, która działa według jurysdykcji europejskiej. Trzeba mieć na uwadze
+fakt, że w USA nie ma takiego systemu ochrony danych osobowych jaki istnieje w
+krajach Europy (po więcej informacji odsyłam do książki "&lt;em&gt;Internet. Czas się
+bać&lt;/em&gt;" W. Orlińskiego). Dodatkowo wypadałoby pewnie wspomnieć o tym, że
+&lt;strong&gt;komunikacja za pośrednictwem poczty elektronicznej nie polega na przesyłaniu
+listów&lt;/strong&gt; tj. &lt;strong&gt;wiadomości zabezpieczonych w tradycyjnej poczcie przez kopertę&lt;/strong&gt;
+tylko, idąc tym torem, &lt;strong&gt;co najwyżej pocztówek, których treść jest dostępna dla
+każdego w czasie przesyłania wiadomości&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Brak informacji na temat możliwości kryptograficznych jakie są dostępne dla
+każdego (pakiet &lt;a href="https://www.gnupg.org"&gt;GnuPG&lt;/a&gt; implementujący OpenPGP dla przykładu) to chyba jedna
+z poważniejszych wad tej książki.&lt;/p&gt;
+&lt;h3&gt;Podsumowanie&lt;/h3&gt;
+&lt;p&gt;Nie będę się już dłużej rozwodził nad treścią tej książki, bo wiele z tematów
+to zwykły kurs obsługi komputera. Martwi mnie też niestety fakt, że &lt;strong&gt;brakuje w
+tej w niej prawdziwej bibliografii opartej o inne książki, najlepiej
+podręczniki akademickie&lt;/strong&gt;(&lt;a href="https://web.archive.org/web/20090206185258/http://www.jacek234.yoyo.pl/strona2.html"&gt;czy tę stronę można uznać za bibliografię?&lt;/a&gt;), no
+i oczywiście odniesień do nich w odpowiednich miejscach. W wielu miejscach
+brakowało mi możliwości dodania, jak w Wikipedii, znacznika &lt;em&gt;[citation
+needed]&lt;/em&gt;. Nie wiem czy w wydaniu drugim coś się zmieniło w stosunku do tego co
+ja miałem okazję przeczytać. Mam oczywiście nadzieję, że tak jest, ale sam
+przeszedłem przez liceum i, niestety dopiero od niedawna, zdaję sobie sprawę z
+tego jak słabej jakości są teraz podręczniki na rynku. Cieszyć może mnie może
+fakt, że nie znam jeszcze żadnego nauczyciela informatyki, który by wymagał
+kupowania książki do informatyki (nikt w moim otoczeniu w liceum nie był do
+tego zmuszany), bo w mojej ocenie byłaby to strata pieniędzy. &lt;a href="http://helion.pl/autorzy/jaroslaw-sklodowski,jarskl.htm"&gt;Zostawiam ten
+link do notki o autorze do własnego przemyślenia&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Dodatkowo w sprawie podręczników w ogóle  -- &lt;strong&gt;wszędzie widać tylko opisy
+mówiące o ładnym układzie strony i pięknych grafikach, brakuje jednak
+informacji o tym czy treść jest najwyższej jakości&lt;/strong&gt;.  Mam w domu kilka
+podręczników z lat '60, '70 i '80 (co prawda do innych przedmiotów niż
+informatyka) i muszę przyznać, że widać dużą różnicę w tym jak wyglądały
+podręczniki kiedyś, a jak wyglądają teraz. Jedna książka do fizyki wielkości
+zeszytu B5 i grubości ok. 4 cm. myślę, że spokojnie wystarczała na 3-4 lata
+technikum, teraz trudno się obyć bez corocznego wypadu do księgarni po nową
+książkę, która starcza na rok, a i tak jest bardzo uboga w treść. Coś poszło w
+zdecydowanie złym kierunku.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Sat, 12 Sep 2015 19:30:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-09-12:informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</guid><category>education</category><category>review</category></item><item><title>What happened?</title><link>https://jakub-olczyk.github.io/what-happened.html</link><description>&lt;p&gt;Jestem dzieckiem ery, w której dostęp do Internetu jest tak oczywisty, że w
 momencie, w którym dostęp do niego staje się ograniczony komputer zaczyna być
 urządzeniem niemal bezużytecznym (nie jestem w tym osamotniony, vide &lt;a href="https://pl.wikipedia.org/wiki/Prawo_Metcalfe%27a"&gt;Prawo
 Metcalfe'a&lt;/a&gt;). Jednakże im dłużej studiuję informatykę tym bardziej zaczynam
