@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+	  <title>Jakub Olczyk | Blog (około) informatyczny...</title>
+      <link rel="stylesheet" type="text/css" href="../theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="../theme/css/styles.css"/>
+      <meta charset="utf-8" />
+	  <meta name="description" content="Blog studenta
+	  informatyki piszącego na tematy związane z wolnym oprogramowaniem,
+	  prywatnością i bezpieczeństwem w Internecie.">
+	  <meta name="keywords" content="Jakub Olczyk blog, GNU/Linux, prywatność,
+	  bezpieczeństwo, wolne oprogramowanie, free software, kryptografia,
+	  informatyka, programowanie, Koło Naukowe Wolnego Oprogramowania">
+      <meta name="author" content="Jakub Olczyk">
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=/pic.png>
+            <img width="200" height="200" src=/pic.png>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href="..">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia (około) informatyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="../pages/o-mnie.html">o mnie</a></li>
+                <li><a class="nodec" href="../pages/kontakt.html">kontakt</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/drafts/swiat-red-hat-okiem-debianowca.html" rel="bookmark" title="Permalink to Świat Red Hat okiem debianowca">
+      Świat Red Hat okiem debianowca
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-11-29T00:00:00+01:00">
+      Sun 29 November 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>Ze względu na studia musiałem przyspieszyć realizację mojego planu na poznanie
+jak działają systemy, które określiłbym jako Fedoropodobne. Nie jestem
+ekspertem jeśli chodzi o Debiana, ale zdecydowanie lepiej się czuję w
+środowisku, które korzysta z <code>APT</code>a, bo mam już pewne doświadczenie jak chodzi
+o zarządzanie oprogramowaniem w systemie za jego pomocą. Dobrze rozumiem też
+sposób w jaki podzielone są repozytoria Debiana. Świat Fedory do tej pory
+kojarzył mi się jedynie ze słowami-kluczami <code>rpm</code>, <code>yum</code>, <code>RHEL</code>, które nie
+mówiły mi nic więcej ponad "odpowiednik <code>deb</code>a", "menadżer pakietów", "distro
+dla korpo". </p>
+<p>Mam nadzieję, że ten tekst pomoże kiedyś komuś przy robieniu podobnego
+przejścia z jednego świata do drugiego i że będzie przydatny przy przejściu z
+jednej na drugą stronę.</p>
+<h2>Repozytoria</h2>
+<h3><a href="https://www.debian.org/doc/manuals/developers-reference/resources.html">Debian</a></h3>
+<p>Jeśli chodzi o Debiana to sprawa (przynajmniej w teorii) wydaje mi się
+prostsza.  Mamy trzy gałęzie, które różnią się stabilnością (więc tak na prawdę
+wiekiem paczek co przekłada się na ich przetestowanie):</p>
+<ul>
+<li>stable</li>
+<li>testing</li>
+<li>unstable (sid)</li>
+</ul>
+<p>Są to główne wydania (<em>release</em>), z których najlepiej skorzystać. Różnią się
+sposobem, w jaki trafiają do nich najświeższe pakiety. Do gałęzi <code>stable</code>
+najszybciej zawsze trafiają uaktualnienia związane z bezpieczeństwem, a po
+pewnym czasie zbierane są w mini-wydania i z tego powodu mamy, na przykład 
+Debiana Jessie 8.2, z dodatkowym numerkiem po numerze wydania głównego.
+Jeśli chodzi o pozostałe dwie gałęzie to ich rozwój jest prowadzony jako
+<em>rolling-release</em>, gdzie główne starania deweloperów skupiają się na wersji
+<code>unstable</code>, z której po pewnym czasie paczki trafiają do gałęzi <code>testing</code>.</p>
+<p>Dodatkowo, jeśli chodzi o Debiana, wspaniałą rzeczą jest to, że w jego
+repozytorium znajduje się przeogromna ilość pakietów, które można pobrać. Jeśli
+jakiś projekt jest sensowny i ciekawy prędzej czy później wyląduje w głównym w
+odpowiedniej cześci repozytorium . Tutaj dochodzimy do kolejnego <a href="https://www.debian.org/doc/debian-policy/ch-archive">podziału</a> jaki
+znajduje się w większych dystrybucjach debianopochodnych :</p>
+<ul>
+<li>main</li>
+<li>contrib</li>
+<li>non-free </li>
+</ul>
+<p><code>main</code> to część repozytorium, w którym znajdują się wszystkie paczki składające
+się na dystrybucje. <code>contrib</code> to paczki, które nie wchodzą w skład dystrybucji.
+Wszystkie pakiety z tych archiwów muszą spełniać wymogi DFSG, a więc muszą być
+wolnym oprogramowaniem. Różnica jednak jest taka, że w <code>main</code>ie nie może być
+żadnych zależności od paczek z <code>contrib</code> ani <code>non-free</code>, gdzie znajdują się
+wszelkie paczki z własnościowym oprogramowaniem.</p>
+<p>Dla mnie ten podział jest bardzo logiczny i dodatkowo bardzo sensowny. Dzięki
+temu nie trzeba się bardzo martwić tym, że pakiety w naszym systemie nie są
+oprogramowaniem FLOSS. </p>
+<p>Dzięki temu plik <code>sources.list</code>, w którym opisane jest miejsce repozytorium ma
+bardzo prosty układ:</p>
+<div class="highlight"><pre>deb [adres repozytorium] [wydanie] [archiwa, z których chcemy czerpać]
+</pre></div>
+
+
+<p>Dla przykładu mój wygląda tak:</p>
+<div class="highlight"><pre>deb https://ftp.agh.edu.pl/debian sid main contrib
+</pre></div>
+
+
+<table style="tr{ padding:1em;} td{ margin:1em;} text-align:center; padding:1em; margin:1em;">
+<tr>
+    <td></td>
+    <td>main</td>
+    <td>contrib</td>
+    <td>non-free</td>
+</tr>
+<tr>
+    <td>stable</td>
+    <td>x</td>
+    <td>x</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>testing</td>
+    <td>x</td>
+    <td>x</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>unstable</td>
+    <td>x</td>
+    <td>x</td>
+    <td></td>
+    <td></td>
+</tr>
+</table>
+
+<h2>Red Hat Enterprise Linux (CentOS, Scientific Linux)</h2>
+<p>Żeby zgębić działanie dystrybucji "redhatowych" postanowiłem zainstalować
+Scientific Linuxa. Już samo rozdrobnienie jak chodzi o te dystrybucje było dla
+mnie dość intrygujące. Otóż <code>RHEL</code> jest oficjalnie wspieraną dystrybucją
+dostarczaną przez Red Hat'a, ale ze względu na moc wolnych licencji powstało
+kilka projektów (za które nie trzeba zapłacić) stawiających sobie za cel
+stworzenie środowiska zbliżonego do produktu płatnego, z którego będzie można
+korzystać w sposób wolny i darmowy, ponieważ nie zawiera w sobie zastrzeżonych
+znaków firmy. W ten sposób powstały projekty <code>CentOS</code> i <code>Scientific Linux</code>. Ten
+drugi jest rozwijany przez Fermi Lab oraz CERN i właśnie tam ma największe
+zastosowanie.</p>
+<p>Rozwoj <code>RHEL</code>a związany jest bezpośrednio z rozwojem Fedory, która jest
+rozwijana w bliskim związku z <code>upstream</code>em, więc można powiedzieć, że Fedora
+jest jakimś stopniu podobna do Debiana Unstable. To na podstawie wybranego
+wydania Fedory budowany jest <code>RHEL</code>. Dla przykładu :</p>
+<ul>
+<li>Fedora 12,13 → Red Hat Enterprise Linux 6</li>
+<li>Fedora 19/20 → Red Hat Enterprise Linux 7</li>
+</ul>
+<p>Można by się więc pokusić o pewną analogię pomiędzy Debianem Stable a <code>RHEL</code>em,
+który ma być stablinym systemem skierowanym do klientów biznesowych.</p>
+  </div><!-- .content -->
+
+</section>
+
+<!--static comments from plugin -->
+<section id="comment-section">
+    <p>Brak komentarzy.<p>
+<br>
+<br>
+<a id="comment-button" href="mailto:jakub.olczyk@openmailbox.org?subject=[blog]comment-swiat-red-hat-okiem-debianowca&body=date:YYYY-MM-DD HH:MM:SS%0D%0Aauthor:%0D%0ATwój komentarz">Napisz komentarz przez e-mail</a>
+</section>
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href="http://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons BY-SA 4.0 International</a>
+		unless otherwise noted.<br>
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+		slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.<br>
+		Code blocks styled with <a href="https://github.com/uraimo/pygments-vimstyles">wombat.css</a>
+      </p>
+    </footer>
+  </body>
+</html>
+<!-- vim: set filetype=htmldjango -->
