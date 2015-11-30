@@ -4,7 +4,9 @@
 /* General stuff. */
 
 body {
-    width: 800px;
+	margin-left:auto;
+	margin-right:auto;
+	width:800px;
 }
 
 html { /* This stuff is for the sticky footer. */
@@ -71,7 +73,11 @@ body {
 
 /* Article list on index page. */
 
-
+article {
+	margin-right:auto;
+	margin-left:auto;
+	width:700px;
+}
 
 .posttitle {
     font-size: 1.6em;
@@ -152,13 +158,13 @@ sub {
 
 /* Article */
 
-.article {
+article {
     margin-top: 30px;
 }
 
 /* Lists */
 
-.article * li {
+article * li {
     line-height: 1.1em;
     margin-top: 0.3em;
     margin-bottom: 0.3em;
@@ -166,31 +172,31 @@ sub {
 
 /* Paragraphs. */
 
-.article p {
+article p {
     line-height: 1.3em;
     margin-bottom: 1.5em;
 }
 
 /* Headers. */
 
-.article h1 {
+article h1 {
     padding-bottom: 1em;
     font-size: 1.4em;
 }
 
-.article h2 {
+article h2 {
     padding-bottom: 0.9em;
     font-size: 1.2em;
 }
 
-.article h3 {
+article h3 {
     padding-bottom: 0.8em;
     font-size: 1em;
 }
 
 /* Footnotes. */
 
-.article .footnote {
+article .footnote {
     font-size: 0.8em;
 }
 
@@ -205,7 +211,7 @@ sub {
 
 /* Blockquotes */
 
-.article blockquote {
+article blockquote {
     font-size: 0.9em;
     font-style: italic;
     border-left: 3px solid #ccc;
@@ -252,7 +258,7 @@ sub {
 
 .codehilite, .highlight { /* Put code blocks in the right place. */
     background-color:#303030;
-    width: 800px;
+    width: inherit;
     margin: 0 0 0 0;
     margin-bottom: 20px;
     overflow: auto;
@@ -260,17 +266,23 @@ sub {
     border-radius: 5px;
 }
 
-.article pre {
-    font-family: 'Source Code Pro',monospace;
+article pre {
+    font-family: "Liberation Mono Regular", monospace;
     font-size: .8em;
     margin: auto;
     padding: 1em;
     line-height: 120%;
 }
 
-.article code {
-    font-family: 'Source Code Pro',monospace;
-    font-size: 1em;
+article code {
+    font-family: "Liberation Mono Regular", monospace;
+	font-size:0.9em;
+	color: #d14;
+	background-color: #f7f7f9;
+	border-radius: 3px;
+	border: 1px solid #e1e1e8;
+	padding:2px 4px;
+	white-space: nowrap;
 }
 
 /* Footer at page bottom */
