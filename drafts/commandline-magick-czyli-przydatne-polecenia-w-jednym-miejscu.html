@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+	  <title>Jakub Olczyk | Blog (około) informatyczny...</title>
+      <link rel="stylesheet" type="text/css" href="../theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="../theme/css/styles.css"/>
+      <meta charset="utf-8" />
+	  <meta name="description" content="Blog studenta
+	  informatyki piszącego na tematy związane z wolnym oprogramowaniem,
+	  prywatnością i bezpieczeństwem w Internecie.">
+	  <meta name="keywords" content="Jakub Olczyk blog, GNU/Linux, prywatność,
+	  bezpieczeństwo, wolne oprogramowanie, free software, kryptografia,
+	  informatyka, programowanie, Koło Naukowe Wolnego Oprogramowania">
+      <meta name="author" content="Jakub Olczyk">
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=/pic.png>
+            <img width="200" height="200" src=/pic.png>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href="..">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia (około) informatyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="../pages/o-mnie.html">o mnie</a></li>
+                <li><a class="nodec" href="../pages/kontakt.html">kontakt</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/drafts/commandline-magick-czyli-przydatne-polecenia-w-jednym-miejscu.html" rel="bookmark" title="Permalink to Commandline Magick - czyli przydatne polecenia w jednym miejscu">
+      Commandline Magick - czyli przydatne polecenia w jednym miejscu
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-12-09T14:50:00+01:00">
+      Wed 09 December 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <article>
+    <p>Powłoka systemowa to bardzo potężne narzędzie. Dzięki kilku komendom w
+terminalu można zrobić naprawdę wiele żeby poprawić swoją produktywność albo
+ułatwić sobie korzystanie z komputera w inny sposób. Poniżej znajduje się lista
+przydatnych poleceń, które gdzieś znalazłem lub sam wpadłem na nie czytając ich
+dokumentację (polecenie <code>man</code> to największy przyjaciel!).</p>
+<h3>Jak połączyć się z jakąś stroną zza firewalla?</h3>
+<p>Często się zdarza, że potrzeba nam połączyć się z jakąś stroną np. na innym niż
+standardowe porcie. Co zrobić, jeśli wszystkie wysokie porty są blokowane?
+Skorzystajmy z tunelowania SSH! <strong>Uwaga</strong> serwer, przez który będziemy się
+łączyć musi mieć odblokowaną możliwość połączenia z portem, o który nam chodzi.</p>
+<div class="highlight"><pre><span class="go">ssh -L [lokalny port]:[adres hosta]:[port hosta] user@proxy_host</span>
+</pre></div>
+
+
+<p>Dla przykładu, jeśli chcielibyśmy się połączyć ze streamem radiowym Polskiego
+Radia na localhostowym porcie <code>12345</code> należy wykonać polecenie:</p>
+<div class="highlight"><pre><span class="go">ssh -L 12345:stream3.polskieradio.pl:8904 user@proxy_host</span>
+</pre></div>
+
+
+<p>Zastosowań <code>ssh</code> jest jednak zdecydowanie więcej i mogą być związane z bardziej
+profesjonalnymi zastosowaniami. Jak np. łączenie się z bazą danych, która
+znajduje się za firewallem.</p>
+<h3>Jak wygenerować mocne hasło?</h3>
+<p>Sposobów jest na prawdę wiele! Chyba najprostszym jest skorzystanie z funkcji 
+skrótu MD5 :</p>
+<div class="highlight"><pre><span class="go">date | md5sum</span>
+</pre></div>
+
+
+<p>Jeśli nie dostatecznie podoba nam się możliwość kolizji z innymi haszami:</p>
+<div class="highlight"><pre><span class="go">dd if=/dev/urandom bs=1 count=32 2&gt;/dev/null | base64 -w 0 | rev | cut -b 2- | rev</span>
+</pre></div>
+
+
+<p>Co się tutaj dzieje? Za pomocą <code>dd</code> wyciągamy najpierw 32 bajty z
+<code>/dev/urandom</code>.  Następnie ubieramy je w znaki ASCII za pomocą <code>base64</code>
+(ustawiamy flagę żeby nie zawijał tekstu). Ostatnie 3 polecenia służą do
+obcięcia z końca dwóch znaków równości, które dodaje wcześniejsze polecenie.</p>
+  </article><!-- .content -->
+
+</section>
+
+<!--static comments from plugin -->
+<section id="comment-section">
+    <p>Brak komentarzy.<p>
+<br>
+<br>
+<a id="comment-button" href="mailto:jakub.olczyk@openmailbox.org?subject=[blog]comment-commandline-magick-czyli-przydatne-polecenia-w-jednym-miejscu&body=date:YYYY-MM-DD HH:MM:SS%0D%0Aauthor:%0D%0ATwój komentarz">Napisz komentarz przez e-mail</a>
+</section>
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href="http://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons BY-SA 4.0 International</a>
+		unless otherwise noted.<br>
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+		slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.<br>
+		Code blocks styled with <a href="https://github.com/uraimo/pygments-vimstyles">wombat.css</a>
+      </p>
+    </footer>
+  </body>
+</html>
+<!-- vim: set filetype=htmldjango -->

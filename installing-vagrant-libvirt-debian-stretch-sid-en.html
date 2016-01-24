@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+	  <title>Jakub Olczyk | Blog (około) informatyczny...</title>
+      <link rel="stylesheet" type="text/css" href="./theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="./theme/css/styles.css"/>
+      <meta charset="utf-8" />
+	  <meta name="description" content="Blog studenta
+	  informatyki piszącego na tematy związane z wolnym oprogramowaniem,
+	  prywatnością i bezpieczeństwem w Internecie.">
+	  <meta name="keywords" content="Jakub Olczyk blog, GNU/Linux, prywatność,
+	  bezpieczeństwo, wolne oprogramowanie, free software, kryptografia,
+	  informatyka, programowanie, Koło Naukowe Wolnego Oprogramowania">
+      <meta name="author" content="Jakub Olczyk">
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=/pic.png>
+            <img width="200" height="200" src=/pic.png>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href=".">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia (około) informatyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="./pages/o-mnie.html">o mnie</a></li>
+                <li><a class="nodec" href="./pages/kontakt.html">kontakt</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/installing-vagrant-libvirt-debian-stretch-sid-en.html" rel="bookmark" title="Permalink to Installing vagrant-libvirt in Debian stretch/sid">
+      Installing vagrant-libvirt in Debian stretch/sid
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2016-01-24T10:00:00+01:00">
+      Sun 24 January 2016
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <article>
+    <p>Vagrant is an awesome piece of software when you want to develop something
+without littering your system with (potentially) unwanted packages.</p>
+<p>Although great it has one major flaw -- it uses VirtualBox as default provider
+for virtualization. That is the main reason why I wanted to try out
+<code>vagrant-libvirt</code> plugin that provides it with native kernel virtualization
+support.</p>
+<p>Unfortunately, the standard way of installing software (i.e. with <code>apt</code>) is
+impossible yet I had to use vagrant-style of install and, boy, it was tough!</p>
+<p>Installing with</p>
+<div class="highlight"><pre>vagrant plugin install vagrant-libvirt
+</pre></div>
+
+
+<p>thrown compilation errors for plugin dependency <code>ruby-libvirt</code> (which provides
+ruby bindings for libvirt).</p>
+<p>After searching and reading quite a few issues on <a href="https://github.com/mitchellh/vagrant/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+is%3Aopen+">Vagrant's</a> and
+<a href="https://github.com/pradels/vagrant-libvirt/issues/403"><code>vagrant-libvirt</code></a> GitHub page one I found a working solution.</p>
+<h2>The solution</h2>
+<ol>
+<li>Install all required dependencies!</li>
+</ol>
+<div class="highlight"><pre><span class="gp">#</span> apt-get install libxslt-dev libxml2-dev libvirt-dev zlib1g-dev
+</pre></div>
+
+
+<ol>
+<li>Issue the command with pointers to proper libraries</li>
+</ol>
+<div class="highlight"><pre><span class="gp">$</span> <span class="nv">CONFIGURE_ARGS</span><span class="o">=</span><span class="s2">&quot;with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib&quot;</span> vagrant plugin install vagrant-libvirt   
+</pre></div>
+
+
+<p>This worked for me. If it doesn't work for you I suggest searching in issues on
+projects bug trackers.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://github.com/pradels/vagrant-libvirt"><code>vagrant-libvirt</code> GitHub</a></li>
+<li><a href="https://www.vagrantup.com/docs/">Vagrant Docs (somewhat lacking source, I hope in future it will be restructured)</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Vagrant">Vagrant on ArchWiki (helped me with understanding the nature of the problem)</a></li>
+</ul>
+  </article><!-- .content -->
+
+</section>
+
+<!--static comments from plugin -->
+<section id="comment-section">
+    <p>Brak komentarzy.<p>
+<br>
+<br>
+<a id="comment-button" href="mailto:jakub.olczyk@openmailbox.org?subject=[blog]comment-installing-vagrant-libvirt-debian-stretch-sid&body=date:YYYY-MM-DD HH:MM:SS%0D%0Aauthor:%0D%0ATwój komentarz">Napisz komentarz przez e-mail</a>
+</section>
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href="http://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons BY-SA 4.0 International</a>
+		unless otherwise noted.<br>
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+		slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.<br>
+		Code blocks styled with <a href="https://github.com/uraimo/pygments-vimstyles">wombat.css</a>
+      </p>
+    </footer>
+  </body>
+</html>
+<!-- vim: set filetype=htmldjango -->
