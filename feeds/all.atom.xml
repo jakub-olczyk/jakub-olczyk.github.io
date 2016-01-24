@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2015-09-12T19:30:00+02:00</updated><entry><title>Informatyka Europejczyka - czego uczy nas podręcznik do szkoły średniej?</title><link href="https://jakub-olczyk.github.io/informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html" rel="alternate"></link><updated>2015-09-12T19:30:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-09-12:informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</id><summary type="html">&lt;p&gt;Miałem okazję ostatnio przyjrzeć się jednej książce, z której w liceum lub
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2016-01-24T10:00:00+01:00</updated><entry><title>Installing vagrant-libvirt in Debian stretch/sid</title><link href="https://jakub-olczyk.github.io/installing-vagrant-libvirt-debian-stretch-sid-en.html" rel="alternate"></link><updated>2016-01-24T10:00:00+01:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-01-24:installing-vagrant-libvirt-debian-stretch-sid-en.html</id><summary type="html">&lt;p&gt;Vagrant is an awesome piece of software when you want to develop something
+without littering your system with (potentially) unwanted packages.&lt;/p&gt;
+&lt;p&gt;Although great it has one major flaw -- it uses VirtualBox as default provider
+for virtualization. That is the main reason why I wanted to try out
+&lt;code&gt;vagrant-libvirt&lt;/code&gt; plugin that provides it with native kernel virtualization
+support.&lt;/p&gt;
+&lt;p&gt;Unfortunately, the standard way of installing software (i.e. with &lt;code&gt;apt&lt;/code&gt;) is
+impossible yet I had to use vagrant-style of install and, boy, it was tough!&lt;/p&gt;
+&lt;p&gt;Installing with&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vagrant plugin install vagrant-libvirt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;thrown compilation errors for plugin dependency &lt;code&gt;ruby-libvirt&lt;/code&gt; (which provides
+ruby bindings for libvirt).&lt;/p&gt;
+&lt;p&gt;After searching and reading quite a few issues on &lt;a href="https://github.com/mitchellh/vagrant/issues?utf8=%E2%9C%93&amp;amp;q=is%3Aissue+is%3Aopen+"&gt;Vagrant's&lt;/a&gt; and
+&lt;a href="https://github.com/pradels/vagrant-libvirt/issues/403"&gt;&lt;code&gt;vagrant-libvirt&lt;/code&gt;&lt;/a&gt; GitHub page one I found a working solution.&lt;/p&gt;
+&lt;h2&gt;The solution&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Install all required dependencies!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;#&lt;/span&gt; apt-get install libxslt-dev libxml2-dev libvirt-dev zlib1g-dev
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Issue the command with pointers to proper libraries&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nv"&gt;CONFIGURE_ARGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib&amp;quot;&lt;/span&gt; vagrant plugin install vagrant-libvirt   
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This worked for me. If it doesn't work for you I suggest searching in issues on
+projects bug trackers.&lt;/p&gt;
+&lt;h2&gt;Sources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/pradels/vagrant-libvirt"&gt;&lt;code&gt;vagrant-libvirt&lt;/code&gt; GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.vagrantup.com/docs/"&gt;Vagrant Docs (somewhat lacking source, I hope in future it will be restructured)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/Vagrant"&gt;Vagrant on ArchWiki (helped me with understanding the nature of the problem)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="vagrant"></category></entry><entry><title>Informatyka Europejczyka - czego uczy nas podręcznik do szkoły średniej?</title><link href="https://jakub-olczyk.github.io/informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html" rel="alternate"></link><updated>2015-09-12T19:30:00+02:00</updated><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2015-09-12:informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</id><summary type="html">&lt;p&gt;Miałem okazję ostatnio przyjrzeć się jednej książce, z której w liceum lub
 technikum mieliby się uczyć przyszli "prości użytkownicy komputera" (i nie mam
 tutaj bynajmniej na myśli niczego złego, każdy z nas czasem jest prostym
 użytkownikiem -- ja dla przykładu zawsze będę &lt;em&gt;prostym użytkownikiem
