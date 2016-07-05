@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+	  <title>Jakub Olczyk | Blog (około) informatyczny...</title>
+      <link rel="stylesheet" type="text/css" href="./theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="./theme/css/styles.css"/>
+      <meta charset="utf-8" />
+	  <meta name="description" content="Blog studenta
+	  informatyki piszącego na tematy związane z wolnym oprogramowaniem,
+	  prywatnością i bezpieczeństwem w Internecie.">
+	  <meta name="keywords" content="Jakub Olczyk blog, GNU/Linux, prywatność,
+	  bezpieczeństwo, wolne oprogramowanie, free software, kryptografia,
+	  informatyka, programowanie, Koło Naukowe Wolnego Oprogramowania">
+      <meta name="author" content="Jakub Olczyk">
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=/pic.png>
+            <img width="200" height="200" src=/pic.png>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href=".">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia (około) informatyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="./pages/o-mnie.html">o mnie</a></li>
+                <li><a class="nodec" href="./pages/kontakt.html">kontakt</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/librecmc-client-mode-on-tl-wr841n.html" rel="bookmark" title="Permalink to LibreCMC - konfiguracja client mode na TP-Link TL-WR841N">
+      LibreCMC - konfiguracja client mode na TP-Link TL-WR841N
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2016-07-05T18:00:00+02:00">
+      Tue 05 July 2016
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <article>
+    <p>Ostatnio udało mi się kupić dość tanio (za butelkę wódki!) bardzo fajny model
+TP-Linka, a dokładnie TL-WR841N. Oczywiście, zainteresowałem się nim z powodu
+jego możliwości - jest na liście wspieranych urządzeń OpenWRT oraz…
+<a href="https://librecmc.org/librecmc/home">libreCMC</a>!</p>
+<p>LibreCMC to projekt, który dąży do stworzenia dystrybucji, która pozbawiona
+jest <a href="https://pl.wikipedia.org/wiki/Blob_binarny">binarnych blobów</a> (więc mamy router, który w pełni korzysta z wolnego
+oprogramowania). A ponadto pozwala na dostęp do niesamowitych możliwości,
+których nie daje nam producent urządzenia.</p>
+<h1>Konfiguracja Client Mode Wireless</h1>
+<p>Będę korzystać z <a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a> - a konkretnie z ustawień domyślnych w
+<code>/etc/config/firewall</code> (dokładnie masquerading). Wynika to z tego, że nie mam
+dostępu do routera, z którym się łączę. Istnieje możliwość wyznaczenia tras
+między sieciami, ale wtedy trzeba skonfigurować oba routery. </p>
+<p>W zasadzie różnica jest taka, że hosty za moją siecią nie będą widoczne dla
+innych podłączonych do sieci, z którą ma się łączyć moja sieć. Poniżej
+topografia, którą chcę osiągnąć:</p>
+<div class="highlight"><pre><span></span>                                 (ESSID: HUE)
+(Moja sieć)      (przez WiFi)       (LAN)         (Ethernet)    (WAN)
+172.16.0.0/24  &lt;--------------&gt; 192.168.1.0/24 &lt;--------------&gt; ISP
+</pre></div>
+
+
+<p>Zakładając świeżą instalację libreCMC (w moim przypadku wersja 1.3.2 Elegant
+Eleanor) będziemy musieli wyedytować następujące pliki:</p>
+<ul>
+<li><code>/etc/config/network</code></li>
+<li><code>/etc/config/wireless</code></li>
+</ul>
+<h2>Przygotowanie do konfiguracji</h2>
+<p>Zanim cokolwiek potrzeba nam się połączyć z routerem. W webgui trzeba ustawić
+połączenie przez <code>ssh</code> oraz <em>nowy adres dla podsieci</em>. Druga część jest bardzo
+istotna, ponieważ nie chcemy mieć kolizji z siecią do której mamy się połączyć.</p>
+<p>Po połączeniu musimy włączyć i ustawić radio w station mode (aby móc zobaczyć
+sieci znajdujące się w pobliżu).</p>
+<div class="highlight"><pre><span></span>uci del wireless.@wifi-device<span class="o">[</span>0<span class="o">]</span>.disabled
+uci del wireless.@wifi-iface<span class="o">[</span>0<span class="o">]</span>.network
+uci <span class="nb">set</span> wireless.@wifi-iface<span class="o">[</span>0<span class="o">]</span>.mode<span class="o">=</span>sta
+uci commit wireless
+wifi
+</pre></div>
+
+
+<p>Co się dzieję po kolei:
+    * z konfiguracji wireless usuwamy opcję <em>disable 1</em>
+    * ustawiamy opcję <em>mode</em> na <em>station</em>
+    * zapisujemy zmiany
+    * włączamy radio za pomocą <code>wifi</code></p>
+<h2>Informacje o dostępnych sieciach</h2>
+<p>Potrzebujemy znaleźć ustawienia naszej sieci dla przykładu niech to będzie
+<code>HUE</code>.</p>
+<p>Jeśli możemy wydajemy  polecenie <code>iwlist scan</code> powinno wyrzucić coś co wygląda
+jak :</p>
+<div class="highlight"><pre><span></span>root@libreCMC:~# iwlist scan
+wlan0       Scan completed :
+          Cell <span class="m">01</span> - Address: 00:1D:19:0E:03:8F
+                    ESSID:<span class="s2">&quot;HUE&quot;</span>
+                    Mode:Managed
+                    Channel:9
+                    Quality:3/5  Signal level:-69 dBm  Noise level:-92 dBm
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers <span class="o">(</span>2<span class="o">)</span> : TKIP CCMP
+                        Authentication Suites <span class="o">(</span>1<span class="o">)</span> : PSK
+                       Preauthentication Supported
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers <span class="o">(</span>2<span class="o">)</span> : TKIP CCMP
+                        Authentication Suites <span class="o">(</span>1<span class="o">)</span> : PSK
+                    Encryption key:on
+                    Bit Rates:1 Mb/s<span class="p">;</span> <span class="m">2</span> Mb/s<span class="p">;</span> 5.5 Mb/s<span class="p">;</span> <span class="m">6</span> Mb/s<span class="p">;</span> <span class="m">9</span> Mb/s
+                              <span class="m">11</span> Mb/s<span class="p">;</span> <span class="m">12</span> Mb/s<span class="p">;</span> <span class="m">18</span> Mb/s<span class="p">;</span> <span class="m">24</span> Mb/s<span class="p">;</span> <span class="m">36</span> Mb/s
+                              <span class="m">48</span> Mb/s<span class="p">;</span> <span class="m">54</span> Mb/s
+</pre></div>
+
+
+<p>Ja musiałem skorzystać z <code>iw</code>, żeby nie przedzierać się przez wszystkie możliwe
+sieci polecam sobie przefiltrować output:</p>
+<div class="highlight"><pre><span></span>iw wlan0 scan <span class="p">|</span> grep -A <span class="m">50</span> -B <span class="m">8</span> HUE
+</pre></div>
+
+
+<p>Wyrzuca to coś co wygląda następująco:</p>
+<div class="highlight"><pre><span></span>BSS fc:94:e3:11:9c:5c(on wlan0) -- associated
+    TSF: 8390318242 usec (0d, 02:19:50)
+    freq: 2462
+    beacon interval: 100 TUs
+    capability: ESS Privacy SpectrumMgmt ShortSlotTime (0x0511)
+    signal: -62.00 dBm
+    last seen: 0 ms ago
+    Information elements from Probe Response frame:
+    SSID: HUE
+    Supported rates: 1.0* 2.0* 5.5* 11.0* 18.0 24.0 36.0 54.0 
+    DS Parameter set: channel 11
+    Country: EU Environment: Indoor/Outdoor
+        Channels [1 - 13] @ 20 dBm
+    Power constraint: 0 dB
+    TPC report: TX power: 17 dBm
+    ERP: Barker_Preamble_Mode
+    ERP D4.0: Barker_Preamble_Mode
+    RSN:     * Version: 1
+         * Group cipher: TKIP
+         * Pairwise ciphers: CCMP TKIP
+         * Authentication suites: PSK
+         * Capabilities: 16-PTKSA-RC 1-GTKSA-RC (0x000c)
+    Extended supported rates: 6.0 9.0 12.0 48.0 
+    HT capabilities:
+        Capabilities: 0x18bc
+            HT20
+            SM Power Save disabled
+            RX Greenfield
+            RX HT20 SGI
+            TX STBC
+            No RX STBC
+            Max AMSDU length: 7935 bytes
+            DSSS/CCK HT40
+        Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
+        Minimum RX AMPDU time spacing: 4 usec (0x05)
+        HT RX MCS rate indexes supported: 0-15
+        HT TX MCS rate indexes are undefined
+    HT operation:
+         * primary channel: 11
+</pre></div>
+
+
+<h2>Konfiguracja</h2>
+<p>Po pierwsze zmiany w <code>/etc/config/network</code> - należy wykomentować/usunąć
+wszelkie linijki zawierające <code>ifname</code> w sekcji 'wan'.</p>
+<div class="highlight"><pre><span></span>config interface &#39;wan&#39;
+    #ifname ...
+    option proto    &#39;dhcp&#39;
+</pre></div>
+
+
+<p>Po drugie zmiany w <code>/etc/config/network</code> - należy znaleźć sekcję <code>wifi-iface</code> i
+wyedytować w niej opcję <code>network</code> tak żeby wskazywała na interfejs WAN, opcję
+<code>mode</code> w tryb station oraz zmienić <code>ssid</code> i <code>encryption</code> tak, żeby zgadzały się
+z siecią, z którą chcemy się połączyć.</p>
+<div class="highlight"><pre><span></span>config &#39;wifi-iface&#39;
+        option &#39;device&#39;     &#39;wlan0&#39;
+        option &#39;network&#39;    &#39;wan&#39;
+        option &#39;mode&#39;       &#39;sta&#39;
+        option &#39;ssid&#39;       &#39;HUE&#39;
+        option &#39;encryption&#39; &#39;psk2&#39;
+        option &#39;key&#39;        &#39;hasło_do_wifi&#39; 
+</pre></div>
+
+
+<p>Nie pozostaje nic innego jak tylko zastosować zmiany:</p>
+<div class="highlight"><pre><span></span>ifup wan
+wifi
+</pre></div>
+
+
+<h1>Źródła</h1>
+<ul>
+<li><a href="https://wiki.openwrt.org/doc/howto/clientmode">OpenWRT Wiki - Client Mode Wireless</a></li>
+<li><a href="https://wiki.openwrt.org/doc/recipes/routedclient#usingmasquerade">OpenWRT Wiki - Routed Client</a></li>
+<li><a href="https://wiki.openwrt.org/doc/uci/firewall">OpenWRT Wiki - Firewall</a></li>
+</ul>
+  </article><!-- .content -->
+
+</section>
+
+<!--static comments from plugin -->
+<section id="comment-section">
+    <p>Brak komentarzy.<p>
+<br>
+<br>
+<a id="comment-button" href="mailto:jakub.olczyk@openmailbox.org?subject=[blog]comment-librecmc-client-mode-on-tl-wr841n&body=date:YYYY-MM-DD HH:MM:SS%0D%0Aauthor:%0D%0ATwój komentarz">Napisz komentarz przez e-mail</a>
+</section>
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href="http://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons BY-SA 4.0 International</a>
+		unless otherwise noted.<br>
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+		slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.<br>
+		Code blocks styled with <a href="https://github.com/uraimo/pygments-vimstyles">wombat.css</a>
+      </p>
+    </footer>
+  </body>
+</html>
+<!-- vim: set filetype=htmldjango -->

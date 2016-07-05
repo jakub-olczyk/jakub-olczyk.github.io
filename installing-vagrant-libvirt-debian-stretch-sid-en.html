@@ -74,7 +74,7 @@ support.</p>
 <p>Unfortunately, the standard way of installing software (i.e. with <code>apt</code>) is
 impossible yet I had to use vagrant-style of install and, boy, it was tough!</p>
 <p>Installing with</p>
-<div class="highlight"><pre>vagrant plugin install vagrant-libvirt
+<div class="highlight"><pre><span></span>vagrant plugin install vagrant-libvirt
 </pre></div>
 
 
@@ -86,14 +86,14 @@ ruby bindings for libvirt).</p>
 <ol>
 <li>Install all required dependencies!</li>
 </ol>
-<div class="highlight"><pre><span class="gp">#</span> apt-get install libxslt-dev libxml2-dev libvirt-dev zlib1g-dev
+<div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install libxslt-dev libxml2-dev libvirt-dev zlib1g-dev
 </pre></div>
 
 
 <ol>
 <li>Issue the command with pointers to proper libraries</li>
 </ol>
-<div class="highlight"><pre><span class="gp">$</span> <span class="nv">CONFIGURE_ARGS</span><span class="o">=</span><span class="s2">&quot;with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib&quot;</span> vagrant plugin install vagrant-libvirt   
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">CONFIGURE_ARGS</span><span class="o">=</span><span class="s2">&quot;with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib&quot;</span> vagrant plugin install vagrant-libvirt   
 </pre></div>
 
 

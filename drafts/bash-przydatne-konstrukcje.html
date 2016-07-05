@@ -74,7 +74,7 @@ innych (a w przypadku bloga pewnie siebie za jakiś czas). Do dzieła!</p>
 <h1>Bashowy <em>strict mode</em>?</h1>
 <p>Dość często porównuje się różne języki skryptowe i muszę przyznać, że perlowa
 zasada dodawania</p>
-<div class="highlight"><pre><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
 <span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
 </pre></div>
 
@@ -83,7 +83,7 @@ zasada dodawania</p>
 na debugowanie niedziałających skryptów. I okazuje się, że w Bashu przy
 odrobinie kreatywności jesteśmy osiągnąć podobny efekt. Wystarczy, żeby na
 początku skryptu dodać takie linijki :</p>
-<div class="highlight"><pre><span class="nb">set</span> -euo pipefail
+<div class="highlight"><pre><span></span><span class="nb">set</span> -euo pipefail
 <span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n\t&#39;</span>
 </pre></div>
 
@@ -93,7 +93,7 @@ coś o czym powinien wiedzieć każdy kto chce nauczyć się pisać porządne sk
 systemowe. A teraz co dokładnie robią poszczególne opcje, które tutaj włączamy?
 (<a href="https://www.gnu.org/software/bash/manual/bashref.html#The-Set-Builtin">Zachęcam do przejrzenia odpowiedniej strony z podręcznika dotyczącego Basha</a>)
 Po pierwsze można by to rozbić na poszczególne polecenia:</p>
-<div class="highlight"><pre><span class="nb">set</span> -e 
+<div class="highlight"><pre><span></span><span class="nb">set</span> -e 
 <span class="nb">set</span> -u
 <span class="nb">set</span> -o pipefail
 </pre></div>
@@ -117,7 +117,7 @@ wychwycenia i naprawienia. Jest to dość podobne do skorzystania z <code>use st
 <code>pipefail</code>, która odkrywa wszelkie błędy, które mogą się pojawić w potokach, a
 nie będą widoczne na pierwszy rzut oka. Posłużę się tutaj przykładem ze źródła
 tej informacji.</p>
-<div class="highlight"><pre><span class="gp">$</span> grep jakis-tekst /nieistniejacy/plik <span class="p">|</span> sort
+<div class="highlight"><pre><span></span><span class="gp">$</span> grep jakis-tekst /nieistniejacy/plik <span class="p">|</span> sort
 <span class="go">grep: /nieistniejacy/plik: No such file or directory</span>
 <span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$?</span>
 <span class="go">0</span>
@@ -128,7 +128,7 @@ tej informacji.</p>
 pomimo, że dostał pusty string do posortowania traktuje go jako poprawne dane
 wejściowe. Nie jest to zachowanie, które pasuje do skryptów powłoki, ale bez 
 wątpienia wystarcza przy normalnym pracowniu z terminalem.</p>
-<div class="highlight"><pre><span class="gp">$</span> <span class="nb">set</span> -o pipefail
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">set</span> -o pipefail
 <span class="gp">$</span> grep jakis-tekst /nieistniejacy/plik <span class="p">|</span> sort
 <span class="go">grep: /nieistniejacy/plik: No such file or directory</span>
 <span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$?</span>
@@ -147,7 +147,7 @@ The default value is ``\ \t\n''.</p>
 po listach zmiennych. Jest to dość pomocne szczególnie, gdy spojrzy się na
 skrypt, który mógłby dla przykładu robić coś z plikami, których nazwy
 podawałoby się przy wywołaniu. </p>
-<div class="highlight"><pre><span class="c">#!/bin/bash </span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash </span>
 <span class="k">for</span> arg in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
     <span class="nb">echo</span> <span class="s2">&quot;Removing </span><span class="nv">$arg</span><span class="s2">&quot;</span>
 <span class="k">done</span>
@@ -156,7 +156,7 @@ podawałoby się przy wywołaniu. </p>
 
 <p>Bez zmiany IFS wywołanie tego skryptu z argumentami mogłoby skutkować pomyłką
 w ich interpretacji:</p>
-<div class="highlight"><pre><span class="gp">$</span> ./skrypt.sh <span class="nb">test</span>-file <span class="s1">&#39;Mission Impossible.webm&#39;</span>
+<div class="highlight"><pre><span></span><span class="gp">$</span> ./skrypt.sh test-file <span class="s1">&#39;Mission Impossible.webm&#39;</span>
 <span class="go">Removing test-file</span>
 <span class="go">Removing Mission</span>
 <span class="go">Removing Impossible.webm</span>

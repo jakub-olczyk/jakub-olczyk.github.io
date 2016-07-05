@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/drafts.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2016-07-05T18:00:00+02:00</updated><entry><title>LibreCMC - konfiguracja client mode na TP-Link TL-WR841N</title><link href="https://jakub-olczyk.github.io/librecmc-client-mode-on-tl-wr841n.html" rel="alternate"></link><published>2016-07-05T18:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-07-05:librecmc-client-mode-on-tl-wr841n.html</id><summary type="html">&lt;p&gt;Ostatnio udało mi się kupić dość tanio (za butelkę wódki!) bardzo fajny model
+TP-Linka, a dokładnie TL-WR841N. Oczywiście, zainteresowałem się nim z powodu
+jego możliwości - jest na liście wspieranych urządzeń OpenWRT oraz…
+&lt;a href="https://librecmc.org/librecmc/home"&gt;libreCMC&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;LibreCMC to projekt, który dąży do stworzenia dystrybucji, która pozbawiona
+jest binarnych blobów (więc mamy router, który w pełni korzysta z wolnego
+oprogramowania). A ponadto pozwala na dostęp do niesamowitych możliwości,
+których nie daje nam producent urządzenia.&lt;/p&gt;
+&lt;h1&gt;Konfiguracja Client Mode Wireless&lt;/h1&gt;
+&lt;p&gt;Będę korzystać z &lt;a href="https://en.wikipedia.org/wiki/Network_address_translation"&gt;NAT&lt;/a&gt; - a konkretnie z ustawień domyślnych w
+&lt;code&gt;/etc/config/firewall&lt;/code&gt; (dokładnie masquerading). Wynika to z tego, że nie mam
+dostępu do routera, z którym się łączę. Istnieje możliwość wyznaczenia tras
+między sieciami, ale wtedy trzeba skonfigurować oba routery. &lt;/p&gt;
+&lt;p&gt;W zasadzie różnica jest taka, że hosty za moją siecią nie będą widoczne dla
+innych podłączonych do sieci, z którą ma się łączyć moja sieć. Poniżej
+topografia, którą chcę osiągnąć:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                                 (ESSID: HUE)
+(Moja sieć)      (przez WiFi)       (LAN)         (Ethernet)    (WAN)
+172.16.0.0/24  &amp;lt;--------------&amp;gt; 192.168.1.0/24 &amp;lt;--------------&amp;gt; ISP
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Zakładając świeżą instalację libreCMC (w moim przypadku wersja 1.3.2 Elegant
+Eleanor) będziemy musieli wyedytować następujące pliki:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/etc/config/network&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/config/wireless&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Przygotowanie do konfiguracji&lt;/h2&gt;
+&lt;p&gt;Zanim cokolwiek potrzeba nam się połączyć z routerem. W webgui trzeba ustawić
+połączenie przez &lt;code&gt;ssh&lt;/code&gt; oraz &lt;em&gt;nowy adres dla podsieci&lt;/em&gt;. Druga część jest bardzo
+istotna, ponieważ nie chcemy mieć kolizji z siecią do której mamy się połączyć.&lt;/p&gt;
+&lt;p&gt;Po połączeniu musimy włączyć i ustawić radio w station mode (aby móc zobaczyć
+sieci znajdujące się w pobliżu).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uci del wireless.@wifi-device&lt;span class="o"&gt;[&lt;/span&gt;0&lt;span class="o"&gt;]&lt;/span&gt;.disabled
+uci del wireless.@wifi-iface&lt;span class="o"&gt;[&lt;/span&gt;0&lt;span class="o"&gt;]&lt;/span&gt;.network
+uci &lt;span class="nb"&gt;set&lt;/span&gt; wireless.@wifi-iface&lt;span class="o"&gt;[&lt;/span&gt;0&lt;span class="o"&gt;]&lt;/span&gt;.mode&lt;span class="o"&gt;=&lt;/span&gt;sta
+uci commit wireless
+wifi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Co się dzieję po kolei:
+    * z konfiguracji wireless usuwamy opcję &lt;em&gt;disable 1&lt;/em&gt;
+    * ustawiamy opcję &lt;em&gt;mode&lt;/em&gt; na &lt;em&gt;station&lt;/em&gt;
+    * zapisujemy zmiany
+    * włączamy radio za pomocą &lt;code&gt;wifi&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Informacje o dostępnych sieciach&lt;/h2&gt;
+&lt;p&gt;Potrzebujemy znaleźć ustawienia naszej sieci dla przykładu niech to będzie
+&lt;code&gt;HUE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Jeśli możemy wydajemy  polecenie &lt;code&gt;iwlist scan&lt;/code&gt; powinno wyrzucić coś co wygląda
+jak :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s s-Atom"&gt;root@&lt;/span&gt;&lt;span class="nv"&gt;OpenWrt&lt;/span&gt;&lt;span class="s s-Atom"&gt;:~#&lt;/span&gt; &lt;span class="s s-Atom"&gt;iwlist&lt;/span&gt; &lt;span class="s s-Atom"&gt;scan&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;wlan0&lt;/span&gt;       &lt;span class="nv"&gt;Scan&lt;/span&gt; &lt;span class="s s-Atom"&gt;completed&lt;/span&gt; &lt;span class="s s-Atom"&gt;:&lt;/span&gt;
+          &lt;span class="nv"&gt;Cell&lt;/span&gt; &lt;span class="mi"&gt;01&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Address&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;00&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;D&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;19&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;E&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;03&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="nv"&gt;F&lt;/span&gt;
+                    &lt;span class="nv"&gt;ESSID&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HUE&amp;quot;&lt;/span&gt;
+                    &lt;span class="nv"&gt;Mode&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;Managed&lt;/span&gt;
+                    &lt;span class="nv"&gt;Channel&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;
+                    &lt;span class="nv"&gt;Quality&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;  &lt;span class="nv"&gt;Signal&lt;/span&gt; &lt;span class="nn"&gt;level&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;69&lt;/span&gt; &lt;span class="s s-Atom"&gt;dBm&lt;/span&gt;  &lt;span class="nv"&gt;Noise&lt;/span&gt; &lt;span class="nn"&gt;level&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;92&lt;/span&gt; &lt;span class="s s-Atom"&gt;dBm&lt;/span&gt;
+                    &lt;span class="nv"&gt;IE&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;IEEE&lt;/span&gt; &lt;span class="mf"&gt;802.11&lt;/span&gt;&lt;span class="s s-Atom"&gt;i&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;WPA2&lt;/span&gt; &lt;span class="nv"&gt;Version&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                        &lt;span class="nv"&gt;Group&lt;/span&gt; &lt;span class="nv"&gt;Cipher&lt;/span&gt; &lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;TKIP&lt;/span&gt;
+                        &lt;span class="nv"&gt;Pairwise&lt;/span&gt; &lt;span class="nv"&gt;Ciphers&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;TKIP&lt;/span&gt; &lt;span class="nv"&gt;CCMP&lt;/span&gt;
+                        &lt;span class="nv"&gt;Authentication&lt;/span&gt; &lt;span class="nv"&gt;Suites&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;PSK&lt;/span&gt;
+                       &lt;span class="nv"&gt;Preauthentication&lt;/span&gt; &lt;span class="nv"&gt;Supported&lt;/span&gt;
+                    &lt;span class="nv"&gt;IE&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;WPA&lt;/span&gt; &lt;span class="nv"&gt;Version&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                        &lt;span class="nv"&gt;Group&lt;/span&gt; &lt;span class="nv"&gt;Cipher&lt;/span&gt; &lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;TKIP&lt;/span&gt;
+                        &lt;span class="nv"&gt;Pairwise&lt;/span&gt; &lt;span class="nv"&gt;Ciphers&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;TKIP&lt;/span&gt; &lt;span class="nv"&gt;CCMP&lt;/span&gt;
+                        &lt;span class="nv"&gt;Authentication&lt;/span&gt; &lt;span class="nv"&gt;Suites&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s s-Atom"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;PSK&lt;/span&gt;
+                    &lt;span class="nv"&gt;Encryption&lt;/span&gt; &lt;span class="nn"&gt;key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;on&lt;/span&gt;
+                    &lt;span class="nv"&gt;Bit&lt;/span&gt; &lt;span class="nv"&gt;Rates&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mf"&gt;5.5&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;
+                              &lt;span class="mi"&gt;11&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;36&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;
+                              &lt;span class="mi"&gt;48&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;54&lt;/span&gt; &lt;span class="nv"&gt;Mb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;s&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ja musiałem skorzystać z &lt;code&gt;iw&lt;/code&gt;, żeby nie przedzierać się przez wszystkie możliwe
+sieci polecam sobie przefiltrować output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;iw wlan0 scan &lt;span class="p"&gt;|&lt;/span&gt; grep -A &lt;span class="m"&gt;50&lt;/span&gt; -B &lt;span class="m"&gt;8&lt;/span&gt; HUE
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Wyrzuca to coś co wygląda następująco:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;BSS fc:94:e3:11:9c:5c(on wlan0) -- associated
+    TSF: 8390318242 usec (0d, 02:19:50)
+    freq: 2462
+    beacon interval: 100 TUs
+    capability: ESS Privacy SpectrumMgmt ShortSlotTime (0x0511)
+    signal: -62.00 dBm
+    last seen: 0 ms ago
+    Information elements from Probe Response frame:
+    SSID: HUE
+    Supported rates: 1.0* 2.0* 5.5* 11.0* 18.0 24.0 36.0 54.0 
+    DS Parameter set: channel 11
+    Country: EU Environment: Indoor/Outdoor
+        Channels [1 - 13] @ 20 dBm
+    Power constraint: 0 dB
+    TPC report: TX power: 17 dBm
+    ERP: Barker_Preamble_Mode
+    ERP D4.0: Barker_Preamble_Mode
+    RSN:     * Version: 1
+         * Group cipher: TKIP
+         * Pairwise ciphers: CCMP TKIP
+         * Authentication suites: PSK
+         * Capabilities: 16-PTKSA-RC 1-GTKSA-RC (0x000c)
+    Extended supported rates: 6.0 9.0 12.0 48.0 
+    HT capabilities:
+        Capabilities: 0x18bc
+            HT20
+            SM Power Save disabled
+            RX Greenfield
+            RX HT20 SGI
+            TX STBC
+            No RX STBC
+            Max AMSDU length: 7935 bytes
+            DSSS/CCK HT40
+        Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
+        Minimum RX AMPDU time spacing: 4 usec (0x05)
+        HT RX MCS rate indexes supported: 0-15
+        HT TX MCS rate indexes are undefined
+    HT operation:
+         * primary channel: 11
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Konfiguracja&lt;/h2&gt;
+&lt;p&gt;Po pierwsze zmiany w &lt;code&gt;/etc/config/network&lt;/code&gt; - należy wykomentować/usunąć
+wszelkie linijki zawierające &lt;code&gt;ifname&lt;/code&gt; w sekcji 'wan'.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;config interface &amp;#39;wan&amp;#39;
+    #ifname ...
+    option proto    &amp;#39;dhcp&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Po drugie zmiany w &lt;code&gt;/etc/config/network&lt;/code&gt; - należy znaleźć sekcję &lt;code&gt;wifi-iface&lt;/code&gt; i
+wyedytować w niej opcję &lt;code&gt;network&lt;/code&gt; tak żeby wskazywała na interfejs WAN, opcję
+&lt;code&gt;mode&lt;/code&gt; w tryb station oraz zmienić &lt;code&gt;ssid&lt;/code&gt; i &lt;code&gt;encryption&lt;/code&gt; tak, żeby zgadzały się
+z siecią, z którą chcemy się połączyć.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;config &amp;#39;wifi-iface&amp;#39;
+        option &amp;#39;device&amp;#39;     &amp;#39;wlan0&amp;#39;
+        option &amp;#39;network&amp;#39;    &amp;#39;wan&amp;#39;
+        option &amp;#39;mode&amp;#39;       &amp;#39;sta&amp;#39;
+        option &amp;#39;ssid&amp;#39;       &amp;#39;HUE&amp;#39;
+        option &amp;#39;encryption&amp;#39; &amp;#39;psk2&amp;#39;
+        option &amp;#39;key&amp;#39;        &amp;#39;hasło_do_wifi&amp;#39; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Nie pozostaje nic innego jak tylko zastosować zmiany:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ifup wan
+wifi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Źródła&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wiki.openwrt.org/doc/howto/clientmode"&gt;OpenWRT Wiki - Client Mode Wireless&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.openwrt.org/doc/recipes/routedclient#usingmasquerade"&gt;OpenWRT Wiki - Routed Client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.openwrt.org/doc/uci/firewall"&gt;OpenWRT Wiki - Firewall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="librecmc"></category><category term="router"></category><category term="networking"></category></entry><entry><title>i3 wymiata</title><link href="https://jakub-olczyk.github.io/i3-wymiata.html" rel="alternate"></link><published>2016-06-14T19:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-06-14:i3-wymiata.html</id><summary type="html">&lt;p&gt;Od niedawna zacząłem korzystać z nowego środowiska graficznego. Jako, że sesja
+w pełni trzeba przecież zacząć robić coś co odciągnie od nauki, a nie ma nic
+lepszego niż konfigurowanie środowiska pod siebie… prawda?&lt;/p&gt;
+&lt;p&gt;Otóż, nie! i3 jest świetne o tyle, że config, który dostajemy po instalacji,
+jest na tyle sensowny, że nie trzeba robić wielu zmian.&lt;/p&gt;
+&lt;p&gt;Chociaż to może wynikać z tego, że sam korzystam z dość niewielu rzeczy na
+codzień i najczęściej korzystam z terminala do interakcji z systemem. W każdym
+razie i3 jest dla mnie środowiskiem idealnym. Jest bardzo, bardzo proste i 
+czytanie konfiguracji oraz jej modyfikacje nie sprawiają wielkich problemów. &lt;/p&gt;
+&lt;p&gt;Jedyna rzecz, do której mogę się przyczepić to wykorzystywanie &lt;code&gt;alt&lt;/code&gt;a zamiast
+&lt;code&gt;super&lt;/code&gt; w podstawowych bindach.&lt;/p&gt;
+&lt;p&gt;Inna sprawa to moje przyzwyczajenia. Znalazłem kiedyś sobie &lt;code&gt;gmrun&lt;/code&gt; i
+wykorzystuje go z powodzeniem jako launcher aplikacji z prostego powodu -- umie
+tabować ścieżki, do czego się już bardzo przyzwyczaiłem. To jest feature,
+którego mnie osobiście brakuje w &lt;code&gt;dmenu&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Polecam dla każdego, kto chce spróbować czegoś innego niż standardowy Gnome czy
+KDE. Jest duża wygoda w posługiwaniu się na laptopie, bo nie trzeba ściągać rąk
+z klawiatury i sięgać po mysz zbyc często (jak dla mnie na plus, ale &lt;em&gt;de gustibus&lt;/em&gt;… ).&lt;/p&gt;</summary><category term="i3wm"></category><category term="desktop"></category></entry><entry><title>Pamięć absolutna -- zarządzanie HDD oraz diagnostyka w GNU/Linux</title><link href="https://jakub-olczyk.github.io/pamiec-absolutna-zarzadzanie-hdd-oraz-diagnostyka-w-gnulinux.html" rel="alternate"></link><published>2016-05-23T20:39:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-05-23:pamiec-absolutna-zarzadzanie-hdd-oraz-diagnostyka-w-gnulinux.html</id><summary type="html">&lt;p&gt;Niekiedy to przeciwności losu sprawiają, że wiedza na temat działania dysków 
+oraz (co może istotniejsze) jak odzyskiwać z nich dane, kiedy zawiodą staje się
+naprawdę przydatna. Korzystając z GNU/Linuksa mamy do wyboru mnogość narzędzi,
+tutaj skupię się jednak na kilku.&lt;/p&gt;
+&lt;p&gt;Na wstępie pragnę zauważyć, że jeśli dysk, który chcemy zdiagnozować, to
+wbudowany dysk, z którego korzystamy na codzień, należy posłużyć się w do tego
+celu jakąś dystrubucją LiveCD -- polecam skorzystać z &lt;a href="http://grml.org/"&gt;GRML&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Poziom zdrowia naszego twardziela&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;smartclt&lt;/code&gt; 
+https://en.wikipedia.org/wiki/Smartmontools
+&lt;code&gt;badblocks&lt;/code&gt;
+https://en.wikipedia.org/wiki/Badblocks&lt;/p&gt;</summary><category term="gnu/linux"></category></entry><entry><title>Python -- kilka uwag</title><link href="https://jakub-olczyk.github.io/python-kilka-uwag.html" rel="alternate"></link><published>2016-05-22T18:49:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-05-22:python-kilka-uwag.html</id><summary type="html">&lt;p&gt;Ostatnio dość często piszę jakieś programy w Pythonie (w wersji 2.7). Z różnych
+względów. W każdym razie coraz bardziej podoba mi się pisanie w tym języku.
+Dostrzegam, oczywiście, jego wady, ale nie o tym jest ten post.&lt;/p&gt;
+&lt;p&gt;Chciałbym tutaj przekazać troszkę moich własnych znalezisk związanych z tym jak
+tę bestię powinno się obsłużyć, jeśli przychodzi się z doświadczeniem z innego
+języka programowania.&lt;/p&gt;
+&lt;h2&gt;Stringi&lt;/h2&gt;
+&lt;p&gt;Najczęściej pisałem programy w C/C++ lub po prostu w językach, gdzie napisy są
+reprezentowane jako NTS -- Null-terminated string, a tak na prawdę są to proste
+tablice.
+W Pythonie jest inaczej. Napisy są osobnym typem -- String. Można więc natrafić
+na pewne problemy przy rozwiązywaniu dość błahych problemów.&lt;/p&gt;
+&lt;h3&gt;Jak rozepchnąć stringa w Pythonie?&lt;/h3&gt;
+&lt;p&gt;Przychodząc z języków gdzie operujemy najczęściej na tablicach często szukamy
+rozwiązań, które można w nich znaleźć -- odwołujemy się, na przykład do tablic.
+W Pythonie są natomiast listy. Mając listę nie mamy najmniejszego problemu
+wystarczy, że napiszemy sobie&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I powinniśmy otrzymać&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jak sprawa się ma ze stringami? Nie mamy metody &lt;code&gt;insert&lt;/code&gt;. Trzeba być bardziej
+kreatywnym. Mając do dyspozycji&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;To jest napis&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Aby zaprzeczyć temu zdaniu możemy skorzystać ze slice'ów.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; nie&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category><category term="programming"></category></entry></feed>

@@ -1,5 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia (około) informatyczne...</description><atom:link href="https://jakub-olczyk.github.io/feeds/blog.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 24 Jan 2016 10:00:00 +0100</lastBuildDate><item><title>Installing vagrant-libvirt in Debian stretch/sid</title><link>https://jakub-olczyk.github.io/installing-vagrant-libvirt-debian-stretch-sid-en.html</link><description>&lt;p&gt;Vagrant is an awesome piece of software when you want to develop something
+<rss version="2.0"><channel><title>Jakub Olczyk</title><link>https://jakub-olczyk.github.io/</link><description>przemyślenia (około) informatyczne...</description><lastBuildDate>Tue, 05 Jul 2016 18:00:00 +0200</lastBuildDate><item><title>LibreCMC - konfiguracja client mode na TP-Link TL-WR841N</title><link>https://jakub-olczyk.github.io/librecmc-client-mode-on-tl-wr841n.html</link><description>&lt;p&gt;Ostatnio udało mi się kupić dość tanio (za butelkę wódki!) bardzo fajny model
+TP-Linka, a dokładnie TL-WR841N. Oczywiście, zainteresowałem się nim z powodu
+jego możliwości - jest na liście wspieranych urządzeń OpenWRT oraz…
+&lt;a href="https://librecmc.org/librecmc/home"&gt;libreCMC&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;LibreCMC to projekt, który dąży do stworzenia dystrybucji, która pozbawiona
+jest &lt;a href="https://pl.wikipedia.org/wiki/Blob_binarny"&gt;binarnych blobów&lt;/a&gt; (więc mamy router, który w pełni korzysta z wolnego
+oprogramowania). A ponadto pozwala na dostęp do niesamowitych możliwości,
+których nie daje nam producent urządzenia.&lt;/p&gt;
+&lt;h1&gt;Konfiguracja Client Mode Wireless&lt;/h1&gt;
+&lt;p&gt;Będę korzystać z &lt;a href="https://en.wikipedia.org/wiki/Network_address_translation"&gt;NAT&lt;/a&gt; - a konkretnie z ustawień domyślnych w
+&lt;code&gt;/etc/config/firewall&lt;/code&gt; (dokładnie masquerading). Wynika to z tego, że nie mam
+dostępu do routera, z którym się łączę. Istnieje możliwość wyznaczenia tras
+między sieciami, ale wtedy trzeba skonfigurować oba routery. &lt;/p&gt;
+&lt;p&gt;W zasadzie różnica jest taka, że hosty za moją siecią nie będą widoczne dla
+innych podłączonych do sieci, z którą ma się łączyć moja sieć. Poniżej
+topografia, którą chcę osiągnąć:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                                 (ESSID: HUE)
+(Moja sieć)      (przez WiFi)       (LAN)         (Ethernet)    (WAN)
+172.16.0.0/24  &amp;lt;--------------&amp;gt; 192.168.1.0/24 &amp;lt;--------------&amp;gt; ISP
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Zakładając świeżą instalację libreCMC (w moim przypadku wersja 1.3.2 Elegant
+Eleanor) będziemy musieli wyedytować następujące pliki:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/etc/config/network&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/config/wireless&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Przygotowanie do konfiguracji&lt;/h2&gt;
+&lt;p&gt;Zanim cokolwiek potrzeba nam się połączyć z routerem. W webgui trzeba ustawić
+połączenie przez &lt;code&gt;ssh&lt;/code&gt; oraz &lt;em&gt;nowy adres dla podsieci&lt;/em&gt;. Druga część jest bardzo
+istotna, ponieważ nie chcemy mieć kolizji z siecią do której mamy się połączyć.&lt;/p&gt;
+&lt;p&gt;Po połączeniu musimy włączyć i ustawić radio w station mode (aby móc zobaczyć
+sieci znajdujące się w pobliżu).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uci del wireless.@wifi-device&lt;span class="o"&gt;[&lt;/span&gt;0&lt;span class="o"&gt;]&lt;/span&gt;.disabled
+uci del wireless.@wifi-iface&lt;span class="o"&gt;[&lt;/span&gt;0&lt;span class="o"&gt;]&lt;/span&gt;.network
+uci &lt;span class="nb"&gt;set&lt;/span&gt; wireless.@wifi-iface&lt;span class="o"&gt;[&lt;/span&gt;0&lt;span class="o"&gt;]&lt;/span&gt;.mode&lt;span class="o"&gt;=&lt;/span&gt;sta
+uci commit wireless
+wifi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Co się dzieję po kolei:
+    * z konfiguracji wireless usuwamy opcję &lt;em&gt;disable 1&lt;/em&gt;
+    * ustawiamy opcję &lt;em&gt;mode&lt;/em&gt; na &lt;em&gt;station&lt;/em&gt;
+    * zapisujemy zmiany
+    * włączamy radio za pomocą &lt;code&gt;wifi&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Informacje o dostępnych sieciach&lt;/h2&gt;
+&lt;p&gt;Potrzebujemy znaleźć ustawienia naszej sieci dla przykładu niech to będzie
+&lt;code&gt;HUE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Jeśli możemy wydajemy  polecenie &lt;code&gt;iwlist scan&lt;/code&gt; powinno wyrzucić coś co wygląda
+jak :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@libreCMC:~# iwlist scan
+wlan0       Scan completed :
+          Cell &lt;span class="m"&gt;01&lt;/span&gt; - Address: 00:1D:19:0E:03:8F
+                    ESSID:&lt;span class="s2"&gt;&amp;quot;HUE&amp;quot;&lt;/span&gt;
+                    Mode:Managed
+                    Channel:9
+                    Quality:3/5  Signal level:-69 dBm  Noise level:-92 dBm
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt; : TKIP CCMP
+                        Authentication Suites &lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt; : PSK
+                       Preauthentication Supported
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt; : TKIP CCMP
+                        Authentication Suites &lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt; : PSK
+                    Encryption key:on
+                    Bit Rates:1 Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; Mb/s&lt;span class="p"&gt;;&lt;/span&gt; 5.5 Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; Mb/s
+                              &lt;span class="m"&gt;11&lt;/span&gt; Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;12&lt;/span&gt; Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;18&lt;/span&gt; Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;24&lt;/span&gt; Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;36&lt;/span&gt; Mb/s
+                              &lt;span class="m"&gt;48&lt;/span&gt; Mb/s&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="m"&gt;54&lt;/span&gt; Mb/s
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ja musiałem skorzystać z &lt;code&gt;iw&lt;/code&gt;, żeby nie przedzierać się przez wszystkie możliwe
+sieci polecam sobie przefiltrować output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;iw wlan0 scan &lt;span class="p"&gt;|&lt;/span&gt; grep -A &lt;span class="m"&gt;50&lt;/span&gt; -B &lt;span class="m"&gt;8&lt;/span&gt; HUE
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Wyrzuca to coś co wygląda następująco:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;BSS fc:94:e3:11:9c:5c(on wlan0) -- associated
+    TSF: 8390318242 usec (0d, 02:19:50)
+    freq: 2462
+    beacon interval: 100 TUs
+    capability: ESS Privacy SpectrumMgmt ShortSlotTime (0x0511)
+    signal: -62.00 dBm
+    last seen: 0 ms ago
+    Information elements from Probe Response frame:
+    SSID: HUE
+    Supported rates: 1.0* 2.0* 5.5* 11.0* 18.0 24.0 36.0 54.0 
+    DS Parameter set: channel 11
+    Country: EU Environment: Indoor/Outdoor
+        Channels [1 - 13] @ 20 dBm
+    Power constraint: 0 dB
+    TPC report: TX power: 17 dBm
+    ERP: Barker_Preamble_Mode
+    ERP D4.0: Barker_Preamble_Mode
+    RSN:     * Version: 1
+         * Group cipher: TKIP
+         * Pairwise ciphers: CCMP TKIP
+         * Authentication suites: PSK
+         * Capabilities: 16-PTKSA-RC 1-GTKSA-RC (0x000c)
+    Extended supported rates: 6.0 9.0 12.0 48.0 
+    HT capabilities:
+        Capabilities: 0x18bc
+            HT20
+            SM Power Save disabled
+            RX Greenfield
+            RX HT20 SGI
+            TX STBC
+            No RX STBC
+            Max AMSDU length: 7935 bytes
+            DSSS/CCK HT40
+        Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
+        Minimum RX AMPDU time spacing: 4 usec (0x05)
+        HT RX MCS rate indexes supported: 0-15
+        HT TX MCS rate indexes are undefined
+    HT operation:
+         * primary channel: 11
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Konfiguracja&lt;/h2&gt;
+&lt;p&gt;Po pierwsze zmiany w &lt;code&gt;/etc/config/network&lt;/code&gt; - należy wykomentować/usunąć
+wszelkie linijki zawierające &lt;code&gt;ifname&lt;/code&gt; w sekcji 'wan'.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;config interface &amp;#39;wan&amp;#39;
+    #ifname ...
+    option proto    &amp;#39;dhcp&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Po drugie zmiany w &lt;code&gt;/etc/config/network&lt;/code&gt; - należy znaleźć sekcję &lt;code&gt;wifi-iface&lt;/code&gt; i
+wyedytować w niej opcję &lt;code&gt;network&lt;/code&gt; tak żeby wskazywała na interfejs WAN, opcję
+&lt;code&gt;mode&lt;/code&gt; w tryb station oraz zmienić &lt;code&gt;ssid&lt;/code&gt; i &lt;code&gt;encryption&lt;/code&gt; tak, żeby zgadzały się
+z siecią, z którą chcemy się połączyć.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;config &amp;#39;wifi-iface&amp;#39;
+        option &amp;#39;device&amp;#39;     &amp;#39;wlan0&amp;#39;
+        option &amp;#39;network&amp;#39;    &amp;#39;wan&amp;#39;
+        option &amp;#39;mode&amp;#39;       &amp;#39;sta&amp;#39;
+        option &amp;#39;ssid&amp;#39;       &amp;#39;HUE&amp;#39;
+        option &amp;#39;encryption&amp;#39; &amp;#39;psk2&amp;#39;
+        option &amp;#39;key&amp;#39;        &amp;#39;hasło_do_wifi&amp;#39; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Nie pozostaje nic innego jak tylko zastosować zmiany:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ifup wan
+wifi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Źródła&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wiki.openwrt.org/doc/howto/clientmode"&gt;OpenWRT Wiki - Client Mode Wireless&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.openwrt.org/doc/recipes/routedclient#usingmasquerade"&gt;OpenWRT Wiki - Routed Client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.openwrt.org/doc/uci/firewall"&gt;OpenWRT Wiki - Firewall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 05 Jul 2016 18:00:00 +0200</pubDate><guid isPermaLink="false">tag:jakub-olczyk.github.io,2016-07-05:librecmc-client-mode-on-tl-wr841n.html</guid><category>librecmc</category><category>router</category><category>networking</category></item><item><title>Installing vagrant-libvirt in Debian stretch/sid</title><link>https://jakub-olczyk.github.io/installing-vagrant-libvirt-debian-stretch-sid-en.html</link><description>&lt;p&gt;Vagrant is an awesome piece of software when you want to develop something
 without littering your system with (potentially) unwanted packages.&lt;/p&gt;
 &lt;p&gt;Although great it has one major flaw -- it uses VirtualBox as default provider
 for virtualization. That is the main reason why I wanted to try out
@@ -8,7 +166,7 @@ support.&lt;/p&gt;
 &lt;p&gt;Unfortunately, the standard way of installing software (i.e. with &lt;code&gt;apt&lt;/code&gt;) is
 impossible yet I had to use vagrant-style of install and, boy, it was tough!&lt;/p&gt;
 &lt;p&gt;Installing with&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vagrant plugin install vagrant-libvirt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vagrant plugin install vagrant-libvirt
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -20,14 +178,14 @@ ruby bindings for libvirt).&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Install all required dependencies!&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;#&lt;/span&gt; apt-get install libxslt-dev libxml2-dev libvirt-dev zlib1g-dev
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;#&lt;/span&gt; apt-get install libxslt-dev libxml2-dev libvirt-dev zlib1g-dev
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ol&gt;
 &lt;li&gt;Issue the command with pointers to proper libraries&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nv"&gt;CONFIGURE_ARGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib&amp;quot;&lt;/span&gt; vagrant plugin install vagrant-libvirt   
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nv"&gt;CONFIGURE_ARGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib&amp;quot;&lt;/span&gt; vagrant plugin install vagrant-libvirt   
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -38,7 +196,7 @@ projects bug trackers.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://github.com/pradels/vagrant-libvirt"&gt;&lt;code&gt;vagrant-libvirt&lt;/code&gt; GitHub&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.vagrantup.com/docs/"&gt;Vagrant Docs (somewhat lacking source, I hope in future it will be restructured)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/Vagrant"&gt;Vagrant on ArchWiki (helped me with understanding the nature of the problem)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Sun, 24 Jan 2016 10:00:00 +0100</pubDate><guid>tag:jakub-olczyk.github.io,2016-01-24:installing-vagrant-libvirt-debian-stretch-sid-en.html</guid><category>vagrant</category></item><item><title>Informatyka Europejczyka - czego uczy nas podręcznik do szkoły średniej?</title><link>https://jakub-olczyk.github.io/informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</link><description>&lt;p&gt;Miałem okazję ostatnio przyjrzeć się jednej książce, z której w liceum lub
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Sun, 24 Jan 2016 10:00:00 +0100</pubDate><guid isPermaLink="false">tag:jakub-olczyk.github.io,2016-01-24:installing-vagrant-libvirt-debian-stretch-sid-en.html</guid><category>vagrant</category></item><item><title>Informatyka Europejczyka - czego uczy nas podręcznik do szkoły średniej?</title><link>https://jakub-olczyk.github.io/informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</link><description>&lt;p&gt;Miałem okazję ostatnio przyjrzeć się jednej książce, z której w liceum lub
 technikum mieliby się uczyć przyszli "prości użytkownicy komputera" (i nie mam
 tutaj bynajmniej na myśli niczego złego, każdy z nas czasem jest prostym
 użytkownikiem -- ja dla przykładu zawsze będę &lt;em&gt;prostym użytkownikiem
@@ -95,7 +253,7 @@ teleinformatyka (...) stanowi swego rodzaju połączenie informatyki i
 telekomunikacji (rysunek 1.3)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Poniżej moje przybliżone odtworzenie rysunku 1.3 za pomocą znaków ASCII.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;+-------------+          +-------------+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;+-------------+          +-------------+
 | informatyka |          | komunikacja |
 +-------------+          +-------------+
             \             /
@@ -265,7 +423,7 @@ podręczniki kiedyś, a jak wyglądają teraz. Jedna książka do fizyki wielko�
 zeszytu B5 i grubości ok. 4 cm. myślę, że spokojnie wystarczała na 3-4 lata
 technikum, teraz trudno się obyć bez corocznego wypadu do księgarni po nową
 książkę, która starcza na rok, a i tak jest bardzo uboga w treść. Coś poszło w
-zdecydowanie złym kierunku.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Sat, 12 Sep 2015 19:30:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-09-12:informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</guid><category>education</category><category>review</category></item><item><title>What happened?</title><link>https://jakub-olczyk.github.io/what-happened.html</link><description>&lt;p&gt;Jestem dzieckiem ery, w której dostęp do Internetu jest tak oczywisty, że w
+zdecydowanie złym kierunku.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Sat, 12 Sep 2015 19:30:00 +0200</pubDate><guid isPermaLink="false">tag:jakub-olczyk.github.io,2015-09-12:informatyka-europejczyka-czego-uczy-nas-podrecznik-do-szkoly-sredniej.html</guid><category>education</category><category>review</category></item><item><title>What happened?</title><link>https://jakub-olczyk.github.io/what-happened.html</link><description>&lt;p&gt;Jestem dzieckiem ery, w której dostęp do Internetu jest tak oczywisty, że w
 momencie, w którym dostęp do niego staje się ograniczony komputer zaczyna być
 urządzeniem niemal bezużytecznym (nie jestem w tym osamotniony, vide &lt;a href="https://pl.wikipedia.org/wiki/Prawo_Metcalfe%27a"&gt;Prawo
 Metcalfe'a&lt;/a&gt;). Jednakże im dłużej studiuję informatykę tym bardziej zaczynam
@@ -334,7 +492,7 @@ odbywać się prywatna wymiana myśli.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://panoptykon.org/sites/panoptykon.org/files/infografiki/prywatnosc_w_sieci.jpg"&gt;Prywatność w sieci: odzyskaj kontrolę (inforgrafika)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://dug.net.pl/tekst/239/jak_dbac_o_swoja_prywatnosc___nie_tylko_w_sieci/"&gt;Jak zadbać o swoją prywatność? (w kontekście Debiana)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://panoptykon.org/file/2705/download?token=YgpCBN7D"&gt;Szyfrowane: co i dlaczego warto zabezpieczać? (inforgrafika)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 28 Jul 2015 11:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-07-28:what-happened.html</guid><category>internet</category><category>privacy</category></item><item><title>Komentarze w Pelikanie</title><link>https://jakub-olczyk.github.io/komentarze-w-pelikanie.html</link><description>&lt;p&gt;Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 28 Jul 2015 11:00:00 +0200</pubDate><guid isPermaLink="false">tag:jakub-olczyk.github.io,2015-07-28:what-happened.html</guid><category>internet</category><category>privacy</category></item><item><title>Komentarze w Pelikanie</title><link>https://jakub-olczyk.github.io/komentarze-w-pelikanie.html</link><description>&lt;p&gt;Dzisiaj chciałbym jeszcze raz wrócić do stron generowanych statycznie. Jak
 pisałem wcześniej mają one, z mojego punktu widzenia, dużo zalet, jednak
 istnieje w ich przypadku przynajmniej jedna wada (czy może wadka, bo gotowe
 rozwiązania istnieją) - obsługa komentarzy to sprawa dość problematyczna.&lt;/p&gt;
@@ -353,7 +511,7 @@ repozytorium pluginów&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Już teraz można korzystać z tego systemu. Działa on w bardzo prosty sposób.
 Pod każdym artykułem znajduje się teraz duży przycisk, który otworzy okienko
 klienta pocztowego z wstępnie wypełnionymi polami, które wyglądają tak:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;YYYY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DD&lt;/span&gt; &lt;span class="n"&gt;HH&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SS&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;YYYY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;DD&lt;/span&gt; &lt;span class="n"&gt;HH&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SS&lt;/span&gt;
 &lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
 
 &lt;span class="n"&gt;Tw&lt;/span&gt;&lt;span class="err"&gt;ó&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="n"&gt;komentarz&lt;/span&gt;
@@ -365,7 +523,7 @@ podanie nicka, za pomocą którego będzie można zidentyfikować autora komenta
 Po wstępnej moderacji z mojej strony (gdy tylko będę mógł to zrobić) komentarz
 pojawi się pod odpowiednim artykułem.&lt;/p&gt;
 &lt;p&gt;Mam nadzieję, że ten system będzie się sprawdzał i że będę mógł publikować
-Wasze przemyślenia na temat moich wypocin.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 02 Jun 2015 11:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-06-02:komentarze-w-pelikanie.html</guid><category>static site generation</category></item><item><title>cal i calendar w jednym</title><link>https://jakub-olczyk.github.io/cal-i-calendar-w-jednym.html</link><description>&lt;p&gt;Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
+Wasze przemyślenia na temat moich wypocin.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 02 Jun 2015 11:00:00 +0200</pubDate><guid isPermaLink="false">tag:jakub-olczyk.github.io,2015-06-02:komentarze-w-pelikanie.html</guid><category>static site generation</category></item><item><title>cal i calendar w jednym</title><link>https://jakub-olczyk.github.io/cal-i-calendar-w-jednym.html</link><description>&lt;p&gt;Od jakiegoś czasu chciałem sobie jakoś sprytnie połączyć w jedno dostępne w
 większości dystrybucji GNU/Linuxa programy &lt;code&gt;cal&lt;/code&gt; oraz &lt;code&gt;calendar&lt;/code&gt;, które w mojej
 ocenie są niesamowicie dobrymi rozwiązaniami terminarzowymi, z których można
 korzystać w terminalu, szczególnie, gdy dorzuci się je do swojego &lt;code&gt;.bashrc&lt;/code&gt;
@@ -375,7 +533,7 @@ terminach.&lt;/p&gt;
 jest dość pokaźny. Wolałbym to mieć w  bardziej skondensowanej formie,
 szczególnie, że obecnie częściej mamy do czynienia z ekranami o większej
 szerokości niż wysokości. Dla przykładu output takiego polecenia:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; cal&lt;span class="p"&gt;;&lt;/span&gt; calendar
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; cal&lt;span class="p"&gt;;&lt;/span&gt; calendar
 &lt;span class="go"&gt;   Czerwiec 2015      &lt;/span&gt;
 &lt;span class="go"&gt;ni po wt śr cz pi so  &lt;/span&gt;
 &lt;span class="go"&gt;    1  2  3  4  5  6  &lt;/span&gt;
@@ -406,7 +564,7 @@ rozwiązanie sklepane na kolanie w Perlu.&lt;/p&gt;
 gdzie przypisujemy wyjście z zewnętrznych programów. Kontekst listowy w tym 
 wypadku załatwia nam sprawę i wrzuca każdą linię osobno w tablicę. 
 Konteksty to zdecydowanie piękna rzecz w Perlu.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;#!/usr/bin/perl&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/perl&lt;/span&gt;
 &lt;span class="c1"&gt;# author : Jakub Olczyk &amp;lt;jakub.olczyk@openmailbox.org&amp;gt;&lt;/span&gt;
 &lt;span class="c1"&gt;# date   : 2015-06-01&lt;/span&gt;
 &lt;span class="c1"&gt;# license: GPLv3+&lt;/span&gt;
@@ -430,7 +588,7 @@ Konteksty to zdecydowanie piękna rzecz w Perlu.&lt;/p&gt;
 &lt;p&gt;Jak na razie wydaje mi się, że taki skrypcik skutecznie będzie spełniał swoje
 zadanie.&lt;/p&gt;
 &lt;p&gt;Przykładowy output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;   Czerwiec 2015        Jun 02  Non-Profit status of SPI approved, 1999&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;   Czerwiec 2015        Jun 02  Non-Profit status of SPI approved, 1999&lt;/span&gt;
 &lt;span class="go"&gt;ni po wt śr cz pi so    Jun 02  First issue of Computerworld, 1967&lt;/span&gt;
 &lt;span class="go"&gt;    1  2  3  4  5  6  &lt;/span&gt;
 &lt;span class="go"&gt; 7  8  9 10 11 12 13  &lt;/span&gt;
@@ -441,7 +599,7 @@ zadanie.&lt;/p&gt;
 
 
 &lt;p&gt;Oczywiście, w tym skrypcie przyjmuję założenie, że nie chcemy mieć więcej
-informacji z &lt;code&gt;calendar&lt;/code&gt; niż ilość linii, które wypluwa &lt;code&gt;cal&lt;/code&gt;. &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Mon, 01 Jun 2015 00:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-06-01:cal-i-calendar-w-jednym.html</guid><category>terminal</category><category>GNU/Linux</category></item><item><title># service blog restart</title><link>https://jakub-olczyk.github.io/service-blog-restart.html</link><description>&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
+informacji z &lt;code&gt;calendar&lt;/code&gt; niż ilość linii, które wypluwa &lt;code&gt;cal&lt;/code&gt;. &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Mon, 01 Jun 2015 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:jakub-olczyk.github.io,2015-06-01:cal-i-calendar-w-jednym.html</guid><category>terminal</category><category>GNU/Linux</category></item><item><title># service blog restart</title><link>https://jakub-olczyk.github.io/service-blog-restart.html</link><description>&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
 w dużym stopniu wydawały mi się uciążliwe oraz niesamowicie przeciążone, a już
 w żadnej mierze nie pasowały do mojego stylu pracy nad tekstem (trzeba przyznać,
 że edycja tekstu w Vimie to jest coś co zmienia człowieka na zawsze). Z tego
@@ -491,4 +649,4 @@ dociągać dużej ilości nowych paczek (kolejny plus).&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.staticgen.com/pelican"&gt;Static Gen o Pelicanie &lt;em&gt;można tam poczytać o innych genereatorach&lt;/em&gt;&lt;/a&gt; &lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/getpelican/pelican"&gt;GitHub projektu Pelican&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://docs.getpelican.com"&gt;Dokumentacja Pelicana&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 12 May 2015 10:00:00 +0200</pubDate><guid>tag:jakub-olczyk.github.io,2015-05-12:service-blog-restart.html</guid><category>static site generation</category></item></channel></rss>
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jakub Olczyk</dc:creator><pubDate>Tue, 12 May 2015 10:00:00 +0200</pubDate><guid isPermaLink="false">tag:jakub-olczyk.github.io,2015-05-12:service-blog-restart.html</guid><category>static site generation</category></item></channel></rss>

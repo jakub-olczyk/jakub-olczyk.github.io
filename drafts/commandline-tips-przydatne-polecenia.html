@@ -75,13 +75,13 @@ dokumentację (polecenie <code>man</code> to największy przyjaciel!).</p>
 standardowe porcie. Co zrobić, jeśli wszystkie wysokie porty są blokowane?
 Skorzystajmy z tunelowania SSH! <strong>Uwaga</strong> serwer, przez który będziemy się
 łączyć musi mieć odblokowaną możliwość połączenia z portem, o który nam chodzi.</p>
-<div class="highlight"><pre><span class="go">ssh -L [lokalny port]:[adres hosta]:[port hosta] user@proxy_host</span>
+<div class="highlight"><pre><span></span><span class="go">ssh -L [lokalny port]:[adres hosta]:[port hosta] user@proxy_host</span>
 </pre></div>
 
 
 <p>Dla przykładu, jeśli chcielibyśmy się połączyć ze streamem radiowym Polskiego
 Radia na localhostowym porcie <code>12345</code> należy wykonać polecenie:</p>
-<div class="highlight"><pre><span class="go">ssh -L 12345:stream3.polskieradio.pl:8904 user@proxy_host</span>
+<div class="highlight"><pre><span></span><span class="go">ssh -L 12345:stream3.polskieradio.pl:8904 user@proxy_host</span>
 </pre></div>
 
 
@@ -91,12 +91,12 @@ znajduje się za firewallem.</p>
 <h3>Jak wygenerować mocne hasło?</h3>
 <p>Sposobów jest na prawdę wiele! Chyba najprostszym jest skorzystanie z funkcji 
 skrótu MD5 :</p>
-<div class="highlight"><pre><span class="go">date | md5sum</span>
+<div class="highlight"><pre><span></span><span class="go">date | md5sum</span>
 </pre></div>
 
 
 <p>Jeśli nie podoba nam się możliwość kolizji z innymi haszami:</p>
-<div class="highlight"><pre><span class="go">dd if=/dev/urandom bs=1 count=32 2&gt;/dev/null | base64 -w 0 | rev | cut -b 2- | rev</span>
+<div class="highlight"><pre><span></span><span class="go">dd if=/dev/urandom bs=1 count=32 2&gt;/dev/null | base64 -w 0 | rev | cut -b 2- | rev</span>
 </pre></div>
 
 
@@ -107,12 +107,12 @@ obcięcia z końca dwóch znaków równości, które dodaje wcześniejsze polece
 <h3>Rozmiary plików</h3>
 <p>Ile miejsca zajmują poszczególne pliki (i katalogi bez rozdrabniania się na ich
 zawartość)?</p>
-<div class="highlight"><pre><span class="go">du -hs * | sort -rh</span>
+<div class="highlight"><pre><span></span><span class="go">du -hs * | sort -rh</span>
 </pre></div>
 
 
 <p>Dość prosto można zawęzić wynik do jednego największego</p>
-<div class="highlight"><pre><span class="go">du -hs * | sort -rh | head -n 1</span>
+<div class="highlight"><pre><span></span><span class="go">du -hs * | sort -rh | head -n 1</span>
 </pre></div>
   </article><!-- .content -->
 
