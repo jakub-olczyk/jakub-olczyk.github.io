@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Jakub Olczyk</title><link href="https://jakub-olczyk.github.io/" rel="alternate"></link><link href="https://jakub-olczyk.github.io/feeds/all.atom.xml" rel="self"></link><id>https://jakub-olczyk.github.io/</id><updated>2016-07-06T16:00:00+02:00</updated><entry><title>i3 jest świetne!</title><link href="https://jakub-olczyk.github.io/i3-jest-swietne.html" rel="alternate"></link><published>2016-07-06T16:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-07-06:i3-jest-swietne.html</id><summary type="html">&lt;p&gt;W trakcie sesji zacząłem robić to co każdy student - unikać nauki jak tylko się
 da, więc postanowiłem w końcu przerzucić się na tiling window managera - i3wm. 
-Myślałem, że konfiguracja zajmie mi nie wiadomo ile czasu… ale byłem w będzie!&lt;/p&gt;
-&lt;p&gt;Konfiguracja, którą dostajemy &lt;em&gt;out-of-box&lt;/em&gt; jest świetna (dodatkowo czytanie jej
-również nie jest uciążliwe). Być może niektóre domyślne ustawienia czy bindingi
-nie są najtrafniejsze, ale mimo wszystko jest to bardzo przyjazne środowisko
-dla kogoś, kto i tak większość czasu spędza w terminalu.&lt;/p&gt;
+Myślałem, że konfiguracja zajmie mi nie wiadomo ile czasu… ale byłem w błędzie!&lt;/p&gt;
+&lt;p&gt;Konfiguracja, którą dostajemy &lt;em&gt;out-of-box&lt;/em&gt; jest świetna, dodatkowo samo
+czytanie jej również nie jest uciążliwe. Być może niektóre domyślne ustawienia
+czy bindingi nie są najtrafniejsze, ale mimo wszystko jest to bardzo przyjazne
+środowisko dla kogoś, kto i tak większość czasu spędza w terminalu.&lt;/p&gt;
 &lt;p&gt;Dodatkowo mogę polecić to środowisko dla każdego, kto chce spróbować czegoś
 innego niż standardowy Gnome czy KDE. Na laptopie nie jestem w stanie wyobrazić
 sobie już niczego innego, bo nie trzeba ściągać rąk z klawiatury i sięgać po
@@ -26,7 +26,7 @@ aby osiągnąć takie zachowanie. W Vimie wystarczy wydać takie zaklęcie:&lt;/
 
 &lt;p&gt;Dla pewności można jeszcze dorzucić na koniec &lt;code&gt;c&lt;/code&gt;, żeby interaktywnie sprawdzić
 każde dopasowanie, ale ja nie miałem żadnych problemów.&lt;/p&gt;
-&lt;h2&gt;Korzystanie z notyfikacji aktywności w obszarach roboczych&lt;/h2&gt;
+&lt;h2&gt;Korzystanie z powiadomień aktywności w obszarach roboczych&lt;/h2&gt;
 &lt;p&gt;Niesamowicie pomocny okazał się być &lt;a href="http://atsutane.de/blog/2013/05/14/irssi-screen-urxvt-the-urgency-hint/"&gt;artykuł&lt;/a&gt; dotyczący skonfigurowania
 &lt;code&gt;irssi&lt;/code&gt; w takie sposób, aby w przypadku wysłania wiadomości workspace, w którym
 znajduje się otwarte okno z programem, pojawiało się podświetlenie na czerwono,
@@ -59,11 +59,11 @@ $
 
 &lt;p&gt;I w przypadku gdy nie znajduję się w danym workspace'ie dostaję taką wskazówkę:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="i3 jak wygląda hint" src="http://i.imgur.com/HgMQjA9.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Jak dla mnie jest to &lt;em&gt;booster&lt;/em&gt; jak chodzi o produktywności ;) Może komuś się to
-przyda.&lt;/p&gt;</summary><category term="i3wm"></category><category term="desktop"></category></entry><entry><title>LibreCMC - konfiguracja client mode na TP-Link TL-WR841N</title><link href="https://jakub-olczyk.github.io/librecmc-client-mode-on-tl-wr841n.html" rel="alternate"></link><published>2016-07-05T18:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-07-05:librecmc-client-mode-on-tl-wr841n.html</id><summary type="html">&lt;p&gt;Ostatnio udało mi się kupić dość tanio (za butelkę wódki!) bardzo fajny model
-TP-Linka, a dokładnie TL-WR841N. Oczywiście, zainteresowałem się nim z powodu
-jego możliwości - jest na liście wspieranych urządzeń OpenWRT oraz…
-&lt;a href="https://librecmc.org/librecmc/home"&gt;libreCMC&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Jak dla mnie jest to &lt;em&gt;booster&lt;/em&gt; jak chodzi o produktywność ;) Może komuś się to
+przyda.&lt;/p&gt;</summary><category term="i3wm"></category><category term="desktop"></category></entry><entry><title>LibreCMC - konfiguracja client mode na TP-Link TL-WR841N</title><link href="https://jakub-olczyk.github.io/librecmc-client-mode-on-tl-wr841n.html" rel="alternate"></link><published>2016-07-05T18:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub-olczyk.github.io,2016-07-05:librecmc-client-mode-on-tl-wr841n.html</id><summary type="html">&lt;p&gt;Ostatnio udało mi się kupić dość tanio (za 20PLN to nic się nie kupi, a za
+flaszkę wódki można router!:) ) bardzo fajny model TP-Linka, a dokładnie
+TL-WR841N. Oczywiście, zainteresowałem się nim z powodu jego możliwości - jest
+na liście wspieranych urządzeń OpenWRT oraz… &lt;a href="https://librecmc.org/librecmc/home"&gt;libreCMC&lt;/a&gt;!&lt;/p&gt;
 &lt;p&gt;LibreCMC to projekt, który dąży do stworzenia dystrybucji, która pozbawiona
 jest &lt;a href="https://pl.wikipedia.org/wiki/Blob_binarny"&gt;binarnych blobów&lt;/a&gt; (więc mamy router, który w pełni korzysta z wolnego
 oprogramowania). A ponadto pozwala na dostęp do niesamowitych możliwości,
