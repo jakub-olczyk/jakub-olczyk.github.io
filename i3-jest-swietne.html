@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+  <head>
+	  <title>Jakub Olczyk | Blog (około) informatyczny...</title>
+      <link rel="stylesheet" type="text/css" href="./theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="./theme/css/styles.css"/>
+      <meta charset="utf-8" />
+	  <meta name="description" content="Blog studenta
+	  informatyki piszącego na tematy związane z wolnym oprogramowaniem,
+	  prywatnością i bezpieczeństwem w Internecie.">
+	  <meta name="keywords" content="Jakub Olczyk blog, GNU/Linux, prywatność,
+	  bezpieczeństwo, wolne oprogramowanie, free software, kryptografia,
+	  informatyka, programowanie, Koło Naukowe Wolnego Oprogramowania">
+      <meta name="author" content="Jakub Olczyk">
+        <link href="/feeds/rss.xml" type="application/rss+xml" rel="alternate" title="Jakub Olczyk RSS Feed" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <!-- site image -->
+        <div class= "siteimage">
+          <a class="nodec" href=/pic.png>
+            <img width="200" height="200" src=/pic.png>
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h1><a class="sitetitle nodec" href=".">Jakub Olczyk</a></h1>
+        <h3 class ="sitesubtitle">przemyślenia (około) informatyczne...</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+              <li><a class="nodec" href="/">blog</a></li>
+            <!--pages-->
+                <li><a class="nodec" href="./pages/o-mnie.html">o mnie</a></li>
+                <li><a class="nodec" href="./pages/kontakt.html">kontakt</a></li>
+            <!-- services icons -->
+              <li><a class="nodec icon-mail-alt" href="mailto:jakub.olczyk@openmailbox.org"></a></li>
+              <li><a class="nodec icon-github" href="http://github.com/jakub-olczyk"></a></li>
+              <li><a class="nodec" href="http://dia.so/torlakr">D*</a></li>
+              <li><a class="nodec icon-rss" href="/feeds/rss.xml"></a></li>
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/i3-jest-swietne.html" rel="bookmark" title="Permalink to i3 jest świetne!">
+      i3 jest świetne!
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2016-07-06T16:00:00+02:00">
+      Wed 06 July 2016
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <article>
+    <p>W trakcie sesji zacząłem robić to co każdy student - unikać nauki jak tylko się
+da, więc postanowiłem w końcu przerzucić się na tiling window managera - i3wm. 
+Myślałem, że konfiguracja zajmie mi nie wiadomo ile czasu… ale byłem w będzie!</p>
+<p>Konfiguracja, którą dostajemy <em>out-of-box</em> jest świetna (dodatkowo czytanie jej
+również nie jest uciążliwe). Być może niektóre domyślne ustawienia czy bindingi
+nie są najtrafniejsze, ale mimo wszystko jest to bardzo przyjazne środowisko
+dla kogoś, kto i tak większość czasu spędza w terminalu.</p>
+<p>Dodatkowo mogę polecić to środowisko dla każdego, kto chce spróbować czegoś
+innego niż standardowy Gnome czy KDE. Na laptopie nie jestem w stanie wyobrazić
+sobie już niczego innego, bo nie trzeba ściągać rąk z klawiatury i sięgać po
+mysz zbyt często (jak dla mnie na plus, ale <em>de gustibus</em>… Z jakiegoś dziwnego
+powodu ludzie korzystają z MacOSX).</p>
+<p>A teraz troszkę szczegółów, które wymagały usprawnienia. 
+(Plik konfiguracyjny najprawdobodobniej można znaleźć w <code>~/.config/i3/config</code>).</p>
+<h2>Zmiana <code>alt</code> na <code>super</code></h2>
+<p>Pierwsza rzecz, która rzuca się w oczy. Alt jest jak dla mnie dziwnym wyborem,
+ponieważ sporo aplikacji z niego korzysta, więc przemapowanie go na tzw.
+<code>super</code> było dla mnie oczywiste (dla niewtajemniczonych będzie to windows key).</p>
+<p><img alt="i3 układ klawiszy" src="https://i3wm.org/docs/keyboard-layer2.png" /></p>
+<p>Zgodnie z dokumentacją należy zamienić wszystkie wystąpienia <code>Mod1</code> na <code>Mod4</code>,
+aby osiągnąć takie zachowanie. W Vimie wystarczy wydać takie zaklęcie:</p>
+<div class="highlight"><pre><span></span>:%s/Mod1/Mod4/g
+</pre></div>
+
+
+<p>Dla pewności można jeszcze dorzucić na koniec <code>c</code>, żeby interaktywnie sprawdzić
+każde dopasowanie, ale ja nie miałem żadnych problemów.</p>
+<h2>Korzystanie z notyfikacji aktywności w obszarach roboczych</h2>
+<p>Niesamowicie pomocny okazał się być <a href="http://atsutane.de/blog/2013/05/14/irssi-screen-urxvt-the-urgency-hint/">artykuł</a> dotyczący skonfigurowania
+<code>irssi</code> w takie sposób, aby w przypadku wysłania wiadomości workspace, w którym
+znajduje się otwarte okno z programem, pojawiało się podświetlenie na czerwono,
+które ma zwrócić uwagę na ten workspace. </p>
+<p>Nie będę się tutaj niepotrzebnie rozpisywać po prostu zachęcam do
+skonfigurowania sobie w ten sposób <code>urxvt</code> oraz <code>irssi</code> - zdecydowanie ułatwia
+korzystanie z IRC :).</p>
+<p>W każdym razie takie ustawienie pozwala na skonfigurowanie swojej powłoki w
+taki sposób, aby długo wykonujące się polecenia również powiadamiały o swoim
+zakończeniu.</p>
+<p>W przypadku Basha można napisać na przykład taką prostą funkcję:</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> urgency_hint_i3 <span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> -e <span class="s1">&#39;\a&#39;</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Aby wszystko działało jak należy wystarczy dodać wywołanie tej funkcji do
+zmiennej <code>PS1</code> określającej co ma sie wyświetlić jako zachętka powłoki.</p>
+<p>U mnie wygląda ona następująco:</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\u@\h:[\w]: \$?\$(urgency_hint_i3)\n\$ &quot;</span>
+</pre></div>
+
+
+<p>Co daje taki efekt:</p>
+<div class="highlight"><pre><span></span>jakub@jotunheimr:[~]: 0
+$ 
+</pre></div>
+
+
+<p>I w przypadku gdy nie znajduję się w danym workspace'ie dostaję taką wskazówkę:</p>
+<p><img alt="i3 jak wygląda hint" src="http://i.imgur.com/HgMQjA9.png" /></p>
+<p>Jak dla mnie jest to <em>booster</em> jak chodzi o produktywności ;) Może komuś się to
+przyda.</p>
+  </article><!-- .content -->
+
+</section>
+
+<!--static comments from plugin -->
+<section id="comment-section">
+    <p>Brak komentarzy.<p>
+<br>
+<br>
+<a id="comment-button" href="mailto:jakub.olczyk@openmailbox.org?subject=[blog]comment-i3-jest-swietne&body=date:YYYY-MM-DD HH:MM:SS%0D%0Aauthor:%0D%0ATwój komentarz">Napisz komentarz przez e-mail</a>
+</section>
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jakub Olczyk, license <a href="http://creativecommons.org/licenses/by-sa/4.0/"> Creative Commons BY-SA 4.0 International</a>
+		unless otherwise noted.<br>
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+		slightly modified <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.<br>
+		Code blocks styled with <a href="https://github.com/uraimo/pygments-vimstyles">wombat.css</a>
+      </p>
+    </footer>
+  </body>
+</html>
+<!-- vim: set filetype=htmldjango -->
