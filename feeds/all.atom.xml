@@ -41,11 +41,13 @@ wifi
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Co się dzieję po kolei:
-    * z konfiguracji wireless usuwamy opcję &lt;em&gt;disable 1&lt;/em&gt;
-    * ustawiamy opcję &lt;em&gt;mode&lt;/em&gt; na &lt;em&gt;station&lt;/em&gt;
-    * zapisujemy zmiany
-    * włączamy radio za pomocą &lt;code&gt;wifi&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Co się dzieję po kolei:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;z konfiguracji wireless usuwamy opcję &lt;em&gt;disable 1&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;ustawiamy opcję &lt;em&gt;mode&lt;/em&gt; na &lt;em&gt;station&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;zapisujemy zmiany&lt;/li&gt;
+&lt;li&gt;włączamy radio za pomocą &lt;code&gt;wifi&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;Informacje o dostępnych sieciach&lt;/h2&gt;
 &lt;p&gt;Potrzebujemy znaleźć ustawienia naszej sieci dla przykładu niech to będzie
 &lt;code&gt;HUE&lt;/code&gt;.&lt;/p&gt;
