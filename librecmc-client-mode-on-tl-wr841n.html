@@ -66,13 +66,13 @@
 
   <article>
     <p>Ostatnio udało mi się kupić dość tanio (za 20PLN to nic się nie kupi, a za
-flaszkę wódki można router!:) ) bardzo fajny model TP-Linka, a dokładnie
+flaszkę wódki można router! :) ) bardzo fajny model TP-Linka, a dokładnie
 TL-WR841N. Oczywiście, zainteresowałem się nim z powodu jego możliwości - jest
 na liście wspieranych urządzeń OpenWRT oraz… <a href="https://librecmc.org/librecmc/home">libreCMC</a>!</p>
 <p>LibreCMC to projekt, który dąży do stworzenia dystrybucji, która pozbawiona
-jest <a href="https://pl.wikipedia.org/wiki/Blob_binarny">binarnych blobów</a> (więc mamy router, który w pełni korzysta z wolnego
-oprogramowania). A ponadto pozwala na dostęp do niesamowitych możliwości,
-których nie daje nam producent urządzenia.</p>
+jest <a href="https://pl.wikipedia.org/wiki/Blob_binarny">binarnych blobów</a> (więc mamy router, który w pełni korzysta z
+wolnego oprogramowania). A ponadto pozwala na dostęp do niesamowitych
+możliwości, których nie daje nam producent urządzenia.</p>
 <h1>Konfiguracja Client Mode Wireless</h1>
 <p>Będę korzystać z <a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a> - a konkretnie z ustawień domyślnych w
 <code>/etc/config/firewall</code> (dokładnie masquerading). Wynika to z tego, że nie mam
@@ -88,17 +88,19 @@ topografia, którą chcę osiągnąć:</p>
 
 
 <p>Zakładając świeżą instalację libreCMC (w moim przypadku wersja 1.3.2 Elegant
-Eleanor) będziemy musieli wyedytować następujące pliki:</p>
+Eleanor) będziemy musieli edytować następujące pliki:</p>
 <ul>
 <li><code>/etc/config/network</code></li>
 <li><code>/etc/config/wireless</code></li>
 </ul>
 <h2>Przygotowanie do konfiguracji</h2>
-<p>Zanim cokolwiek potrzeba nam się połączyć z routerem. W webgui trzeba ustawić
-połączenie przez <code>ssh</code> oraz <em>nowy adres dla podsieci</em>. Druga część jest bardzo
-istotna, ponieważ nie chcemy mieć kolizji z siecią do której mamy się połączyć.</p>
-<p>Po połączeniu musimy włączyć i ustawić radio w station mode (aby móc zobaczyć
-sieci znajdujące się w pobliżu).</p>
+<p>Zanim cokolwiek zaczniemy potrzeba nam się połączyć z routerem. W webgui trzeba
+ustawić połączenie przez <code>ssh</code> oraz <em>nowy adres dla podsieci</em>. Druga część jest
+bardzo istotna, ponieważ nie chcemy mieć kolizji z siecią, do której mamy się
+połączyć.</p>
+<p>Po połączeniu się z routerem przez SSH musimy włączyć i ustawić radio w station
+mode (aby móc zobaczyć sieci znajdujące się w pobliżu). Wystarczy wywołać
+następujące polecenia z konta roota:</p>
 <div class="highlight"><pre><span></span>uci del wireless.@wifi-device<span class="o">[</span>0<span class="o">]</span>.disabled
 uci del wireless.@wifi-iface<span class="o">[</span>0<span class="o">]</span>.network
 uci <span class="nb">set</span> wireless.@wifi-iface<span class="o">[</span>0<span class="o">]</span>.mode<span class="o">=</span>sta
@@ -200,7 +202,7 @@ wszelkie linijki zawierające <code>ifname</code> w sekcji 'wan'.</p>
 </pre></div>
 
 
-<p>Po drugie zmiany w <code>/etc/config/network</code> - należy znaleźć sekcję <code>wifi-iface</code> i
+<p>Po drugie zmiany w <code>/etc/config/wireless</code> - należy znaleźć sekcję <code>wifi-iface</code> i
 wyedytować w niej opcję <code>network</code> tak żeby wskazywała na interfejs WAN, opcję
 <code>mode</code> w tryb station oraz zmienić <code>ssid</code> i <code>encryption</code> tak, żeby zgadzały się
 z siecią, z którą chcemy się połączyć.</p>
@@ -220,6 +222,7 @@ wifi
 </pre></div>
 
 
+<p>I cieszyć się działającą siecią :)</p>
 <h1>Źródła</h1>
 <ul>
 <li><a href="https://wiki.openwrt.org/doc/howto/clientmode">OpenWRT Wiki - Client Mode Wireless</a></li>
