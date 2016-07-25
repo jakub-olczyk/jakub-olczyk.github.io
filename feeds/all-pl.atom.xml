@@ -60,7 +60,7 @@ $
 &lt;p&gt;I w przypadku gdy nie znajduję się w danym workspace'ie dostaję taką wskazówkę:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="i3 jak wygląda hint" src="http://i.imgur.com/HgMQjA9.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Jak dla mnie jest to &lt;em&gt;booster&lt;/em&gt; jak chodzi o produktywność ;) Może komuś się to
-przyda.&lt;/p&gt;</summary><category term="i3wm"></category><category term="desktop"></category></entry><entry><title>LibreCMC - konfiguracja client mode na TP-Link TL-WR841N</title><link href="http://jakub.olczyk.info/librecmc-client-mode-on-tl-wr841n.html" rel="alternate"></link><published>2016-07-05T18:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub.olczyk.info,2016-07-05:librecmc-client-mode-on-tl-wr841n.html</id><summary type="html">&lt;p&gt;Ostatnio udało mi się kupić dość tanio (za 20PLN to nic się nie kupi, a za
+przyda.&lt;/p&gt;</summary><category term="i3wm"></category><category term="desktop"></category></entry><entry><title>LibreCMC - client mode na TP-Link TL-WR841N</title><link href="http://jakub.olczyk.info/librecmc-client-mode-on-tl-wr841n.html" rel="alternate"></link><published>2016-07-05T18:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub.olczyk.info,2016-07-05:librecmc-client-mode-on-tl-wr841n.html</id><summary type="html">&lt;p&gt;Ostatnio udało mi się kupić dość tanio (za 20PLN to nic się nie kupi, a za
 flaszkę wódki można router! :) ) bardzo fajny model TP-Linka, a dokładnie
 TL-WR841N. Oczywiście, zainteresowałem się nim z powodu jego możliwości - jest
 na liście wspieranych urządzeń OpenWRT oraz… &lt;a href="https://librecmc.org/librecmc/home"&gt;libreCMC&lt;/a&gt;!&lt;/p&gt;
@@ -626,7 +626,7 @@ zadanie.&lt;/p&gt;
 
 
 &lt;p&gt;Oczywiście, w tym skrypcie przyjmuję założenie, że nie chcemy mieć więcej
-informacji z &lt;code&gt;calendar&lt;/code&gt; niż ilość linii, które wypluwa &lt;code&gt;cal&lt;/code&gt;. &lt;/p&gt;</summary><category term="terminal"></category><category term="GNU/Linux"></category></entry><entry><title># service blog restart</title><link href="http://jakub.olczyk.info/service-blog-restart.html" rel="alternate"></link><published>2015-05-12T10:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub.olczyk.info,2015-05-12:service-blog-restart.html</id><summary type="html">&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
+informacji z &lt;code&gt;calendar&lt;/code&gt; niż ilość linii, które wypluwa &lt;code&gt;cal&lt;/code&gt;. &lt;/p&gt;</summary><category term="terminal"></category><category term="GNU/Linux"></category><category term="Perl"></category></entry><entry><title># service blog restart</title><link href="http://jakub.olczyk.info/service-blog-restart.html" rel="alternate"></link><published>2015-05-12T10:00:00+02:00</published><author><name>Jakub Olczyk</name></author><id>tag:jakub.olczyk.info,2015-05-12:service-blog-restart.html</id><summary type="html">&lt;p&gt;Od jakiegoś czasu myślałem o tym, żeby porzucić wszelkie rozbudowane CMS, które
 w dużym stopniu wydawały mi się uciążliwe oraz niesamowicie przeciążone, a już
 w żadnej mierze nie pasowały do mojego stylu pracy nad tekstem (trzeba przyznać,
 że edycja tekstu w Vimie to jest coś co zmienia człowieka na zawsze). Z tego
@@ -676,4 +676,4 @@ dociągać dużej ilości nowych paczek (kolejny plus).&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.staticgen.com/pelican"&gt;Static Gen o Pelicanie &lt;em&gt;można tam poczytać o innych genereatorach&lt;/em&gt;&lt;/a&gt; &lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/getpelican/pelican"&gt;GitHub projektu Pelican&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://docs.getpelican.com"&gt;Dokumentacja Pelicana&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="static site generation"></category></entry></feed>
+&lt;/ul&gt;</summary><category term="static site generation"></category><category term="pelican"></category><category term="blogging"></category></entry></feed>
