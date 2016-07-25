@@ -1,111 +1,70 @@
 @import url(pygments.css);
 @import url(reset.css);
 
-/* General stuff. */
+html{
+    font-family:'Helvetica Neue', Arial, Helvetica, 'Liberation Sans', FreeSans, sans-serif;
+}
 
+/* General stuff taken from bettermotherfuckingwebsite.com */
 body {
-	margin-left:auto;
-	margin-right:auto;
-	width:800px;
+    margin:40px auto;
+    max-width:600px;
+    line-height:1.6;
+    font-size:18px;
+    padding:0 10px;
+    background-color: #f2f2f2;
+}
+    
+h1,h2,h3 {
+    line-height:1.2;
 }
 
-html { /* This stuff is for the sticky footer. */
-    min-height:100%;
-    position:relative;
-    font-size: 18px;
-    -webkit-font-smoothing: antialiased;
-}
-
-body {
-    background-color:#fafafa;
-    font-family:'Open Sans', sans-serif;
-    margin: 20px auto 100px auto; /* For sticky footer. */
-	text-align:justify;
-}
-
-/* Site header. */
-
-.sitebanner {
-    position: relative;
-    font-size: 18;
-    top: 15px;
-}
-
-.siteheader {
-    margin-bottom: 30px;
-    overflow: visible;
-    height: 200px;
-}
-
-.siteimage {
-    float: left;
-    width: 230px;
-}
-
+/* Header, Banner etc*/
 .sitetitle {
-    font-family: 'Open Sans', sans;
-    font-weight: 300;
     font-size: 4em;
-    padding-left: 10px; /* Hack to dodge :hover issue. */
-    position: relative; /* Hack to dodge :hover issue. */
-    left: -10px; /* Hack to dodge :hover issue. */
+    font-weight:300;
 }
 
-.sitesubtitle {
-    color: #000;
+/* Footer */
+
+footer {
+    font-size: small;
+}
+
+/* Article specific */
+
+article * li {
+    line-height: 1.1em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    margin-left: 1.5em;
+}
+
+article ul,ol {
+    padding-bottom:1.5em;
+    /*margin-bottom: 1.4em;*/
+}
+
+article p {
+    margin-bottom: 1.5em;
+    line-height: 1.3em;
+    text-align: justify;
+}
+
+article h1 {
+    padding-bottom: 1em;
+    font-size: 1.4em;
+}
+
+article h2 {
+    padding-bottom: 0.9em;
+    font-size: 1.2em;
+}
+
+article h3 {
+    padding-bottom: 0.8em;
     font-size: 1em;
-    margin-bottom: 30px;
-    margin-top: 20px;
-    /* padding-left: 30px; */
 }
-
-/* The navbar. */
-
-.menu {
-    font-size: 1.3em;
-    /* padding-left: 30px; */
-}
-
-.menu li {
-    display: inline;
-    margin-right: 10px;
-}
-
-/* Article list on index page. */
-
-article {
-	margin-right:auto;
-	margin-left:auto;
-	width:700px;
-}
-
-.posttitle {
-    font-size: 1.6em;
-}
-
-.posttitle a {
-    padding-left: 10px; /* Hack to dodge :hover issue. */
-    position: relative; /* Hack to dodge :hover issue. */
-    left: -10px; /* Hack to dodge :hover issue. */
-}
-
-.postinfo {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    color: #666;
-    font-size: .7em;
-}
-
-.postsummary {
-    font-family: 'Merriweather', serif;
-    font-weight: 300;
-}
-
-.post {
-    margin-bottom: 20px;
-	list-style-type: none;
-}
-
 
 /* Links. */
 
@@ -131,83 +90,79 @@ a:hover { /* Hover style: transition to orange. Cool! */
     color: orange;
 }
 
+/* Menu */
+
+#menu {
+    display: block;
+    background-color: red;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#menu ul li {
+    display: inline;
+    float: left;
+    margin: 0;
+}
+
+#menu * a {
+    text-decoration:none;
+    display: inline-block;
+    height:30px;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+}
+
+#menu * a:hover {
+    -o-transition:background-color .2s ease-in-out;
+    -webkit-transition:background-color .2s ease-in-out;
+    -moz-transition:background-color .2s ease-in-out;
+    transition:background-color .2s ease-in-out;
+    background-color: #bedead;
+}
+
+.active {
+    background-color: #bedead;
+}
+
 /* Generic to all content. */
 
-.content ol, .content ul {
+#content * img {
+    display: block;
+    margin: 0 auto 0 auto;
+    max-width: 550px;
+    height: auto;
+}
+
+#content ol, #content ul {
     position: relative;
     left: 40px;
     padding-bottom: 20px;
 }
 
-/* Make super and subscipts look reasonable. */
+/* Posts lists */
 
-sup, sub {
-    vertical-align: 0;
+#post-list {
+    list-style-type:none;
+    list-style-position: outside;
+}
+
+#post-list li {
+    max-width:550px;
+    /* handle multiline */
+    overflow: visible;
+    padding-left: 29px;
     position: relative;
 }
 
-sup {
-    bottom: 1ex;
-    font-size: 0.6em;
+#post-list li:before {
+/* your own marker in content */
+    content: "├─";
+    /*margin: 0 1em;*/
+    left: 0;
+    position: absolute;
 }
 
-sub {
-    top: 0.8ex;
-    font-size: 0.6em;
-}
-
-/* Article */
-
-article {
-    margin-top: 30px;
-}
-
-/* Lists */
-
-article * li {
-    line-height: 1.1em;
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
-}
-
-/* Paragraphs. */
-
-article p {
-    line-height: 1.3em;
-    margin-bottom: 1.5em;
-}
-
-/* Headers. */
-
-article h1 {
-    padding-bottom: 1em;
-    font-size: 1.4em;
-}
-
-article h2 {
-    padding-bottom: 0.9em;
-    font-size: 1.2em;
-}
-
-article h3 {
-    padding-bottom: 0.8em;
-    font-size: 1em;
-}
-
-/* Footnotes. */
-
-article .footnote {
-    font-size: 0.8em;
-}
-
-/* Images */
-
-.content * img {
-    display: block;
-    margin: 0 auto 0 auto;
-    max-width: 600px;
-    height: auto;
-}
 
 /* Blockquotes */
 
@@ -284,14 +239,3 @@ article code {
 	padding:2px 4px;
 	white-space: nowrap;
 }
-
-/* Footer at page bottom */
-
-footer {
-    bottom: 0;
-    color: grey;
-    font-size: .7em;
-    height: 30px;
-    position: absolute;
-}
-
